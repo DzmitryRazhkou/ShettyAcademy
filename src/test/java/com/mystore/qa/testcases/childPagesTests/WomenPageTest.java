@@ -18,6 +18,7 @@ public class WomenPageTest {
     private static WebDriver driver;
     private static WebDriverWait wait;
 
+    MyStorePage myStorePage;
     WomenPage womenPage;
     ContactUsPage contactUsPage;
     LoginPage loginPage;
@@ -41,5 +42,22 @@ public class WomenPageTest {
         womenPage = new WomenPage(driver);
         Assert.assertTrue(womenPage.getWomenBreadcrumb());
     }
+
+    @Test
+    public void doSortingTest() throws InterruptedException {
+        womenPage = new WomenPage(driver);
+        myStorePage = new MyStorePage(driver);
+
+        womenPage = myStorePage.clickOnWomen();
+        womenPage.doSorting();
+
+        String actSortingResult = womenPage.validateFilteringText();
+        String expSortingResult = "Women > Categories Dresses > Size L";
+        Assert.assertNotEquals(actSortingResult, expSortingResult);
+    }
+
+
+
+
 
 }
