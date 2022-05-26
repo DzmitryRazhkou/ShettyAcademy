@@ -1,5 +1,6 @@
 package com.mystore.qa.pages;
 
+import com.mystore.qa.pages.childpagesOfMyStorePage.WomenPage;
 import com.mystore.qa.utils.TestUtil;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -102,6 +103,17 @@ public class MyStorePage {
         List<String> listOfSection = new ArrayList<>(Arrays.asList(getWomenSection(), getDressesSection(), getTShirtsSection()));
         System.out.println("Section is included: " + listOfSection);
         return listOfSection;
+    }
+
+    private WebElement womenButton(){
+        By womenSectionLocator = By.xpath("//*[@class='sf-menu clearfix menu-content sf-js-enabled sf-arrows']/li/a");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(womenSectionLocator));
+        return driver.findElement(womenSectionLocator);
+    }
+
+    public WomenPage clickOnWomen(){
+        womenButton().click();
+        return new WomenPage(driver);
     }
 
 //    Header Pictures:

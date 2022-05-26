@@ -4,6 +4,7 @@ package com.mystore.qa.testcases;
 import com.mystore.qa.pages.ContactUsPage;
 import com.mystore.qa.pages.LoginPage;
 import com.mystore.qa.pages.MyStorePage;
+import com.mystore.qa.pages.childpagesOfMyStorePage.WomenPage;
 import com.mystore.qa.utils.ConfigReader;
 import com.mystore.qa.utils.TestUtil;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -29,6 +30,7 @@ public class MyStorePageTest {
     MyStorePage myStorePage;
     ContactUsPage contactUsPage;
     LoginPage loginPage;
+    WomenPage womenPage;
 
     @BeforeMethod
     public void startUp() {
@@ -62,6 +64,13 @@ public class MyStorePageTest {
         myStorePage = new MyStorePage(driver);
         loginPage = myStorePage.clickSignIn();
         Assert.assertTrue(loginPage.getAuthenticationBreadCrumb());
+    }
+
+    @Test
+    public void doClickWomen(){
+        myStorePage = new MyStorePage(driver);
+        womenPage = myStorePage.clickOnWomen();
+        Assert.assertTrue(womenPage.getWomenBreadcrumb());
     }
 
     @DataProvider
