@@ -60,14 +60,20 @@ public class WomenPageTest {
         String actSortingResult = womenPage.validateFilteringText().toUpperCase(Locale.ROOT);
         String expSortingResult = "WOMEN > CATEGORIES DRESSES > SIZE L > COLOR ORANGE";
 
-        womenPage.extractResultSorting();
-        List<String> expList = new ArrayList<>(Arrays.asList("Printed Dress $26.00 In stock", "Printed Summer Dress $28.98 $30.51 -5% In stock"));
+        String actList = womenPage.extractResultString();
+        String expList = "Printed Dress $26.00 In stock";
         Assert.assertEquals(actSortingResult, expSortingResult);
-//        Assert.assertEquals(actList, expList);
+        Assert.assertEquals(actList, expList);
     }
 
+    @Test
+    public void moveSlidersTest() throws InterruptedException {
+        womenPage = new WomenPage(driver);
+        myStorePage = new MyStorePage(driver);
+
+        womenPage = myStorePage.clickOnWomen();
+        womenPage.moveSlider();
 
 
-
-
+    }
 }

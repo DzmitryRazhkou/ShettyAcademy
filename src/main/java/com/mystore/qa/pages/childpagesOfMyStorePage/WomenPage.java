@@ -1,16 +1,12 @@
 package com.mystore.qa.pages.childpagesOfMyStorePage;
 
 import com.mystore.qa.utils.TestUtil;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class WomenPage {
@@ -77,7 +73,7 @@ public class WomenPage {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#uniform-layered_id_attribute_group_3")));
         getSizeCheckbox().click();
         getColorCheckbox().click();
-        Thread.sleep(7500);
+        Thread.sleep(15000);
 
     }
 
@@ -91,28 +87,82 @@ public class WomenPage {
         return validateSortingText;
     }
 
-    public void extractResultSorting() {
+    public String extractResultString() {
         List<WebElement> list = driver.findElements(By.cssSelector(".product-container"));
         for (int i = 0; i < list.size(); i++) {
-            String extTemp = list.get(i).getText().replaceAll("\n", " ").trim();
-            System.out.println(extTemp);
-//            String first = extTemp.split("\n")[0];
-//
-//            String second = extTemp.split("\n")[1].trim();
-//            System.out.println(first);
-//            System.out.println(second);
-//            List<String> extractResult = new ArrayList<>(Arrays.asList(first, second));
-//            for (String extractList: extractResult) {
-//                System.out.println(extractList);
-
+            String extTemp = list.get(i).getText().replaceAll("\n", " ");
+            System.out.println("Initial: " + extTemp);
+            return extTemp;
+        }
+        return null;
     }
+
+//  SLIDER:
+
+    private WebElement slider(){
+        By sliderLocator = By.cssSelector("#ul_layered_price_0");
+        wait.until(ExpectedConditions.presenceOfElementLocated(sliderLocator));
+        return driver.findElement(sliderLocator);
+    }
+
+    private void navigateToSlider(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0, 950)", "");
+        System.out.println("Page has bee scrolled down");
+    }
+
+    private WebElement leftSlider(){
+        By leftSliderLocator = By.xpath("(//*[@id = 'layered_price_slider']/a)[1]");
+        wait.until(ExpectedConditions.presenceOfElementLocated(leftSliderLocator));
+        return driver.findElement(leftSliderLocator);
+    }
+
+    private WebElement rightSlider(){
+        By rightSliderLocator = By.xpath("(//*[@id = 'layered_price_slider']/a)[2]");
+        wait.until(ExpectedConditions.presenceOfElementLocated(rightSliderLocator));
+        return driver.findElement(rightSliderLocator);
+    }
+
+    public void moveLeftSlider(){
+
+//        Position of slider:
+        Point point = leftSlider().getLocation();
+        int x_axis =  point.getX();
+        int y_axis =  point.getY();
+        System.out.println("X-axis: " +x_axis+ ", Y-axis: " +y_axis);
+
+        Actions act = new Actions(driver);
+        act.dragAndDropBy(leftSlider(), 33, 0).perform();
+    }
+
+    public void moveRightSlider(){
+
+//        Position of slider:
+        Point point = rightSlider().getLocation();
+        int x_axis =  point.getX();
+        int y_axis =  point.getY();
+        System.out.println("X-axis: " +x_axis+ ", Y-axis: " +y_axis);
+
+        Actions act = new Actions(driver);
+        act.dragAndDropBy(rightSlider(), -175, 0).perform();
+    }
+
+    public void moveSlider() throws InterruptedException {
+        navigateToSlider();
+        Thread.sleep(2000);
+        moveLeftSlider();
+        Thread.sleep(2000);
+        moveRightSlider();
+        Thread.sleep(7500);
+    }
+
+}
+
+
 
 //    private String getShowingOut() {
 //        By showingOutLocator = By.xpath("(//*[@class='product-count'])[1]");
 //        wait.until(ExpectedConditions.visibilityOfElementLocated(showingOutLocator));
 //        String showingOutResult = driver.findElement(showingOutLocator).getText();
 //        return showingOutResult;
-    }
 
-
-}
