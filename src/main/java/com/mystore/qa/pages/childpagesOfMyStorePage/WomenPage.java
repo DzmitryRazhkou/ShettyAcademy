@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class WomenPage {
 
@@ -52,8 +53,9 @@ public class WomenPage {
     }
 
     private WebElement getColorCheckbox(){
-        By colorCheckboxLocator = By.cssSelector("#ul_layered_id_attribute_group_3>li:nth-of-type(4)");
+        By colorCheckboxLocator = By.cssSelector("#layered_id_attribute_group_13");
         wait.until(ExpectedConditions.visibilityOfElementLocated(colorCheckboxLocator));
+        System.out.println("Color has been selected");
         return driver.findElement(colorCheckboxLocator);
     }
 
@@ -70,19 +72,32 @@ public class WomenPage {
 //    METHOD:
     public void doSorting() throws InterruptedException {
         getDressesCategoryCheckbox().click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#uniform-layered_id_attribute_group_3")));
         getSizeCheckbox().click();
-        Thread.sleep(2000);
         getColorCheckbox().click();
-        Thread.sleep(2000);
+        Thread.sleep(3000);
+
     }
 
 //    Validate Text:
 
     public String validateFilteringText(){
         By validateTextLocator = By.cssSelector("span.cat-name");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(validateTextLocator));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("span.cat-name")));
         String validateSortingText = driver.findElement(validateTextLocator).getText();
+        System.out.println(validateSortingText);
         return validateSortingText;
+    }
+
+    public String s() {
+        List<WebElement> list = driver.findElements(By.xpath("//*[@class='product_list row list']/li"));
+
+        String t = null;
+        for (int i = 0; i < list.size(); i++) {
+            t = list.get(i).getText();
+            System.out.println(t);
+        }
+        return t;
     }
 
     private String getShowingOut(){

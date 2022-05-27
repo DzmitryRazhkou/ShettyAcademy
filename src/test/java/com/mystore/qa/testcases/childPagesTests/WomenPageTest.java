@@ -7,11 +7,14 @@ import com.mystore.qa.pages.childpagesOfMyStorePage.WomenPage;
 import com.mystore.qa.utils.ConfigReader;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class WomenPageTest {
 
@@ -52,8 +55,8 @@ public class WomenPageTest {
         womenPage.doSorting();
 
         String actSortingResult = womenPage.validateFilteringText();
-        String expSortingResult = "Women > Categories Dresses > Size L";
-        Assert.assertNotEquals(actSortingResult, expSortingResult);
+        String expSortingResult = "Women > Categories Dresses > Size L > Color Orange";
+        Assert.assertEquals(actSortingResult, expSortingResult);
     }
 
 
