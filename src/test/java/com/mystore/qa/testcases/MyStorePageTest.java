@@ -34,7 +34,7 @@ public class MyStorePageTest {
 
     @BeforeMethod
     public void startUp() {
-        driver = WebDriverManager.safaridriver().create();
+        driver = WebDriverManager.chromedriver().create();
         driver.manage().window().maximize();
         driver.get(ConfigReader.initProp().getProperty("url"));
     }

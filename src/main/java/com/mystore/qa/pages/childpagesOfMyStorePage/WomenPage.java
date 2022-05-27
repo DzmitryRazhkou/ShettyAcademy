@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class WomenPage {
@@ -40,48 +42,48 @@ public class WomenPage {
 
     //    FILTERING:
 
-    private WebElement getDressesCategoryCheckbox(){
+    private WebElement getDressesCategoryCheckbox() {
         By dressCategoryCheckboxLocator = By.cssSelector("#uniform-layered_category_8");
         wait.until(ExpectedConditions.visibilityOfElementLocated(dressCategoryCheckboxLocator));
         return driver.findElement(dressCategoryCheckboxLocator);
     }
 
-    private WebElement getSizeCheckbox(){
+    private WebElement getSizeCheckbox() {
         By sizeCheckboxLocator = By.cssSelector("#uniform-layered_id_attribute_group_3");
         wait.until(ExpectedConditions.visibilityOfElementLocated(sizeCheckboxLocator));
         return driver.findElement(sizeCheckboxLocator);
     }
 
-    private WebElement getColorCheckbox(){
+    private WebElement getColorCheckbox() {
         By colorCheckboxLocator = By.cssSelector("#layered_id_attribute_group_13");
         wait.until(ExpectedConditions.visibilityOfElementLocated(colorCheckboxLocator));
         System.out.println("Color has been selected");
         return driver.findElement(colorCheckboxLocator);
     }
 
-    public void getSortBy(){
+    public void getSortBy() {
 //        #selectProductSort>option
     }
 
-    private WebElement getViewList(){
+    private WebElement getViewList() {
         By viewListLocator = By.cssSelector(".icon-th-list");
         wait.until(ExpectedConditions.visibilityOfElementLocated(viewListLocator));
         return driver.findElement(viewListLocator);
     }
 
-//    METHOD:
+    //    METHOD:
     public void doSorting() throws InterruptedException {
         getDressesCategoryCheckbox().click();
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#uniform-layered_id_attribute_group_3")));
         getSizeCheckbox().click();
         getColorCheckbox().click();
-        Thread.sleep(3000);
+        Thread.sleep(7500);
 
     }
 
 //    Validate Text:
 
-    public String validateFilteringText(){
+    public String validateFilteringText() {
         By validateTextLocator = By.cssSelector("span.cat-name");
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("span.cat-name")));
         String validateSortingText = driver.findElement(validateTextLocator).getText();
@@ -89,24 +91,28 @@ public class WomenPage {
         return validateSortingText;
     }
 
-    public String s() {
-        List<WebElement> list = driver.findElements(By.xpath("//*[@class='product_list row list']/li"));
-
-        String t = null;
+    public void extractResultSorting() {
+        List<WebElement> list = driver.findElements(By.cssSelector(".product-container"));
         for (int i = 0; i < list.size(); i++) {
-            t = list.get(i).getText();
-            System.out.println(t);
-        }
-        return t;
+            String extTemp = list.get(i).getText().replaceAll("\n", " ").trim();
+            System.out.println(extTemp);
+//            String first = extTemp.split("\n")[0];
+//
+//            String second = extTemp.split("\n")[1].trim();
+//            System.out.println(first);
+//            System.out.println(second);
+//            List<String> extractResult = new ArrayList<>(Arrays.asList(first, second));
+//            for (String extractList: extractResult) {
+//                System.out.println(extractList);
+
     }
 
-    private String getShowingOut(){
-        By showingOutLocator = By.xpath("(//*[@class='product-count'])[1]");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(showingOutLocator));
-        String showingOutResult = driver.findElement(showingOutLocator).getText();
-        return showingOutResult;
+//    private String getShowingOut() {
+//        By showingOutLocator = By.xpath("(//*[@class='product-count'])[1]");
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(showingOutLocator));
+//        String showingOutResult = driver.findElement(showingOutLocator).getText();
+//        return showingOutResult;
     }
-
 
 
 }
