@@ -4,6 +4,7 @@ import com.mystore.qa.utils.TestUtil;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -57,24 +58,14 @@ public class WomenPage {
         return driver.findElement(colorCheckboxLocator);
     }
 
-    public void getSortBy() {
-//        #selectProductSort>option
-    }
-
-    private WebElement getViewList() {
-        By viewListLocator = By.cssSelector(".icon-th-list");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(viewListLocator));
-        return driver.findElement(viewListLocator);
-    }
-
     //    METHOD:
+
     public void doSorting() throws InterruptedException {
         getDressesCategoryCheckbox().click();
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#uniform-layered_id_attribute_group_3")));
         getSizeCheckbox().click();
         getColorCheckbox().click();
         Thread.sleep(15000);
-
     }
 
 //    Validate Text:
@@ -99,49 +90,43 @@ public class WomenPage {
 
 //  SLIDER:
 
-    private WebElement slider(){
-        By sliderLocator = By.cssSelector("#ul_layered_price_0");
-        wait.until(ExpectedConditions.presenceOfElementLocated(sliderLocator));
-        return driver.findElement(sliderLocator);
-    }
-
-    private void navigateToSlider(){
+    private void navigateToSlider() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0, 950)", "");
         System.out.println("Page has bee scrolled down");
     }
 
-    private WebElement leftSlider(){
+    private WebElement leftSlider() {
         By leftSliderLocator = By.xpath("(//*[@id = 'layered_price_slider']/a)[1]");
         wait.until(ExpectedConditions.presenceOfElementLocated(leftSliderLocator));
         return driver.findElement(leftSliderLocator);
     }
 
-    private WebElement rightSlider(){
+    private WebElement rightSlider() {
         By rightSliderLocator = By.xpath("(//*[@id = 'layered_price_slider']/a)[2]");
         wait.until(ExpectedConditions.presenceOfElementLocated(rightSliderLocator));
         return driver.findElement(rightSliderLocator);
     }
 
-    public void moveLeftSlider(){
+    public void moveLeftSlider() {
 
 //        Position of slider:
         Point point = leftSlider().getLocation();
-        int x_axis =  point.getX();
-        int y_axis =  point.getY();
-        System.out.println("X-axis: " +x_axis+ ", Y-axis: " +y_axis);
+        int x_axis = point.getX();
+        int y_axis = point.getY();
+        System.out.println("X-axis: " + x_axis + ", Y-axis: " + y_axis);
 
         Actions act = new Actions(driver);
         act.dragAndDropBy(leftSlider(), 33, 0).perform();
     }
 
-    public void moveRightSlider(){
+    public void moveRightSlider() {
 
 //        Position of slider:
         Point point = rightSlider().getLocation();
-        int x_axis =  point.getX();
-        int y_axis =  point.getY();
-        System.out.println("X-axis: " +x_axis+ ", Y-axis: " +y_axis);
+        int x_axis = point.getX();
+        int y_axis = point.getY();
+        System.out.println("X-axis: " + x_axis + ", Y-axis: " + y_axis);
 
         Actions act = new Actions(driver);
         act.dragAndDropBy(rightSlider(), -175, 0).perform();
@@ -149,20 +134,44 @@ public class WomenPage {
 
     public void moveSlider() throws InterruptedException {
         navigateToSlider();
-        Thread.sleep(2000);
         moveLeftSlider();
-        Thread.sleep(2000);
         moveRightSlider();
-        Thread.sleep(7500);
+        Thread.sleep(2000);
     }
 
+    public String getShowingOut() {
+        By showingOutLocator = By.xpath("(//*[@class='product-count'])[1]");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(showingOutLocator));
+        String showingOutResult = driver.findElement(showingOutLocator).getText();
+        System.out.println("Out of: " + showingOutResult);
+        return showingOutResult;
+    }
+
+    private WebElement getSortBy() {
+        By sortByLocator = By.cssSelector("#selectProductSort");
+        wait.until(ExpectedConditions.presenceOfElementLocated(sortByLocator));
+        return driver.findElement(sortByLocator);
+    }
+
+    public void selectSort() throws InterruptedException {
+        Select select = new Select(getSortBy());
+        select.selectByIndex(2);
+        Thread.sleep(2000);
+    }
+
+    public String extractSortString() {
+
+        List<WebElement> list = driver.findElements(By.cssSelector(".product-container"));
+        for (int i = 0; i < list.size(); i++) {
+            String extTemp = list.get(i).getText().replaceAll("\n", " ");
+            System.out.println("Initial: " + extTemp);
+            return extTemp;
+        }
+        return null;
+    }
+
+
+//    INFORMATION:
+
+//    #informations_block_left_1>div>ul>li
 }
-
-
-
-//    private String getShowingOut() {
-//        By showingOutLocator = By.xpath("(//*[@class='product-count'])[1]");
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(showingOutLocator));
-//        String showingOutResult = driver.findElement(showingOutLocator).getText();
-//        return showingOutResult;
-

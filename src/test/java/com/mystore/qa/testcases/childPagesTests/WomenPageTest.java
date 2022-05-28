@@ -74,6 +74,25 @@ public class WomenPageTest {
         womenPage = myStorePage.clickOnWomen();
         womenPage.moveSlider();
 
+        String actResult = womenPage.extractResultString();
+        String expResult = "Printed Dress $26.00 In stock";
+        Assert.assertEquals(actResult, expResult);
 
+        String actOutOf = womenPage.getShowingOut();
+        String expOutOf = "Showing 1 - 1 of 1 items";
+        Assert.assertEquals(actOutOf, expOutOf);
+    }
+
+    @Test
+    public void doSelectSortTest() throws InterruptedException {
+        womenPage = new WomenPage(driver);
+        myStorePage = new MyStorePage(driver);
+
+        womenPage = myStorePage.clickOnWomen();
+        womenPage.selectSort();
+
+        String actResult = womenPage.extractSortString();
+        String expResult = "Printed Chiffon Dress $16.40 $20.50 -20% In stock";
+        Assert.assertEquals(actResult, expResult);
     }
 }
