@@ -156,7 +156,7 @@ public class WomenPage {
     public void selectSort() throws InterruptedException {
         Select select = new Select(getSortBy());
         select.selectByIndex(2);
-        Thread.sleep(2000);
+        Thread.sleep(3500);
     }
 
     public String extractSortString() {

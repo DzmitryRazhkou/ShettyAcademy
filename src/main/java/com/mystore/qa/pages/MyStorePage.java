@@ -1,5 +1,6 @@
 package com.mystore.qa.pages;
 
+import com.mystore.qa.pages.childpagesOfMyStorePage.DressesPage;
 import com.mystore.qa.pages.childpagesOfMyStorePage.WomenPage;
 import com.mystore.qa.utils.TestUtil;
 import org.openqa.selenium.*;
@@ -105,6 +106,8 @@ public class MyStorePage {
         return listOfSection;
     }
 
+//    WOMEN:
+
     private WebElement womenButton(){
         By womenSectionLocator = By.xpath("//*[@class='sf-menu clearfix menu-content sf-js-enabled sf-arrows']/li/a");
         wait.until(ExpectedConditions.visibilityOfElementLocated(womenSectionLocator));
@@ -115,6 +118,23 @@ public class MyStorePage {
         womenButton().click();
         return new WomenPage(driver);
     }
+
+//    DRESSES:
+
+    private WebElement dressesButton(){
+        By dressesSectionLocator = By.xpath("(//*[@class='sf-menu clearfix menu-content sf-js-enabled sf-arrows']/li/a)[2]");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(dressesSectionLocator));
+        return driver.findElement(dressesSectionLocator);
+    }
+
+    public DressesPage clickOnDresses(){
+        dressesButton().click();
+        return new DressesPage(driver);
+    }
+
+//    T-SHIRTS:
+
+
 
 //    Header Pictures:
 
