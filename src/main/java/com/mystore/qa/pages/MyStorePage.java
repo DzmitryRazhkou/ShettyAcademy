@@ -1,6 +1,7 @@
 package com.mystore.qa.pages;
 
 import com.mystore.qa.pages.childpagesOfMyStorePage.DressesPage;
+import com.mystore.qa.pages.childpagesOfMyStorePage.TShirtsPage;
 import com.mystore.qa.pages.childpagesOfMyStorePage.WomenPage;
 import com.mystore.qa.utils.TestUtil;
 import org.openqa.selenium.*;
@@ -134,7 +135,16 @@ public class MyStorePage {
 
 //    T-SHIRTS:
 
+    private WebElement t_shirtsButton(){
+        By t_shirtsSectionLocator = By.xpath("(//*[@class='sf-menu clearfix menu-content sf-js-enabled sf-arrows']/li/a)[3]");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(t_shirtsSectionLocator));
+        return driver.findElement(t_shirtsSectionLocator);
+    }
 
+    public TShirtsPage clickOnTShirts(){
+        t_shirtsButton().click();
+        return new TShirtsPage(driver);
+    }
 
 //    Header Pictures:
 
