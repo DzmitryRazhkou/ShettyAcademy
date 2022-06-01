@@ -79,7 +79,7 @@ public class DressesPage {
     }
 
     public String extractResultString() {
-        List<WebElement> list = driver.findElements(By.cssSelector(".product-container"));
+        List<WebElement> list = driver.findElements(By.cssSelector("div.product-container"));
         for (int i = 0; i < list.size(); i++) {
             String extTemp = list.get(i).getText().replaceAll("\n", " ");
             System.out.println("Initial: " + extTemp);

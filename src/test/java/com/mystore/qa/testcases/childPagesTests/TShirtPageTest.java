@@ -42,4 +42,21 @@ public class TShirtPageTest {
         tShirtsPage = myStorePage.clickOnTShirts();
         Assert.assertTrue(tShirtsPage.getT_shirtBreadcrumb());
     }
+
+    @Test
+    public void doSortingTest() throws InterruptedException {
+        tShirtsPage = new TShirtsPage(driver);
+        myStorePage = new MyStorePage(driver);
+
+        tShirtsPage = myStorePage.clickOnTShirts();
+        tShirtsPage.doSorting();
+
+        String actSortingResult = tShirtsPage.validateFilteringText();
+        String expSortingResult = "T-SHIRTS > SIZE L > COLOR ORANGE";
+
+        String actList = tShirtsPage.extractResultString().trim();
+        String expList = "Faded Short Sleeve T-shirts $16.51 In stock";
+        Assert.assertEquals(actSortingResult, expSortingResult);
+        Assert.assertEquals(actList, expList);
+    }
 }
