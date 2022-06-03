@@ -108,7 +108,7 @@ public class WomenPage {
         return driver.findElement(rightSliderLocator);
     }
 
-    public void moveLeftSlider() {
+    private void moveLeftSlider() {
 
 //        Position of slider:
         Point point = leftSlider().getLocation();
@@ -120,7 +120,7 @@ public class WomenPage {
         act.dragAndDropBy(leftSlider(), 33, 0).perform();
     }
 
-    public void moveRightSlider() {
+    private void moveRightSlider() {
 
 //        Position of slider:
         Point point = rightSlider().getLocation();
@@ -170,8 +170,4 @@ public class WomenPage {
         return null;
     }
 
-
-//    INFORMATION:
-
-//    #informations_block_left_1>div>ul>li
 }

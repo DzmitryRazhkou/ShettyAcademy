@@ -22,7 +22,7 @@ public class LoginPage {
 
 //    RETURN HOME:
 
-    private WebElement getReturnHomeButton(){
+    private WebElement getReturnHomeButton() {
         By returnHomeButtonLocator = By.cssSelector(".icon-home");
         wait.until(ExpectedConditions.visibilityOfElementLocated(returnHomeButtonLocator));
         return driver.findElement(returnHomeButtonLocator);
@@ -30,7 +30,7 @@ public class LoginPage {
 
 //    AUTHENTICATION:
 
-    private WebElement getAuthentication(){
+    private WebElement getAuthentication() {
         By authenticationLocator = By.cssSelector(".navigation_page");
         wait.until(ExpectedConditions.visibilityOfElementLocated(authenticationLocator));
         return driver.findElement(authenticationLocator);
@@ -45,5 +45,36 @@ public class LoginPage {
             return false;
         }
     }
+
+//    CREDENTIALS:
+
+    private WebElement getEmail() {
+        By emailLocator = By.cssSelector("#email");
+        wait.until(ExpectedConditions.presenceOfElementLocated(emailLocator));
+        return driver.findElement(emailLocator);
+    }
+
+    private WebElement getPassword() {
+        By passwordLocator = By.cssSelector("#passwd");
+        wait.until(ExpectedConditions.presenceOfElementLocated(passwordLocator));
+        return driver.findElement(passwordLocator);
+    }
+
+    private WebElement getSignIn() {
+        By signInBtnLocator = By.cssSelector("#SubmitLogin");
+        wait.until(ExpectedConditions.presenceOfElementLocated(signInBtnLocator));
+        return driver.findElement(signInBtnLocator);
+    }
+
+    public void doLogin(){
+        getEmail().clear();
+        getEmail().sendKeys("dimagadjilla@gmail.com");
+        getPassword().clear();
+        getPassword().sendKeys("3036057Dr");
+        getSignIn().click();
+        return ;
+    }
+
+
 }
 

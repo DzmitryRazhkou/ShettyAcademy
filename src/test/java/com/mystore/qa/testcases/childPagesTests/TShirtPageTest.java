@@ -59,4 +59,34 @@ public class TShirtPageTest {
         Assert.assertEquals(actSortingResult, expSortingResult);
         Assert.assertEquals(actList, expList);
     }
+
+    @Test
+    public void moveSlidersTest() throws InterruptedException {
+        tShirtsPage = new TShirtsPage(driver);
+        myStorePage = new MyStorePage(driver);
+
+        tShirtsPage = myStorePage.clickOnTShirts();
+        tShirtsPage.moveSlider();
+
+        String actResult = tShirtsPage.extractResultString();
+        String expResult = "Faded Short Sleeve T-shirts $16.51 In stock";
+        Assert.assertEquals(actResult, expResult);
+
+        String actOutOf = tShirtsPage.getShowingOut();
+        String expOutOf = "Showing 1 - 1 of 1 item";
+        Assert.assertEquals(actOutOf, expOutOf);
+    }
+
+    @Test
+    public void doSelectSortTest() throws InterruptedException {
+        tShirtsPage = new TShirtsPage(driver);
+        myStorePage = new MyStorePage(driver);
+
+        tShirtsPage = myStorePage.clickOnTShirts();
+        tShirtsPage.selectSort();
+
+        String actResult = tShirtsPage.extractSortString();
+        String expResult = "Faded Short Sleeve T-shirts $16.51 In stock";
+        Assert.assertEquals(actResult, expResult);
+    }
 }

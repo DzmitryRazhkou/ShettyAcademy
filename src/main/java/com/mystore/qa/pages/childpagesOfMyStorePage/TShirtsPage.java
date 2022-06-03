@@ -1,11 +1,10 @@
 package com.mystore.qa.pages.childpagesOfMyStorePage;
 
 import com.mystore.qa.utils.TestUtil;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -78,7 +77,91 @@ public class TShirtsPage {
     }
 
     public String extractResultString() {
-        List<WebElement> list = driver.findElements(By.cssSelector("div.product-container"));
+        List<WebElement> list = driver.findElements(By.cssSelector(".product-container"));
+        for (int i = 0; i < list.size(); i++) {
+            String extTemp = list.get(i).getText().replaceAll("\n", " ");
+            System.out.println("Initial: " + extTemp);
+            return extTemp;
+        }
+        return null;
+    }
+
+    //  SLIDER:
+
+    private void navigateToSlider() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0, 950)", "");
+        System.out.println("Page has bee scrolled down");
+    }
+
+    private WebElement leftSlider() {
+        By leftSliderLocator = By.xpath("(//*[@id = 'layered_price_slider']/a)[1]");
+        wait.until(ExpectedConditions.presenceOfElementLocated(leftSliderLocator));
+        return driver.findElement(leftSliderLocator);
+    }
+
+    private WebElement rightSlider() {
+        By rightSliderLocator = By.xpath("(//*[@id = 'layered_price_slider']/a)[2]");
+        wait.until(ExpectedConditions.presenceOfElementLocated(rightSliderLocator));
+        return driver.findElement(rightSliderLocator);
+    }
+
+    public void moveLeftSlider() {
+
+//        Position of slider:
+        Point point = leftSlider().getLocation();
+        int x_axis = point.getX();
+        int y_axis = point.getY();
+        System.out.println("X-axis: " + x_axis + ", Y-axis: " + y_axis);
+
+        Actions act = new Actions(driver);
+        act.dragAndDropBy(leftSlider(), 15, 0).perform();
+    }
+
+//    DO NOT MOVE RiGHT SLIDER
+
+//    public void moveRightSlider() {
+//
+////        Position of slider:
+//        Point point = rightSlider().getLocation();
+//        int x_axis = point.getX();
+//        int y_axis = point.getY();
+//        System.out.println("X-axis: " + x_axis + ", Y-axis: " + y_axis);
+//
+//        Actions act = new Actions(driver);
+//        act.dragAndDropBy(rightSlider(), 0, 0).perform();
+//    }
+
+    public void moveSlider() throws InterruptedException {
+        navigateToSlider();
+        moveLeftSlider();
+        Thread.sleep(3000);
+    }
+
+
+    public String getShowingOut() {
+        By showingOutLocator = By.xpath("(//*[@class='product-count'])[1]");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(showingOutLocator));
+        String showingOutResult = driver.findElement(showingOutLocator).getText();
+        System.out.println("Out of: " + showingOutResult);
+        return showingOutResult;
+    }
+
+    private WebElement getSortBy() {
+        By sortByLocator = By.cssSelector("#selectProductSort");
+        wait.until(ExpectedConditions.presenceOfElementLocated(sortByLocator));
+        return driver.findElement(sortByLocator);
+    }
+
+    public void selectSort() throws InterruptedException {
+        Select select = new Select(getSortBy());
+        select.selectByIndex(2);
+        Thread.sleep(3500);
+    }
+
+    public String extractSortString() {
+
+        List<WebElement> list = driver.findElements(By.cssSelector(".product-container"));
         for (int i = 0; i < list.size(); i++) {
             String extTemp = list.get(i).getText().replaceAll("\n", " ");
             System.out.println("Initial: " + extTemp);
