@@ -1,8 +1,10 @@
 package com.mystore.qa.testcases;
 
 
+import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.ContactUsPage;
 import com.mystore.qa.pages.LoginPage;
+import com.mystore.qa.pages.MyAccountPage;
 import com.mystore.qa.pages.MyStorePage;
 import com.mystore.qa.pages.childpagesOfMyStorePage.WomenPage;
 import com.mystore.qa.utils.ConfigReader;
@@ -16,27 +18,31 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 
 public class MyStorePageTest {
+
+
+    ConfigReader cp;
+    DriverFactory df;
+    Properties prop;
 
     private static WebDriver driver;
     private static WebDriverWait wait;
 
     MyStorePage myStorePage;
-    ContactUsPage contactUsPage;
     LoginPage loginPage;
+    MyAccountPage myAccountPage;
+    ContactUsPage contactUsPage;
     WomenPage womenPage;
 
     @BeforeMethod
     public void startUp() {
-        driver = WebDriverManager.chromedriver().create();
-        driver.manage().window().maximize();
-        driver.get(ConfigReader.initProp().getProperty("url"));
+        cp = new ConfigReader();
+        df = new DriverFactory();
+        prop = cp.initProp();
+        driver = df.initDriver("chrome", prop);
     }
 
     @AfterMethod

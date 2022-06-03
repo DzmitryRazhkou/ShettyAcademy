@@ -1,5 +1,6 @@
 package com.mystore.qa.testcases.childPagesTests;
 
+import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.MyStorePage;
 import com.mystore.qa.pages.childpagesOfMyStorePage.DressesPage;
 import com.mystore.qa.pages.childpagesOfMyStorePage.WomenPage;
@@ -12,10 +13,15 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class DressesPageTest {
+import java.util.Properties;
 
-    private static WebDriver driver;
-    private static WebDriverWait wait;
+public class DressesPageTest {
+    ConfigReader cp;
+    DriverFactory df;
+    Properties prop;
+
+    WebDriver driver;
+    WebDriverWait wait;
 
     MyStorePage myStorePage;
     DressesPage dressesPage;
@@ -24,9 +30,10 @@ public class DressesPageTest {
 
     @BeforeMethod
     public void startUp() {
-        driver = WebDriverManager.chromedriver().create();
-        driver.manage().window().maximize();
-        driver.get(ConfigReader.initProp().getProperty("url"));
+        cp = new ConfigReader();
+        df = new DriverFactory();
+        prop = cp.initProp();
+        driver = df.initDriver("chrome", prop);
     }
 
     @AfterMethod

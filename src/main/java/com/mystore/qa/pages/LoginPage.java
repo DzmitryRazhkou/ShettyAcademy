@@ -66,13 +66,13 @@ public class LoginPage {
         return driver.findElement(signInBtnLocator);
     }
 
-    public void doLogin(){
+    public MyAccountPage doLogin(){
         getEmail().clear();
         getEmail().sendKeys("dimagadjilla@gmail.com");
         getPassword().clear();
         getPassword().sendKeys("3036057Dr");
         getSignIn().click();
-        return ;
+        return new MyAccountPage(driver);
     }
 
 
