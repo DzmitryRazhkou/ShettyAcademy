@@ -34,10 +34,6 @@ public class LoginPageTest {
         df = new DriverFactory();
         prop = cp.initProp();
         driver = df.initDriver("chrome", prop);
-
-//        driver = WebDriverManager.chromedriver().create();
-//        driver.manage().window().maximize();
-//        driver.get(ConfigReader.initProp().getProperty("url"));
     }
 
     @AfterMethod
@@ -58,7 +54,7 @@ public class LoginPageTest {
     public void doLoginTest(){
         myStorePage = new MyStorePage(driver);
         loginPage = myStorePage.clickSignIn();
-        myAccountPage = loginPage.doLogin();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         Assert.assertTrue(myAccountPage.getMyAccountBreadCrumb());
     }
 

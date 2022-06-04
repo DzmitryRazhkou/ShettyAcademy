@@ -46,7 +46,7 @@ public class LoginPage {
         }
     }
 
-//    CREDENTIALS:
+//    ALREADY REGISTERED?
 
     private WebElement getEmail() {
         By emailLocator = By.cssSelector("#email");
@@ -66,14 +66,37 @@ public class LoginPage {
         return driver.findElement(signInBtnLocator);
     }
 
-    public MyAccountPage doLogin(){
+    public MyAccountPage doLogin(String email, String password){
         getEmail().clear();
-        getEmail().sendKeys("dimagadjilla@gmail.com");
+        getEmail().sendKeys(email);
         getPassword().clear();
-        getPassword().sendKeys("3036057Dr");
+        getPassword().sendKeys(password);
         getSignIn().click();
         return new MyAccountPage(driver);
     }
+
+//    CREATE AN ACCOUNT:
+
+    private WebElement getEmailCreateAccount() {
+        By emailCreateAccountLocator = By.cssSelector("#email_create");
+        wait.until(ExpectedConditions.presenceOfElementLocated(emailCreateAccountLocator));
+        return driver.findElement(emailCreateAccountLocator);
+    }
+
+    private WebElement getCreateAccount() {
+        By signInBtnLocator = By.cssSelector("#SubmitCreate");
+        wait.until(ExpectedConditions.presenceOfElementLocated(signInBtnLocator));
+        return driver.findElement(signInBtnLocator);
+    }
+
+    public MyAccountPage doCreateAccount(String emailCreateAccount){
+        getEmailCreateAccount().clear();
+        getEmailCreateAccount().sendKeys(emailCreateAccount);
+        getCreateAccount().click();
+        return new MyAccountPage(driver);
+    }
+
+
 
 
 }
