@@ -1,18 +1,23 @@
 package com.mystore.qa.testcases;
 
 import com.mystore.qa.driverfactory.DriverFactory;
+import com.mystore.qa.pages.LoginCreateAccountPage;
 import com.mystore.qa.pages.LoginPage;
 import com.mystore.qa.pages.MyAccountPage;
 import com.mystore.qa.pages.MyStorePage;
 import com.mystore.qa.utils.ConfigReader;
+import com.mystore.qa.utils.TestUtil;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Properties;
 
 public class LoginPageTest {
@@ -27,6 +32,7 @@ public class LoginPageTest {
     MyStorePage myStorePage;
     LoginPage loginPage;
     MyAccountPage myAccountPage;
+    LoginCreateAccountPage loginCreateAccountPage;
 
     @BeforeMethod
     public void startUp() {
@@ -56,6 +62,20 @@ public class LoginPageTest {
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         Assert.assertTrue(myAccountPage.getMyAccountBreadCrumb());
+    }
+
+    @DataProvider
+    public Iterator<Object[]> getCreateAccountEmails() {
+        ArrayList<Object[]> testData = TestUtil.getCreateAccountEmails();
+        return testData.iterator();
+    }
+
+    @Test(dataProvider = "getCreateAccountEmails")
+    public void doCreateAccountTest(String emailCreateAccount){
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        loginCreateAccountPage = loginPage.doCreateAccount(emailCreateAccount);
+        Assert.assertTrue(loginCreateAccountPage.getAuthenticationBreadcrumb());
     }
 
 }

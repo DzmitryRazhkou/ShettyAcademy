@@ -83,17 +83,17 @@ public class LoginPage {
         return driver.findElement(emailCreateAccountLocator);
     }
 
-    private WebElement getCreateAccount() {
+    private WebElement getCreateAccountBtn() {
         By signInBtnLocator = By.cssSelector("#SubmitCreate");
         wait.until(ExpectedConditions.presenceOfElementLocated(signInBtnLocator));
         return driver.findElement(signInBtnLocator);
     }
 
-    public MyAccountPage doCreateAccount(String emailCreateAccount){
+    public LoginCreateAccountPage doCreateAccount(String emailCreateAccount){
         getEmailCreateAccount().clear();
         getEmailCreateAccount().sendKeys(emailCreateAccount);
-        getCreateAccount().click();
-        return new MyAccountPage(driver);
+        getCreateAccountBtn().click();
+        return new LoginCreateAccountPage(driver);
     }
 
 

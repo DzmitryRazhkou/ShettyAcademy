@@ -8,6 +8,9 @@ public class TestUtil {
     public static long WEBDRIVERWAIT_DurationOfSeconds = 10;
     static Xls_Reader reader;
 
+
+//  MY STORE PAGE:
+
     public static ArrayList<Object[]> getDataSectionWomen() {
 
         String excelPath = System.getProperty("user.dir") + "/src/main/java/com/mystore/qa/config/data.xlsx";
@@ -138,4 +141,32 @@ public class TestUtil {
 
         return myData;
     }
+
+//    LOGIN PAGE
+
+//    1. CREATE ACCOUNT
+
+    public static ArrayList<Object[]> getCreateAccountEmails() {
+
+        String excelPath = System.getProperty("user.dir") + "/src/main/java/com/mystore/qa/config/data.xlsx";
+        String sheetName = "createAccount";
+
+        ArrayList<Object[]> myData = new ArrayList<>();
+        try {
+            reader = new Xls_Reader(excelPath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        for (int rowNum = 2; rowNum <= reader.getRowCount(sheetName); rowNum++) {
+            String emailCreateAccount = reader.getCellData(sheetName, "emailCreateAccount", rowNum);
+
+            Object ob[] = {emailCreateAccount};
+
+            myData.add(ob);
+        }
+
+        return myData;
+    }
+
 }
