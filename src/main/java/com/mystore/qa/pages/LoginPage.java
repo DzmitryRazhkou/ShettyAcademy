@@ -48,6 +48,25 @@ public class LoginPage {
 
 //    ALREADY REGISTERED?
 
+//    FORGOT YOUR PASSWORD
+
+    private WebElement getForgotPasswordLink(){
+        By getForgotPasswordLinkLocator = By.cssSelector("[title^='Recover your forgotten password']");
+        wait.until(ExpectedConditions.presenceOfElementLocated(getForgotPasswordLinkLocator));
+        return driver.findElement(getForgotPasswordLinkLocator);
+    }
+
+    public boolean validateForgotPasswordLink(){
+        try {
+            System.out.println(" ===> Forgot your password is displayed. <=== ");
+            System.out.println(getForgotPasswordLink().getText());
+            return getForgotPasswordLink().isDisplayed();
+        } catch (TimeoutException y){
+            System.out.println(" ===> Please provide the correct locator. <===");
+            return false;
+        }
+    }
+
     private WebElement getEmail() {
         By emailLocator = By.cssSelector("#email");
         wait.until(ExpectedConditions.presenceOfElementLocated(emailLocator));
@@ -95,9 +114,5 @@ public class LoginPage {
         getCreateAccountBtn().click();
         return new LoginCreateAccountPage(driver);
     }
-
-
-
-
 }
 

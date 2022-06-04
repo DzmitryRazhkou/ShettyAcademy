@@ -57,6 +57,13 @@ public class LoginPageTest {
     }
 
     @Test
+    public void validateForgotPasswordLinkTest(){
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        Assert.assertTrue(loginPage.validateForgotPasswordLink());
+    }
+
+    @Test
     public void doLoginTest(){
         myStorePage = new MyStorePage(driver);
         loginPage = myStorePage.clickSignIn();
