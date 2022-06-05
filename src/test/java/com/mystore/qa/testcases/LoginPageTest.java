@@ -64,11 +64,19 @@ public class LoginPageTest {
     }
 
     @Test
-    public void doLoginTest(){
+    public void doLoginCorrectCredentialsTest(){
         myStorePage = new MyStorePage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         Assert.assertTrue(myAccountPage.getMyAccountBreadCrumb());
+    }
+
+    @Test
+    public void doLoginIncorrectCredentialsTest(){
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        loginPage.doLogin(prop.getProperty("wrong_email"), prop.getProperty("wrong_password"));
+        Assert.assertTrue(loginPage.getErrorForm());
     }
 
     @DataProvider

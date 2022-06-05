@@ -50,22 +50,24 @@ public class LoginPage {
 
 //    FORGOT YOUR PASSWORD
 
-    private WebElement getForgotPasswordLink(){
+    private WebElement getForgotPasswordLink() {
         By getForgotPasswordLinkLocator = By.cssSelector("[title^='Recover your forgotten password']");
         wait.until(ExpectedConditions.presenceOfElementLocated(getForgotPasswordLinkLocator));
         return driver.findElement(getForgotPasswordLinkLocator);
     }
 
-    public boolean validateForgotPasswordLink(){
+    public boolean validateForgotPasswordLink() {
         try {
             System.out.println(" ===> Forgot your password is displayed. <=== ");
             System.out.println(getForgotPasswordLink().getText());
             return getForgotPasswordLink().isDisplayed();
-        } catch (TimeoutException y){
+        } catch (TimeoutException y) {
             System.out.println(" ===> Please provide the correct locator. <===");
             return false;
         }
     }
+
+//    Correct Credentials:
 
     private WebElement getEmail() {
         By emailLocator = By.cssSelector("#email");
@@ -85,13 +87,27 @@ public class LoginPage {
         return driver.findElement(signInBtnLocator);
     }
 
-    public MyAccountPage doLogin(String email, String password){
+    public MyAccountPage doLogin(String email, String password) {
         getEmail().clear();
         getEmail().sendKeys(email);
         getPassword().clear();
         getPassword().sendKeys(password);
         getSignIn().click();
         return new MyAccountPage(driver);
+    }
+
+//    Incorrect Credentials:
+
+    public boolean getErrorForm() {
+        By errorFromLocator = By.cssSelector("#SubmitLogin");
+        wait.until(ExpectedConditions.presenceOfElementLocated(errorFromLocator));
+        try {
+            System.out.println("=====> Error form is displayed <===== .");
+            return driver.findElement(errorFromLocator).isDisplayed();
+        } catch (TimeoutException y) {
+            System.out.println("Provide another locator.");
+            return false;
+        }
     }
 
 //    CREATE AN ACCOUNT:
@@ -108,7 +124,7 @@ public class LoginPage {
         return driver.findElement(signInBtnLocator);
     }
 
-    public LoginCreateAccountPage doCreateAccount(String emailCreateAccount){
+    public LoginCreateAccountPage doCreateAccount(String emailCreateAccount) {
         getEmailCreateAccount().clear();
         getEmailCreateAccount().sendKeys(emailCreateAccount);
         getCreateAccountBtn().click();
