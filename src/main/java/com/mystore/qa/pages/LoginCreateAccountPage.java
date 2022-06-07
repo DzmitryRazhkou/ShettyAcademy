@@ -6,7 +6,6 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -43,19 +42,13 @@ public class LoginCreateAccountPage {
 
 //    1. Title:
 
-    private WebElement getMrRadioBtn() {
+    private WebElement getMrMrsRadioBtn() {
         By getMrRadioBtnLocator = By.cssSelector("#id_gender1");
         wait.until(ExpectedConditions.visibilityOfElementLocated(getMrRadioBtnLocator));
         return driver.findElement(getMrRadioBtnLocator);
     }
 
-    private WebElement getMrsRadioBtn() {
-        By getMrsRadioBtnLocator = By.cssSelector("#id_gender2");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(getMrsRadioBtnLocator));
-        return driver.findElement(getMrsRadioBtnLocator);
-    }
-
-//    First Name:
+    //    First Name:
 
     private WebElement getFirstName() {
         By getFirstNameLocator = By.cssSelector("#customer_firstname");
@@ -83,26 +76,16 @@ public class LoginCreateAccountPage {
 
 //    1. Days
 
-    private WebElement getDays() {
-        By getDaysLocator = By.cssSelector("#days");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(getDaysLocator));
-        return driver.findElement(getDaysLocator);
-    }
-
-    private WebElement getDaysValues() {
-        By getDaysValuesLocator = By.cssSelector("#days>option");
+    private void selectDays(String dayValue) {
+        By getDaysValuesLocator = By.xpath("(//*[@class='form-control'])[1]//option");
         wait.until(ExpectedConditions.visibilityOfElementLocated(getDaysValuesLocator));
-        return driver.findElement(getDaysValuesLocator);
-    }
 
-    public void selectDays(String dayValue) {
-        getDays().click();
-        List<WebElement> list = driver.findElements((By) getDaysValues());
+        List<WebElement> list = driver.findElements(getDaysValuesLocator);
 
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i).getText());
-            if (list.get(i).getText().contains(dayValue)) {
-                list.get(i).click();
+        for (WebElement webElement : list) {
+            System.out.println(webElement.getText());
+            if (webElement.getText().contains(dayValue)) {
+                webElement.click();
                 break;
             }
         }
@@ -110,57 +93,37 @@ public class LoginCreateAccountPage {
 
 //    2. Months
 
-    private WebElement getMonths() {
-        By getMonthsLocator = By.cssSelector("#months");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(getMonthsLocator));
-        return driver.findElement(getMonthsLocator);
-    }
+    private void selectMonths(String monthValue) {
 
-    private WebElement getMonthsValues() {
-        By getMonthsValuesLocator = By.cssSelector("#months>option");
+        By getMonthsValuesLocator = By.xpath("(//*[@class='form-control'])[2]//option");
         wait.until(ExpectedConditions.visibilityOfElementLocated(getMonthsValuesLocator));
-        return driver.findElement(getMonthsValuesLocator);
-    }
 
-    public void selectMonths(String monthValue) {
-            getMonths().click();
-            List<WebElement> list = driver.findElements((By) getMonthsValues());
+            List<WebElement> list = driver.findElements(getMonthsValuesLocator);
 
-            for (int i = 0; i < list.size(); i++) {
-                System.out.println(list.get(i).getText());
-                if (list.get(i).getText().contains(monthValue)) {
-                    list.get(i).click();
-                    break;
-                }
+        for (WebElement webElement : list) {
+            System.out.println(webElement.getText());
+            if (webElement.getText().contains(monthValue)) {
+                webElement.click();
+                break;
             }
+        }
         }
 
 
 //    3. Years
 
-    private WebElement getYears() {
-        By getYearsLocator = By.cssSelector("#years");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(getYearsLocator));
-        return driver.findElement(getYearsLocator);
-    }
-
-    private WebElement getYearsValues() {
-        By getYearsValuesLocator = By.cssSelector("#years>option");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(getYearsValuesLocator));
-        return driver.findElement(getYearsValuesLocator);
-    }
-
     public void selectYears(String yearsValue) {
-            getYears().click();
-            List<WebElement> list = driver.findElements((By) getYearsValues());
+        By getYearsValuesLocator = By.xpath("(//*[@class='form-control'])[3]//option");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(getYearsValuesLocator));
+            List<WebElement> list = driver.findElements(getYearsValuesLocator);
 
-            for (int i = 0; i < list.size(); i++) {
-                System.out.println(list.get(i).getText());
-                if (list.get(i).getText().contains(yearsValue)) {
-                    list.get(i).click();
-                    break;
-                }
+        for (WebElement webElement : list) {
+            System.out.println(webElement.getText());
+            if (webElement.getText().contains(yearsValue)) {
+                webElement.click();
+                break;
             }
+        }
         }
 
 //    YOUR ADDRESS:
@@ -215,22 +178,18 @@ public class LoginCreateAccountPage {
 
 //    6. State:
 
-    private WebElement getStates() {
-        By getStatesLocator = By.cssSelector("#id_state");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(getStatesLocator));
-        return driver.findElement(getStatesLocator);
-    }
-
-    private WebElement getStatesValues() {
-        By getStatesValuesLocator = By.cssSelector("#id_state>option");
+    private void selectStates(String stateValue) {
+        By getStatesValuesLocator = By.xpath("(//*[@class='form-control'])[10]//option");
         wait.until(ExpectedConditions.visibilityOfElementLocated(getStatesValuesLocator));
-        return driver.findElement(getStatesValuesLocator);
-    }
+        List<WebElement> list = driver.findElements(getStatesValuesLocator);
 
-    public void selectStates(String stateValue) {
-        getStates().click();
-        Select select = new Select(getStatesValues());
-        select.selectByValue(stateValue);
+        for (WebElement webElement : list) {
+            System.out.println(webElement.getText());
+            if (webElement.getText().contains(stateValue)) {
+                webElement.click();
+                break;
+            }
+        }
     }
 
 //    7. ZIP/POSTAL CODE
@@ -249,15 +208,7 @@ public class LoginCreateAccountPage {
         return driver.findElement(getAddInfoLocator);
     }
 
-//    9. Home phone:
-
-    private WebElement getHomePhone() {
-        By getHomePhoneLocator = By.cssSelector("#phone");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(getHomePhoneLocator));
-        return driver.findElement(getHomePhoneLocator);
-    }
-
-//    10. Mobile phone:
+//    9. Mobile phone:
 
     private WebElement getMobilePhone() {
         By getMobilePhoneLocator = By.cssSelector("#phone_mobile");
@@ -277,59 +228,31 @@ public class LoginCreateAccountPage {
 //    FINAL METHOD
 
 
-    public void fillUpPersonalInfo(String firstName, String lastName, String password,
-                                   String dayDOB, String monthDOB, String yearDOB, String company, String addressFL, String addressSL,
-                                   String city, String state, String zipCode, String addInfo, String phone) {
+    public MyAccountPage fillUpPersonalInfo(String firstName, String lastName, String password,
+    String dayDOB, String monthDOB, String yearDOB, String company, String addressFL, String addressSL,
+    String city, String state, String zipCode, String addInfo, String phone) {
 
-        getMrRadioBtn().click();
-
-        getFirstName().clear();
+        getMrMrsRadioBtn().click();
         getFirstName().sendKeys(firstName);
-
-        getLastName().clear();
         getLastName().sendKeys(lastName);
-
-        getPassword().clear();
         getPassword().sendKeys(password);
 
         selectDays(dayDOB);
         selectMonths(monthDOB);
         selectYears(yearDOB);
 
-        getFirstNameAddress().clear();
         getFirstNameAddress().sendKeys(firstName);
-
-        getLastNameAddress().clear();
         getLastNameAddress().sendKeys(lastName);
-
-        getCompany().clear();
         getCompany().sendKeys(company);
-
-        getAddressFirstLine().clear();
         getAddressFirstLine().sendKeys(addressFL);
-
-        getAddressSecondLine().clear();
         getAddressSecondLine().sendKeys(addressSL);
-
-        getCity().clear();
         getCity().sendKeys(city);
-
         selectStates(state);
-
-        getZipCode().clear();
         getZipCode().sendKeys(zipCode);
-
-        getAddInfo().clear();
-        getAddInfo().sendKeys(addInfo);
-
-        getHomePhone().clear();
-        getHomePhone().sendKeys(phone);
-
-        getMobilePhone().clear();
+        getAddInfo().sendKeys(addInfo);;
         getMobilePhone().sendKeys(phone);
-
         getRegisterBtn().click();
+        return new MyAccountPage(driver);
     }
-
 
 }
