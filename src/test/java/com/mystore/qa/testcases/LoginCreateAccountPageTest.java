@@ -45,13 +45,15 @@ public class LoginCreateAccountPageTest {
     }
 
     @Test
-    public void fillUpPersonalInfoTest(){
+    public void fillUpPersonalInfoTest(String emailCreateAccount, String firstName, String lastName, String passwd,
+        String days, String months, String years, String company, String addressFl, String addressSl, String city,
+        String state, String zip, String addInfo, String phone){
+
         myStorePage = new MyStorePage(driver);
         loginPage = myStorePage.clickSignIn();
-        loginCreateAccountPage = loginPage.doCreateAccount("emailccount@gmail.com");
-        myAccountPage = loginCreateAccountPage.fillUpPersonalInfo("Edward", "Evans", "23345",
-                "25", "May", "1997", "Sturd", "1325 E Str", "Apt D",
-                "Phily", "California", "90068", "Abs", "234556667");
+        loginCreateAccountPage = loginPage.doCreateAccount(emailCreateAccount);
+        myAccountPage = loginCreateAccountPage.fillUpPersonalInfo(firstName, lastName, passwd, days, months, years,
+                company, addressFl, addressSl, city, state, zip, addInfo, phone);
         Assert.assertTrue(myAccountPage.getMyAccountBreadCrumb());
 
     }

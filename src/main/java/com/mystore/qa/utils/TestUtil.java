@@ -169,4 +169,44 @@ public class TestUtil {
         return myData;
     }
 
+//    FILL UP USER PERSONAL DATA:
+
+    public static ArrayList<Object[]> fillUpPersonalData() {
+
+        String excelPath = System.getProperty("user.dir") + "/src/main/java/com/mystore/qa/config/data.xlsx";
+        String sheetName = "LoginCreateAccountPage";
+
+        ArrayList<Object[]> myData = new ArrayList<>();
+        try {
+            reader = new Xls_Reader(excelPath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        for (int rowNum = 2; rowNum <= reader.getRowCount(sheetName); rowNum++) {
+            String emailCreateAccount = reader.getCellData(sheetName, "emailCreateAccount", rowNum);
+            String firstName = reader.getCellData(sheetName, "firstname", rowNum);
+            String lastName = reader.getCellData(sheetName, "lastname", rowNum);
+            String passwd = reader.getCellData(sheetName, "password", rowNum);
+            String days = reader.getCellData(sheetName, "days", rowNum);
+            String months = reader.getCellData(sheetName, "months", rowNum);
+            String years = reader.getCellData(sheetName, "years", rowNum);
+            String company = reader.getCellData(sheetName, "company", rowNum);
+            String addressFl = reader.getCellData(sheetName, "address", rowNum);
+            String addressSl = reader.getCellData(sheetName, "address2", rowNum);
+            String city = reader.getCellData(sheetName, "city", rowNum);
+            String state = reader.getCellData(sheetName, "state", rowNum);
+            String zip = reader.getCellData(sheetName, "zip", rowNum);
+            String addInfo = reader.getCellData(sheetName, "addInfo", rowNum);
+            String phone = reader.getCellData(sheetName, "phone", rowNum);
+
+            Object ob[] = {emailCreateAccount, firstName, lastName, passwd, days, months, years,
+                    company, addressFl, addressSl, city, state, zip, addInfo, phone};
+
+            myData.add(ob);
+        }
+
+        return myData;
+    }
+
 }
