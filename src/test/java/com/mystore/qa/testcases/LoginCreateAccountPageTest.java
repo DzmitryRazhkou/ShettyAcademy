@@ -67,8 +67,4 @@ public class LoginCreateAccountPageTest {
         Assert.assertTrue(myAccountPage.getMyAccountBreadCrumb());
 
     }
-
-
-
-
 }

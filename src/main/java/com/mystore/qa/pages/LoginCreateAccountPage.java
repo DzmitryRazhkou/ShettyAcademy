@@ -227,9 +227,10 @@ public class LoginCreateAccountPage {
 
 //    FINAL METHOD
 
+
     public MyAccountPage fillUpPersonalInfo(String firstName, String lastName, String password,
     String dayDOB, String monthDOB, String yearDOB, String company, String addressFL, String addressSL,
-    String city, String state, String zipCode, String addInfo, String phone) {
+                                   String city, String state, String zipCode, String addInfo, String phone) {
 
         getMrMrsRadioBtn().click();
         getFirstName().sendKeys(firstName);
@@ -248,10 +249,11 @@ public class LoginCreateAccountPage {
         getCity().sendKeys(city);
         selectStates(state);
         getZipCode().sendKeys(zipCode);
-        getAddInfo().sendKeys(addInfo);
+        getAddInfo().sendKeys(addInfo);;
         getMobilePhone().sendKeys(phone);
         getRegisterBtn().click();
         return new MyAccountPage(driver);
     }
+
 
 }
