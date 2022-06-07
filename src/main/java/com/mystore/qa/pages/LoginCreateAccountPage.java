@@ -84,7 +84,7 @@ public class LoginCreateAccountPage {
 
         for (WebElement webElement : list) {
             System.out.println(webElement.getText());
-            if (webElement.getText().contains(dayValue)) {
+            if (webElement.getText().equals(dayValue)) {
                 webElement.click();
                 break;
             }
@@ -119,7 +119,7 @@ public class LoginCreateAccountPage {
 
         for (WebElement webElement : list) {
             System.out.println(webElement.getText());
-            if (webElement.getText().contains(yearsValue)) {
+            if (webElement.getText().equals(yearsValue)) {
                 webElement.click();
                 break;
             }
@@ -230,7 +230,7 @@ public class LoginCreateAccountPage {
 
     public MyAccountPage fillUpPersonalInfo(String firstName, String lastName, String password,
     String dayDOB, String monthDOB, String yearDOB, String company, String addressFL, String addressSL,
-                                   String city, String state, String zipCode, String addInfo, String phone) {
+                                   String city, String state, long zipCode, String addInfo, long phone) {
 
         getMrMrsRadioBtn().click();
         getFirstName().sendKeys(firstName);
@@ -248,12 +248,11 @@ public class LoginCreateAccountPage {
         getAddressSecondLine().sendKeys(addressSL);
         getCity().sendKeys(city);
         selectStates(state);
-        getZipCode().sendKeys(zipCode);
-        getAddInfo().sendKeys(addInfo);;
-        getMobilePhone().sendKeys(phone);
+        getZipCode().sendKeys(String.valueOf(zipCode));
+        getAddInfo().sendKeys(addInfo);
+        getMobilePhone().sendKeys(String.valueOf(phone));
         getRegisterBtn().click();
         return new MyAccountPage(driver);
     }
-
 
 }

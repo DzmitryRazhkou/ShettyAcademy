@@ -185,22 +185,25 @@ public class TestUtil {
 
         for (int rowNum = 2; rowNum <= reader.getRowCount(sheetName); rowNum++) {
             String emailCreateAccount = reader.getCellData(sheetName, "emailCreateAccount", rowNum);
-            String firstName = reader.getCellData(sheetName, "firstname", rowNum);
-            String lastName = reader.getCellData(sheetName, "lastname", rowNum);
-            String passwd = reader.getCellData(sheetName, "password", rowNum);
+            String firstName = reader.getCellData(sheetName, "firstName", rowNum);
+            String lastName = reader.getCellData(sheetName, "lastName", rowNum);
+            String password = reader.getCellData(sheetName, "password", rowNum);
             String days = reader.getCellData(sheetName, "days", rowNum);
             String months = reader.getCellData(sheetName, "months", rowNum);
             String years = reader.getCellData(sheetName, "years", rowNum);
             String company = reader.getCellData(sheetName, "company", rowNum);
-            String addressFl = reader.getCellData(sheetName, "address", rowNum);
-            String addressSl = reader.getCellData(sheetName, "address2", rowNum);
+            String addressFl = reader.getCellData(sheetName, "addressFl", rowNum);
+            String addressSl = reader.getCellData(sheetName, "addressSl", rowNum);
             String city = reader.getCellData(sheetName, "city", rowNum);
             String state = reader.getCellData(sheetName, "state", rowNum);
-            String zip = reader.getCellData(sheetName, "zip", rowNum);
+            String zipString = reader.getCellData(sheetName, "zip", rowNum);
             String addInfo = reader.getCellData(sheetName, "addInfo", rowNum);
-            String phone = reader.getCellData(sheetName, "phone", rowNum);
+            String phoneString = reader.getCellData(sheetName, "phone", rowNum);
 
-            Object ob[] = {emailCreateAccount, firstName, lastName, passwd, days, months, years,
+            long zip = Long.parseLong(zipString);
+            long phone = Long.parseLong(phoneString);
+
+            Object ob[] = {emailCreateAccount, firstName, lastName, password, days, months, years,
                     company, addressFl, addressSl, city, state, zip, addInfo, phone};
 
             myData.add(ob);

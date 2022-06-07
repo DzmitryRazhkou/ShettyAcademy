@@ -6,20 +6,16 @@ import com.mystore.qa.pages.LoginPage;
 import com.mystore.qa.pages.MyAccountPage;
 import com.mystore.qa.pages.MyStorePage;
 import com.mystore.qa.utils.ConfigReader;
-import com.mystore.qa.utils.TestUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Properties;
 
-public class LoginCreateAccountPageTest {
+public class MyAccountPageTest {
 
     ConfigReader cp;
     DriverFactory df;
@@ -37,7 +33,7 @@ public class LoginCreateAccountPageTest {
     public void startUp() {
         cp = new ConfigReader();
         df = new DriverFactory();
-        prop = ConfigReader.initProp();
+        prop = cp.initProp();
         driver = df.initDriver("chrome", prop);
     }
 
@@ -48,22 +44,21 @@ public class LoginCreateAccountPageTest {
         }
     }
 
-    @DataProvider
-    public Iterator<Object[]> getFillUpPersonalData() {
-        ArrayList<Object[]> testData = TestUtil.fillUpPersonalData();
-        return testData.iterator();
-    }
-
-    @Test(dataProvider = "getFillUpPersonalData")
-    public void fillUpPersonalInfoTest(String emailCreateAccount, String firstName, String lastName, String password,
-        String days, String months, String years, String company, String addressFl, String addressSl, String city,
-        String state, long zip, String addInfo, long phone){
-
+    @Test
+    public void validateMyAccountBreadcrumbTest() {
         myStorePage = new MyStorePage(driver);
         loginPage = myStorePage.clickSignIn();
-        loginCreateAccountPage = loginPage.doCreateAccount(emailCreateAccount);
-        myAccountPage = loginCreateAccountPage.fillUpPersonalInfo(firstName, lastName, password, days, months, years,
-                company, addressFl, addressSl, city, state, zip, addInfo, phone);
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         Assert.assertTrue(myAccountPage.getMyAccountBreadCrumb());
+    }
+
+    @Test
+    public void validateMyAccountTitlePage() {
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        String actMyAccountPageTitle = myAccountPage.getMyAccountPageTitle();
+        String expMyAccountPageTitle = prop.getProperty("myAccountPageTitle");
+        Assert.assertEquals(expMyAccountPageTitle, actMyAccountPageTitle);
     }
 }
