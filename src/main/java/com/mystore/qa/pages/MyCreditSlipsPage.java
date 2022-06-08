@@ -10,29 +10,29 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class OrderHistoryPage {
+public class MyCreditSlipsPage {
 
     private WebDriver driver;
     private WebDriverWait wait;
 
-    public OrderHistoryPage(WebDriver driver) {
+    public MyCreditSlipsPage(WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(TestUtil.PAGE_LOAD_TIMEOUT_DurationOfSeconds));
     }
 
     //    VALIDATE BREADCRUMB:
 
-    private WebElement getOrderHistory() {
-        By orderHistoryLocator = By.cssSelector("span.navigation_page");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(orderHistoryLocator));
-        return driver.findElement(orderHistoryLocator);
+    private WebElement getMyCreditSlips() {
+        By myCreditSlipsLocator = By.cssSelector("span.navigation_page");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(myCreditSlipsLocator));
+        return driver.findElement(myCreditSlipsLocator);
     }
 
-    public boolean getOrderHistoryBreadCrumb() {
+    public boolean getMyCreditSlipsBreadCrumb() {
         try {
-            System.out.println(" ===> Order history breadcrumb is displayed. <=== ");
-            System.out.println(getOrderHistory().getText());
-            return getOrderHistory().isDisplayed();
+            System.out.println(" ===> My credit slips breadcrumb is displayed. <=== ");
+            System.out.println(getMyCreditSlips().getText());
+            return getMyCreditSlips().isDisplayed();
         } catch (TimeoutException y) {
             System.out.println(" ===> Please provide the correct locator. <===");
             return false;
@@ -41,9 +41,10 @@ public class OrderHistoryPage {
 
 //    VALIDATE PAGE TITLE:
 
-    public String getOrderHistoryPageTitle(){
-        System.out.println(" =====> Order history page title is: " +driver.getTitle()+ " <===== ");
+    public String getMyCreditSlipsPageTitle(){
+        System.out.println(" =====> My credit slips page title is: " +driver.getTitle()+ " <===== ");
         return driver.getTitle();
     }
+
 
 }

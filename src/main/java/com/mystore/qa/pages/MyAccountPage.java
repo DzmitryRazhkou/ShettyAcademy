@@ -48,6 +48,8 @@ public class MyAccountPage {
 
 //    MY ACCOUNT:
 
+//    1. Order History:
+
     private WebElement getOrderHistoryLink(){
         By orderHistoryLocator = By.cssSelector("[title^='Orders']");
         wait.until(ExpectedConditions.presenceOfElementLocated(orderHistoryLocator));
@@ -58,5 +60,33 @@ public class MyAccountPage {
         getOrderHistoryLink().click();
         return new OrderHistoryPage(driver);
     }
+
+//    My Credit Slips:
+
+    private WebElement getMyCreditSlipsLink(){
+        By myCreditSlipsLocator = By.cssSelector("[title^='Credit slips']");
+        wait.until(ExpectedConditions.presenceOfElementLocated(myCreditSlipsLocator));
+        return driver.findElement(myCreditSlipsLocator);
+    }
+
+    public MyCreditSlipsPage clickOnMyCreditSlips(){
+        getMyCreditSlipsLink().click();
+        return new MyCreditSlipsPage(driver);
+    }
+
+//    My Addresses:
+
+    private WebElement getMyAddressesLink(){
+        By addressesLocator = By.cssSelector("[title^='Addresses']");
+        wait.until(ExpectedConditions.presenceOfElementLocated(addressesLocator));
+        return driver.findElement(addressesLocator);
+    }
+
+    public MyAddressesPage clickOnMyAddresses(){
+        getMyAddressesLink().click();
+        return new MyAddressesPage(driver);
+    }
+
+
 
 }

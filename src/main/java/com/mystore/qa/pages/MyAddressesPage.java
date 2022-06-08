@@ -10,29 +10,29 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class OrderHistoryPage {
+public class MyAddressesPage {
 
     private WebDriver driver;
     private WebDriverWait wait;
 
-    public OrderHistoryPage(WebDriver driver) {
+    public MyAddressesPage(WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(TestUtil.PAGE_LOAD_TIMEOUT_DurationOfSeconds));
     }
 
     //    VALIDATE BREADCRUMB:
 
-    private WebElement getOrderHistory() {
-        By orderHistoryLocator = By.cssSelector("span.navigation_page");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(orderHistoryLocator));
-        return driver.findElement(orderHistoryLocator);
+    private WebElement getMyAddresses() {
+        By myAddressesLocator = By.cssSelector("span.navigation_page");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(myAddressesLocator));
+        return driver.findElement(myAddressesLocator);
     }
 
-    public boolean getOrderHistoryBreadCrumb() {
+    public boolean getMyAddressesBreadCrumb() {
         try {
-            System.out.println(" ===> Order history breadcrumb is displayed. <=== ");
-            System.out.println(getOrderHistory().getText());
-            return getOrderHistory().isDisplayed();
+            System.out.println(" ===> My addresses breadcrumb is displayed. <=== ");
+            System.out.println(getMyAddresses().getText());
+            return getMyAddresses().isDisplayed();
         } catch (TimeoutException y) {
             System.out.println(" ===> Please provide the correct locator. <===");
             return false;
@@ -41,8 +41,8 @@ public class OrderHistoryPage {
 
 //    VALIDATE PAGE TITLE:
 
-    public String getOrderHistoryPageTitle(){
-        System.out.println(" =====> Order history page title is: " +driver.getTitle()+ " <===== ");
+    public String getMyAddressesPageTitle(){
+        System.out.println(" =====> My addresses page title is: " +driver.getTitle()+ " <===== ");
         return driver.getTitle();
     }
 
