@@ -46,5 +46,47 @@ public class MyCreditSlipsPage {
         return driver.getTitle();
     }
 
+//    Message:
+
+    public String getMessage() {
+        By messageLocator = By.cssSelector("#block-history>p");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(messageLocator));
+        String messageText = driver.findElement(messageLocator).getText();
+        System.out.println(" =====> " +messageText+ " <===== ");
+        return messageText;
+    }
+
+//    Back to your Account:
+
+    private WebElement getBackToYourAccount(){
+        By getBackToYourAccountLocator = By.xpath("(//*[@class='btn btn-default button button-small'])[2]");
+        wait.until(ExpectedConditions.presenceOfElementLocated(getBackToYourAccountLocator));
+        return driver.findElement(getBackToYourAccountLocator);
+    }
+
+    public MyAccountPage doClickBackToToYourAccount(){
+        getBackToYourAccount().click();
+        return new MyAccountPage(driver);
+    }
+
+//    Home:
+
+    private WebElement getHome(){
+        By getHomeLocator = By.xpath("(//*[@class='btn btn-default button button-small'])[3]");
+        wait.until(ExpectedConditions.presenceOfElementLocated(getHomeLocator));
+        return driver.findElement(getHomeLocator);
+    }
+
+    public MyStorePage doClickHome(){
+        getHome().click();
+        return new MyStorePage(driver);
+    }
+
+
+
+
+
+
+
 
 }

@@ -113,6 +113,19 @@ public class MyAccountPage {
         return new MyWishesPage(driver);
     }
 
+//    Home:
+
+    private WebElement getHome(){
+        By getHomeLocator = By.xpath("(//*[@class='btn btn-default button button-small'])[2]");
+        wait.until(ExpectedConditions.presenceOfElementLocated(getHomeLocator));
+        return driver.findElement(getHomeLocator);
+    }
+
+    public MyStorePage doClickHome(){
+        getHome().click();
+        return new MyStorePage(driver);
+    }
+
 
 
 
