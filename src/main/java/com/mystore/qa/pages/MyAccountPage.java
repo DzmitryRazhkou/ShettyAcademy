@@ -87,7 +87,7 @@ public class MyAccountPage {
         return new MyAddressesPage(driver);
     }
 
-    //    Identity:
+//    Identity:
 
     private WebElement getIdentityLink(){
         By identityLocator = By.cssSelector("[title^='Information']");
@@ -99,6 +99,21 @@ public class MyAccountPage {
         getIdentityLink().click();
         return new IdentityPage(driver);
     }
+
+//    My Wishes:
+
+    private WebElement getMyWishesLink(){
+        By myWishesLocator = By.cssSelector("[title^='My wishlists']");
+        wait.until(ExpectedConditions.presenceOfElementLocated(myWishesLocator));
+        return driver.findElement(myWishesLocator);
+    }
+
+    public MyWishesPage clickOnMyWishes(){
+        getMyWishesLink().click();
+        return new MyWishesPage(driver);
+    }
+
+
 
 
 

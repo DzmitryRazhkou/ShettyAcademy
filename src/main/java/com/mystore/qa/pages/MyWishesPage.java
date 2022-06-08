@@ -1,4 +1,4 @@
-package com.mystore.qa.testcases;
+package com.mystore.qa.pages;
 
 import com.mystore.qa.utils.TestUtil;
 import org.openqa.selenium.By;
