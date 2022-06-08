@@ -50,6 +50,15 @@ public class LoginPageTest {
     }
 
     @Test
+    public void validateMyLoginPageTitle(){
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        String actMyLoginPageTitle = loginPage.getMyLoginPageTitle();
+        String expMyLoginPageTitle = prop.getProperty("myLoginPageTitle");
+        Assert.assertEquals(expMyLoginPageTitle, actMyLoginPageTitle);
+    }
+
+    @Test
     public void doClickSignInTest(){
         myStorePage = new MyStorePage(driver);
         loginPage = myStorePage.clickSignIn();

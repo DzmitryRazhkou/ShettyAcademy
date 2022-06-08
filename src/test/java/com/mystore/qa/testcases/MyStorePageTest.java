@@ -59,6 +59,14 @@ public class MyStorePageTest {
     }
 
     @Test
+    public void validateMyStorePageTitle(){
+        myStorePage = new MyStorePage(driver);
+        String actMyStorePageTitle = myStorePage.getMyStorePageTitle();
+        String expMyStorePageTitle = prop.getProperty("myStorePageTitle");
+        Assert.assertEquals(expMyStorePageTitle, actMyStorePageTitle);
+    }
+
+    @Test
     public void doClickContactUsTest(){
         myStorePage = new MyStorePage(driver);
         contactUsPage = myStorePage.clickContactUs();

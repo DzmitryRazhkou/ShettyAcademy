@@ -20,7 +20,7 @@ public class MyAccountPage {
         wait = new WebDriverWait(driver, Duration.ofSeconds(TestUtil.PAGE_LOAD_TIMEOUT_DurationOfSeconds));
     }
 
-    //    VALIDATE:
+    //    VALIDATE BREADCRUMB:
 
     private WebElement getMyAccount() {
         By myAccountLocator = By.cssSelector("span.navigation_page");
@@ -38,6 +38,8 @@ public class MyAccountPage {
             return false;
         }
     }
+
+//    VALIDATE PAGE TITLE:
 
     public String getMyAccountPageTitle(){
         System.out.println(" =====> My account page title is: " +driver.getTitle()+ " <===== ");

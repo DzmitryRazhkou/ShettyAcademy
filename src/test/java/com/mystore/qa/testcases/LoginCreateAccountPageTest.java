@@ -48,6 +48,17 @@ public class LoginCreateAccountPageTest {
         }
     }
 
+    @Test
+    public void validateMyLoginCreateAccountPageTitle(){
+        String emailCreate = prop.getProperty("loginCreateAccountPage");
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        loginCreateAccountPage = loginPage.doCreateAccount(emailCreate);
+        String actMyLoginPageTitle = loginPage.getMyLoginPageTitle();
+        String expMyLoginPageTitle = prop.getProperty("myLoginCreateAccountPageTitle");
+        Assert.assertEquals(expMyLoginPageTitle, actMyLoginPageTitle);
+    }
+
     @DataProvider
     public Iterator<Object[]> getFillUpPersonalData() {
         ArrayList<Object[]> testData = TestUtil.fillUpPersonalData();

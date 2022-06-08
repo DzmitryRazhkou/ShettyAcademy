@@ -25,6 +25,8 @@ public class MyStorePage {
 
 //  Header Section:
 
+//    VALIDATE LOGO:
+
     private WebElement logo() {
         By logoLocator = By.xpath("//*[@title='My Store']");
         wait.until(ExpectedConditions.visibilityOfElementLocated(logoLocator));
@@ -39,6 +41,13 @@ public class MyStorePage {
             System.out.println(" ===> Please provide the correct locator. <===");
             return false;
         }
+    }
+
+//    VALIDATE PAGE TITLE:
+
+    public String getMyStorePageTitle(){
+        System.out.println(" =====> My store page title is: " +driver.getTitle()+ " <===== ");
+        return driver.getTitle();
     }
 
 //    CONTACT US | SIGN OUT | USER:

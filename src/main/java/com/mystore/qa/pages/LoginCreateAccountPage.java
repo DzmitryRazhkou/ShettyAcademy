@@ -21,6 +21,8 @@ public class LoginCreateAccountPage {
         wait = new WebDriverWait(driver, Duration.ofSeconds(TestUtil.PAGE_LOAD_TIMEOUT_DurationOfSeconds));
     }
 
+//    VALIDATE BREADCRUMB:
+
     private WebElement authenticationBreadcrumb() {
         By womenBreadcrumbLocator = By.cssSelector("span.navigation_page");
         wait.until(ExpectedConditions.visibilityOfElementLocated(womenBreadcrumbLocator));
@@ -36,6 +38,13 @@ public class LoginCreateAccountPage {
             System.out.println(" ===> Please provide the correct locator. <===");
             return false;
         }
+    }
+
+//    VALIDATE PAGE TITLE:
+
+    public String getMyLoginCreateAccountPageTitle(){
+        System.out.println(" =====> My login create account page title is: " +driver.getTitle()+ " <===== ");
+        return driver.getTitle();
     }
 
 //    YOUR PERSONAL INFORMATION:

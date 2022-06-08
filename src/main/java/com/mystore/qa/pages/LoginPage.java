@@ -28,7 +28,7 @@ public class LoginPage {
         return driver.findElement(returnHomeButtonLocator);
     }
 
-//    AUTHENTICATION:
+//    VALIDATE AUTHENTICATION:
 
     private WebElement getAuthentication() {
         By authenticationLocator = By.cssSelector(".navigation_page");
@@ -44,6 +44,13 @@ public class LoginPage {
             System.out.println(" ===> Please provide the correct locator. <===");
             return false;
         }
+    }
+
+//    VALIDATE PAGE TITLE:
+
+    public String getMyLoginPageTitle(){
+        System.out.println(" =====> My login page title is: " +driver.getTitle()+ " <===== ");
+        return driver.getTitle();
     }
 
 //    ALREADY REGISTERED?
