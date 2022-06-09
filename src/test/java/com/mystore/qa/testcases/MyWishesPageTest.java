@@ -61,5 +61,14 @@ public class MyWishesPageTest {
         Assert.assertEquals(expMyWishesPageTitle, actMyWishesPageTitle);
     }
 
+    @Test
+    public void validateTopSellersTest() {
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        myWishesPage = myAccountPage.clickOnMyWishes();
+        myWishesPage.getTopSellers();
 
+
+    }
 }

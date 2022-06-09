@@ -9,9 +9,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class MyWishesPage {
 
+    private String textTrimmed;
     private WebDriver driver;
     private WebDriverWait wait;
 
@@ -41,9 +43,20 @@ public class MyWishesPage {
 
 //    VALIDATE PAGE TITLE:
 
-    public String getMyWishesPageTitle(){
-        System.out.println(" =====> My wishes page title is: " +driver.getTitle()+ " <===== ");
+    public String getMyWishesPageTitle() {
+        System.out.println(" =====> My wishes page title is: " + driver.getTitle() + " <===== ");
         return driver.getTitle();
     }
 
+    public String getTopSellers() {
+        By topSellersLocator = By.cssSelector("#best-sellers_block_right>div>ul>li");
+        wait.until(ExpectedConditions.presenceOfElementLocated(topSellersLocator));
+
+        List<WebElement> list = driver.findElements(topSellersLocator);
+        for (WebElement s : list) {
+            textTrimmed = s.getText().replaceAll("\\s+", " ");
+            System.out.println(textTrimmed);
+        }
+        return textTrimmed;
+    }
 }
