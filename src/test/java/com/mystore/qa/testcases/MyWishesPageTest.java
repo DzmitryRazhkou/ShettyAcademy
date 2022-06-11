@@ -10,6 +10,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.List;
 import java.util.Properties;
 
 public class MyWishesPageTest {
@@ -62,13 +63,29 @@ public class MyWishesPageTest {
     }
 
     @Test
-    public void validateTopSellersTest() {
+    public void validateTopSellersCountTest() {
         myStorePage = new MyStorePage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myWishesPage = myAccountPage.clickOnMyWishes();
-        myWishesPage.getTopSellers();
-
-
+        int actCountOfTopSellers = myWishesPage.getTopSellersCount();
+        int expCountOfTopSellers = Integer.parseInt(prop.getProperty("countOfTopSellers"));
+        Assert.assertEquals(actCountOfTopSellers, expCountOfTopSellers, "Please provide another web element!!!");
     }
-}
+
+//    @Test
+//    public void validateTopSellersProductTest() {
+//        myStorePage = new MyStorePage(driver);
+//        loginPage = myStorePage.clickSignIn();
+//        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+//        myWishesPage = myAccountPage.clickOnMyWishes();
+//        myWishesPage.getTopSellersProduct(prop.getProperty("nameOfTopSeller"));
+//    }
+
+    @Test
+    public void validateCountOfWishColumnsTest() {
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        myWishesPage = myAccountPage.clickOnMyWishes();
+}}

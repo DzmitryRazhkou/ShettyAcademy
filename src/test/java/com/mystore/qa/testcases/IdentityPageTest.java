@@ -10,6 +10,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 public class IdentityPageTest {
@@ -59,6 +62,20 @@ public class IdentityPageTest {
         String actIdentityPageTitle = identityPage.getIdentityPageTitle();
         String expIdentityPageTitle = prop.getProperty("myIdentityPageTitle");
         Assert.assertEquals(expIdentityPageTitle, actIdentityPageTitle);
+    }
+
+    @Test
+    public void getPersonalInfoTest() {
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        identityPage = myAccountPage.clickOnIdentity();
+        List<String> actPersonalInfoList = identityPage.getPersonalInfo();
+
+        List<String> expPersonalInfoList = new ArrayList<>(Arrays.asList(prop.getProperty("firstname"),
+                prop.getProperty("lastname"), prop.getProperty("email"), prop.getProperty("dob")));
+
+        Assert.assertEquals(expPersonalInfoList, actPersonalInfoList);
     }
 
 }
