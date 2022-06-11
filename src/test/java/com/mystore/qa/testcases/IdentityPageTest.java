@@ -78,4 +78,28 @@ public class IdentityPageTest {
         Assert.assertEquals(expPersonalInfoList, actPersonalInfoList);
     }
 
+    @Test
+    public void doClickOnBackToYourAccountTest() {
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        identityPage = myAccountPage.clickOnIdentity();
+        myAccountPage = identityPage.doClickBackToToYourAccount();
+        String actMyAccountPageTitle = myAccountPage.getMyAccountPageTitle();
+        String expMyAccountPageTitle = prop.getProperty("myAccountPageTitle");
+        Assert.assertEquals(expMyAccountPageTitle, actMyAccountPageTitle);
+    }
+
+    @Test
+    public void doClickOnHomeTest() {
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        identityPage = myAccountPage.clickOnIdentity();
+        myStorePage = identityPage.doClickHome();
+        String actMyStorePageTitle = myStorePage.getMyStorePageTitle();
+        String expMyStorePageTitle = prop.getProperty("myStorePageTitle");
+        Assert.assertEquals(expMyStorePageTitle, actMyStorePageTitle);
+    }
+
 }
