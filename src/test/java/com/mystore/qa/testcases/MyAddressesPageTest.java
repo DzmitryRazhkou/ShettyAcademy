@@ -104,7 +104,7 @@ public class MyAddressesPageTest {
         Assert.assertTrue(myAddressesPage.getMyAddressesParagraphMessage());
     }
 
-    @Test
+    @Test(priority = 1)
     public void doAddNewAddressTest() {
         myStorePage = new MyStorePage(driver);
         loginPage = myStorePage.clickSignIn();
@@ -122,6 +122,17 @@ public class MyAddressesPageTest {
         String alias = faker.name().title();
 
         myAddressesPage.doAddNewAddress(addressFl, addressSl, city, state, zip, phone, data, alias);
+        Assert.assertTrue(myAddressesPage.getMyAddressesParagraphMessage());
+    }
+
+    @Test(priority = 2)
+    public void doDelete(){
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        myAddressesPage = myAccountPage.clickOnMyAddresses();
+        myAddressesPage.getAlert();
+
         Assert.assertTrue(myAddressesPage.getMyAddressesParagraphMessage());
     }
 }

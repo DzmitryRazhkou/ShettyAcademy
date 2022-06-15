@@ -1,12 +1,8 @@
 package com.mystore.qa.pages;
 
 import com.mystore.qa.utils.TestUtil;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -172,6 +168,22 @@ public class MyAddressesPage {
         getAlias().clear();
         getAlias().sendKeys(alias);
         getSaveBtn().click();
+    }
+
+//    DELETE:
+
+    private WebElement getDeleteBtn(){
+        By deleteBtnLocator = By.xpath("(//*[@title='Delete'])[2]");
+        wait.until(ExpectedConditions.presenceOfElementLocated(deleteBtnLocator));
+        return driver.findElement(deleteBtnLocator);
+    }
+
+    public void getAlert(){
+        getDeleteBtn().click();
+        Alert okDelete = driver.switchTo().alert();
+        String textAlert = okDelete.getText();
+        System.out.println("JS Pop up: " +textAlert);
+        okDelete.accept();
     }
 }
 
