@@ -44,9 +44,11 @@ public class MyAddressesPage {
         return driver.getTitle();
     }
 
-    //    EXTRACT EXISTING DATA:
+//    EXTRACT EXISTING DATA:
+
     public List<String> getExistingData() {
         By myAddressLocator = By.xpath("//ul[@class='last_item item box']/li");
+        wait.until(ExpectedConditions.presenceOfElementLocated(myAddressLocator));
 
         List<WebElement> myAddressList = driver.findElements(myAddressLocator);
         List<String> myAddressesTextList = new ArrayList<>();
