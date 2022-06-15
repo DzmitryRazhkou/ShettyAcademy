@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyAddressesPage {
 
@@ -23,15 +25,14 @@ public class MyAddressesPage {
     //    VALIDATE BREADCRUMB:
 
     private WebElement getMyAddresses() {
-        By myAddressesLocator = By.cssSelector("span.navigation_page");
+        By myAddressesLocator = By.xpath("//strong[contains(text(),'Your addresses are listed below.')]");
         wait.until(ExpectedConditions.visibilityOfElementLocated(myAddressesLocator));
         return driver.findElement(myAddressesLocator);
     }
 
-    public boolean getMyAddressesBreadCrumb() {
+    public boolean getMyAddressesParagraphMessage() {
         try {
-            System.out.println(" ===> My addresses breadcrumb is displayed. <=== ");
-            System.out.println(getMyAddresses().getText());
+            System.out.println(" =====>" + getMyAddresses().getText() + " <===== ");
             return getMyAddresses().isDisplayed();
         } catch (TimeoutException y) {
             System.out.println(" ===> Please provide the correct locator. <===");
@@ -41,9 +42,25 @@ public class MyAddressesPage {
 
 //    VALIDATE PAGE TITLE:
 
-    public String getMyAddressesPageTitle(){
-        System.out.println(" =====> My addresses page title is: " +driver.getTitle()+ " <===== ");
+    public String getMyAddressesPageTitle() {
+        System.out.println(" =====> My addresses page title is: " + driver.getTitle() + " <===== ");
         return driver.getTitle();
     }
 
+    //    EXTRACT EXISTING DATA:
+    public List<String> getExistingData() {
+        By myAddressLocator = By.xpath("//ul[@class='last_item item box']/li");
+
+        List<WebElement> myAddressList = driver.findElements(myAddressLocator);
+        List<String> myAddressesTextList = new ArrayList<>();
+
+        for (WebElement existDataRow : myAddressList) {
+            if (existDataRow.isDisplayed()) {
+                myAddressesTextList.add(existDataRow.getText());
+            } else {
+                return null;
+            }
+        }
+        return myAddressesTextList;
+    }
 }
