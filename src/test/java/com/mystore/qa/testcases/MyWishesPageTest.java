@@ -68,24 +68,19 @@ public class MyWishesPageTest {
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myWishesPage = myAccountPage.clickOnMyWishes();
-        int actCountOfTopSellers = myWishesPage.getTopSellersCount();
-        int expCountOfTopSellers = Integer.parseInt(prop.getProperty("countOfTopSellers"));
-        Assert.assertEquals(actCountOfTopSellers, expCountOfTopSellers, "Please provide another web element!!!");
+
+        List<String> actTopSellersList = myWishesPage.getTopSellers();
+
+        int actAmountOfTopSellers = actTopSellersList.size();
+        System.out.println(" =====> The amount of top sellers: " + actAmountOfTopSellers + " products <=====. ");
+        int expAmountOfTopSellers = Integer.parseInt(prop.getProperty("countOfTopSellers"));
+        Assert.assertEquals(expAmountOfTopSellers, actAmountOfTopSellers);
+
+        for (String s : actTopSellersList) {
+            System.out.println(s);
+
+            String result = prop.getProperty("product");
+            Assert.assertTrue(myWishesPage.validateTopSellers(result));
+        }
     }
-
-//    @Test
-//    public void validateTopSellersProductTest() {
-//        myStorePage = new MyStorePage(driver);
-//        loginPage = myStorePage.clickSignIn();
-//        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
-//        myWishesPage = myAccountPage.clickOnMyWishes();
-//        myWishesPage.getTopSellersProduct(prop.getProperty("nameOfTopSeller"));
-//    }
-
-    @Test
-    public void validateCountOfWishColumnsTest() {
-        myStorePage = new MyStorePage(driver);
-        loginPage = myStorePage.clickSignIn();
-        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
-        myWishesPage = myAccountPage.clickOnMyWishes();
-}}
+}

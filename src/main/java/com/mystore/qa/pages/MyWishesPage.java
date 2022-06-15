@@ -48,39 +48,39 @@ public class MyWishesPage {
         return driver.getTitle();
     }
 
-    public int getTopSellersCount() {
+    public List<String> getTopSellers() {
         By topSellersLocator = By.cssSelector("#best-sellers_block_right>div>ul>li");
         wait.until(ExpectedConditions.presenceOfElementLocated(topSellersLocator));
 
-        List<WebElement> list = driver.findElements(topSellersLocator);
-        int productCount = list.size();
-        System.out.println(" =====> The count of top seller products is: " + productCount + " <===== ");
-        return productCount;
-    }
+        List<WebElement> topSellersList = driver.findElements(topSellersLocator);
+        List<String> topSellersListText = new ArrayList<>();
 
-    public void getTopSellersProduct(String topSeller) {
-        By topSellersLocator = By.cssSelector("#best-sellers_block_right>div>ul>li");
-        wait.until(ExpectedConditions.presenceOfElementLocated(topSellersLocator));
-
-        List<WebElement> list = driver.findElements(topSellersLocator);
-        int productCount = list.size();
-        for (int i = 0; i < productCount; i++) {
-            String listText = list.get(i).getText().replaceAll("\n", " ");
-            if (listText.contains(topSeller)) {
-                System.out.println("The current top seller product exists: " + list.get(productCount - 1).getText());
+        for (WebElement topSellersRows : topSellersList) {
+            if (topSellersRows.isDisplayed()) {
+                topSellersListText.add(topSellersRows.getText().replaceAll("\\s+", " "));
+            } else {
+                return null;
             }
         }
+        return topSellersListText;
     }
 
-    public List<WebElement> getExistingWishList() {
-        List<WebElement> wishListRows = driver.findElements(By.tagName("td"));
-        int countMyWishesExist = wishListRows.size();
-        System.out.println(" =====> The number element in the row is: " +countMyWishesExist+ " <===== ");
-        for (int i = 0; i < countMyWishesExist; i++) {
-            System.out.println(wishListRows.get(i).getText());
-            return wishListRows;
+    public boolean validateTopSellers(String result) {
+        By topSellersLocator = By.cssSelector("#best-sellers_block_right>div>ul>li");
+        wait.until(ExpectedConditions.presenceOfElementLocated(topSellersLocator));
+
+        List<WebElement> topSellersList = driver.findElements(topSellersLocator);
+        List<String> topSellersListText = new ArrayList<>();
+
+        for (WebElement topSellersRows : topSellersList) {
+            if (topSellersRows.isDisplayed()) {
+                topSellersListText.add(topSellersRows.getText().replaceAll("\\s+", " "));
+                if (topSellersListText.contains(result)) {
+                    return true;
+                }
+            }
         }
-
-        return null;
+        return false;
     }
+
 }
