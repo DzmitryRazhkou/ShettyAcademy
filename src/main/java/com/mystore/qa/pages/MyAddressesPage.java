@@ -155,7 +155,7 @@ public class MyAddressesPage {
     }
 
     public void doAddNewAddress(String addAddressFl, String addAddressSl, String addCity, String addState, String addZip,
-                String addPhone, String addAddInfo, String alias) {
+                                String addPhone, String addAddInfo, String alias) {
 
         getAddANewAddressButton().click();
         getAddressFl().sendKeys(addAddressFl);
@@ -172,18 +172,44 @@ public class MyAddressesPage {
 
 //    DELETE:
 
-    private WebElement getDeleteBtn(){
+    private WebElement getDeleteBtn() {
         By deleteBtnLocator = By.xpath("(//*[@title='Delete'])[2]");
         wait.until(ExpectedConditions.presenceOfElementLocated(deleteBtnLocator));
         return driver.findElement(deleteBtnLocator);
     }
 
-    public void getAlert(){
+    public void getAlert() {
         getDeleteBtn().click();
         Alert okDelete = driver.switchTo().alert();
         String textAlert = okDelete.getText();
-        System.out.println("JS Pop up: " +textAlert);
+        System.out.println("JS Pop up: " + textAlert);
         okDelete.accept();
+    }
+
+//    Back to your account:
+
+    private WebElement getBackToYourAccount() {
+        By getBackToYourAccountLocator = By.xpath("//*[contains(text(),' Back to your account')]");
+        wait.until(ExpectedConditions.presenceOfElementLocated(getBackToYourAccountLocator));
+        return driver.findElement(getBackToYourAccountLocator);
+    }
+
+    public MyAccountPage doClickBackToToYourAccount() {
+        getBackToYourAccount().click();
+        return new MyAccountPage(driver);
+    }
+
+//    Home:
+
+    private WebElement getHome() {
+        By getHomeLocator = By.xpath("//*[contains(text(),' Home')]");
+        wait.until(ExpectedConditions.presenceOfElementLocated(getHomeLocator));
+        return driver.findElement(getHomeLocator);
+    }
+
+    public MyStorePage doClickHome() {
+        getHome().click();
+        return new MyStorePage(driver);
     }
 }
 

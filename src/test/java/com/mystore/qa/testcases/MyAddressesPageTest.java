@@ -5,7 +5,6 @@ import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.*;
 import com.mystore.qa.utils.ConfigReader;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -126,7 +125,7 @@ public class MyAddressesPageTest {
     }
 
     @Test(priority = 2)
-    public void doDelete(){
+    public void doDelete() {
         myStorePage = new MyStorePage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
@@ -134,6 +133,30 @@ public class MyAddressesPageTest {
         myAddressesPage.getAlert();
 
         Assert.assertTrue(myAddressesPage.getMyAddressesParagraphMessage());
+    }
+
+    @Test
+    public void doClickOnBackToYourAccountTest() {
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        myAddressesPage = myAccountPage.clickOnMyAddresses();
+        myAccountPage = myAddressesPage.doClickBackToToYourAccount();
+        String actMyAccountPageTitle = myAccountPage.getMyAccountPageTitle();
+        String expMyAccountPageTitle = prop.getProperty("myAccountPageTitle");
+        Assert.assertEquals(expMyAccountPageTitle, actMyAccountPageTitle);
+    }
+
+    @Test
+    public void doClickOnHomeTest() {
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        myAddressesPage = myAccountPage.clickOnMyAddresses();
+        myStorePage = myAddressesPage.doClickHome();
+        String actMyStorePageTitle = myStorePage.getMyStorePageTitle();
+        String expMyStorePageTitle = prop.getProperty("myStorePageTitle");
+        Assert.assertEquals(expMyStorePageTitle, actMyStorePageTitle);
     }
 }
 
