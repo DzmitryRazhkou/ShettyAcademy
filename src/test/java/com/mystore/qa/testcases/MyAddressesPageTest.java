@@ -1,5 +1,6 @@
 package com.mystore.qa.testcases;
 
+import com.github.javafaker.Faker;
 import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.*;
 import com.mystore.qa.utils.ConfigReader;
@@ -29,6 +30,7 @@ public class MyAddressesPageTest {
     LoginPage loginPage;
     MyAccountPage myAccountPage;
     MyAddressesPage myAddressesPage;
+    Faker faker;
 
     @BeforeMethod
     public void startUp() {
@@ -71,17 +73,56 @@ public class MyAddressesPageTest {
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myAddressesPage = myAccountPage.clickOnMyAddresses();
+
         List<String> actualExistingDataList = myAddressesPage.getExistingData();
-        System.out.println(" =====> Actual existing my address list: " +"\n" +actualExistingDataList+ "\n <===== ");
+        System.out.println(" =====> Actual existing my address list: " + "\n" + actualExistingDataList + "\n <===== ");
 
         List<String> expExistingDataList = new ArrayList<>(Arrays.asList(prop.getProperty("myAddress"), prop.getProperty("name"),
                 prop.getProperty("nick"), prop.getProperty("address_Fl"), prop.getProperty("address_Sl"), prop.getProperty("existingState"),
                 prop.getProperty("existPhone"), prop.getProperty("existPhone"), prop.getProperty("updateDelete")));
 
-        System.out.println(" =====> Expected existing my address list: " +"\n" +expExistingDataList+ "\n <===== ");
+        System.out.println(" =====> Expected existing my address list: " + "\n" + expExistingDataList + "\n <===== ");
 
-                Assert.assertEquals(expExistingDataList, actualExistingDataList);
-        }
-
+        Assert.assertEquals(expExistingDataList, actualExistingDataList);
     }
+
+    @Test
+    public void doUpdateTest() {
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        myAddressesPage = myAccountPage.clickOnMyAddresses();
+
+        faker = new Faker();
+        String addressFl = faker.address().fullAddress();
+        String addressSl = faker.address().secondaryAddress();
+        String phone = faker.phoneNumber().cellPhone();
+        String data = faker.beer().name();
+        String alias = faker.name().title();
+
+        myAddressesPage.doUpdate(addressFl, addressSl, phone, data, alias);
+        Assert.assertTrue(myAddressesPage.getMyAddressesParagraphMessage());
+    }
+
+    @Test
+    public void doAddNewAddressTest() {
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        myAddressesPage = myAccountPage.clickOnMyAddresses();
+
+        faker = new Faker();
+        String addressFl = faker.address().fullAddress();
+        String addressSl = faker.address().secondaryAddress();
+        String city = faker.address().city();
+        String state = faker.address().state();
+        String zip = faker.address().zipCode();
+        String phone = faker.phoneNumber().cellPhone();
+        String data = faker.beer().name();
+        String alias = faker.name().title();
+
+        myAddressesPage.doAddNewAddress(addressFl, addressSl, city, state, zip, phone, data, alias);
+        Assert.assertTrue(myAddressesPage.getMyAddressesParagraphMessage());
+    }
+}
 
