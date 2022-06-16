@@ -83,4 +83,14 @@ public class MyWishesPageTest {
             Assert.assertTrue(myWishesPage.validateTopSellers(result));
         }
     }
+
+    @Test
+    public void validateExistingWishListTest() {
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        myWishesPage = myAccountPage.clickOnMyWishes();
+        String existResult = prop.getProperty("wishList");
+        Assert.assertTrue(myWishesPage.validateExistingWishList(existResult));
+    }
 }

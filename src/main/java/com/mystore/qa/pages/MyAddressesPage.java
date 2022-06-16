@@ -19,7 +19,7 @@ public class MyAddressesPage {
         wait = new WebDriverWait(driver, Duration.ofSeconds(TestUtil.PAGE_LOAD_TIMEOUT_DurationOfSeconds));
     }
 
-    //    VALIDATE BREADCRUMB:
+//    VALIDATE BREADCRUMB:
 
     private WebElement getMyAddresses() {
         By myAddressesLocator = By.xpath("//strong[contains(text(),'Your addresses are listed below.')]");
