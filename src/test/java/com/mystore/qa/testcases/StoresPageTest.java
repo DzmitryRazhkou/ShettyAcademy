@@ -66,4 +66,39 @@ public class StoresPageTest {
         Assert.assertEquals(expMyWishesPageTitle, actMyWishesPageTitle);
     }
 
+    @Test
+    public void doGoogleClicksTest() throws InterruptedException {
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        myWishesPage = myAccountPage.clickOnMyWishes();
+        storesPage = myWishesPage.doClickOurStores();
+        Assert.assertTrue(!storesPage.doGetStoreGoogleMaps(prop.getProperty("store")));
+    }
+
+    @Test
+    public void doZoomInZoomOutTest() throws InterruptedException {
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        myWishesPage = myAccountPage.clickOnMyWishes();
+        storesPage = myWishesPage.doClickOurStores();
+        storesPage.zoomInZoomOutTest();
+    }
+
+    @Test
+    public void selectLocationStoreTest() throws InterruptedException {
+        faker = new Faker();
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        myWishesPage = myAccountPage.clickOnMyWishes();
+        storesPage = myWishesPage.doClickOurStores();
+
+        String city = faker.address().city();
+        String value = prop.getProperty("radius");
+        storesPage.doSelectLocation(city, value);
+        Assert.assertTrue(storesPage.fancyError());
+    }
+
 }
