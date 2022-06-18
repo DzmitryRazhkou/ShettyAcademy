@@ -86,8 +86,6 @@ public class MyWishesPageTest {
         }
     }
 
-
-
     @Test
     public void createNewWishListTest(){
         faker = new Faker();
@@ -99,5 +97,38 @@ public class MyWishesPageTest {
         String newWishListName = faker.app().name();
         String wishListID = myWishesPage.getId(newWishListName);
         Assert.assertTrue(myWishesPage.wishListExist(wishListID, newWishListName));
+    }
+
+    @Test
+    public void deleteWishListTest(){
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        myWishesPage = myAccountPage.clickOnMyWishes();
+        myWishesPage.getAlert();
+    }
+
+    @Test
+    public void doClickOnBackToYourAccountTest() {
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        myWishesPage = myAccountPage.clickOnMyWishes();
+        myAccountPage = myWishesPage.doClickBackToToYourAccount();
+        String actMyAccountPageTitle = myAccountPage.getMyAccountPageTitle();
+        String expMyAccountPageTitle = prop.getProperty("myAccountPageTitle");
+        Assert.assertEquals(expMyAccountPageTitle, actMyAccountPageTitle);
+    }
+
+    @Test
+    public void doClickOnHomeTest() {
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        myWishesPage = myAccountPage.clickOnMyWishes();
+        myStorePage = myWishesPage.doClickHome();
+        String actMyStorePageTitle = myStorePage.getMyStorePageTitle();
+        String expMyStorePageTitle = prop.getProperty("myStorePageTitle");
+        Assert.assertEquals(expMyStorePageTitle, actMyStorePageTitle);
     }
 }

@@ -20,7 +20,7 @@ public class MyWishesPage {
         wait = new WebDriverWait(driver, Duration.ofSeconds(TestUtil.PAGE_LOAD_TIMEOUT_DurationOfSeconds));
     }
 
-    //    VALIDATE BREADCRUMB:
+//    VALIDATE BREADCRUMB:
 
     private WebElement getMyWishes() {
         By myWishesLocator = By.cssSelector("span.navigation_page");
@@ -154,23 +154,32 @@ public class MyWishesPage {
 //    DELETE WISH LIST:
 
     private WebElement getDeleteBtn() {
-        By deleteBtnLocator = By.xpath("(//*[@title='Delete'])[2]");
+        By deleteBtnLocator = By.xpath("(//*[@class='icon'])[1]");
         wait.until(ExpectedConditions.presenceOfElementLocated(deleteBtnLocator));
         return driver.findElement(deleteBtnLocator);
     }
 
     public void getAlert() {
-        getDeleteBtn().click();
-        Alert okDelete = driver.switchTo().alert();
-        String textAlert = okDelete.getText();
-        System.out.println("JS Pop up: " + textAlert);
-        okDelete.accept();
+        By wishListLocator = By.xpath("//tr");
+        List<WebElement> listOfWishlist = driver.findElements(wishListLocator);
+
+        if (listOfWishlist.size() > 0) {
+            getDeleteBtn().click();
+            Alert okDelete = driver.switchTo().alert();
+            String textAlert = okDelete.getText();
+            System.out.println("JS Pop up: " + textAlert);
+            okDelete.accept();
+            System.out.println("Wish list has been deleted");
+
+        } else
+            System.out.println("The list of wish list is empty!!!");
     }
+
 
 //    Back to your account:
 
     private WebElement getBackToYourAccount() {
-        By getBackToYourAccountLocator = By.xpath("//*[contains(text(),' Back to your account')]");
+        By getBackToYourAccountLocator = By.xpath("(//*[@class='btn btn-default button button-small'])[6]");
         wait.until(ExpectedConditions.presenceOfElementLocated(getBackToYourAccountLocator));
         return driver.findElement(getBackToYourAccountLocator);
     }
@@ -183,7 +192,7 @@ public class MyWishesPage {
 //    Home:
 
     private WebElement getHome() {
-        By getHomeLocator = By.xpath("//*[contains(text(),' Home')]");
+        By getHomeLocator = By.xpath("(//*[@class='btn btn-default button button-small'])[7]");
         wait.until(ExpectedConditions.presenceOfElementLocated(getHomeLocator));
         return driver.findElement(getHomeLocator);
     }
@@ -191,6 +200,19 @@ public class MyWishesPage {
     public MyStorePage doClickHome() {
         getHome().click();
         return new MyStorePage(driver);
+    }
+
+//    CLICK ON OUR STORES:
+
+    private WebElement getOurStores(){
+        By getOurStoresLocator = By.xpath("(//*[@title='Our stores'])[2]");
+        wait.until(ExpectedConditions.presenceOfElementLocated(getOurStoresLocator));
+        return driver.findElement(getOurStoresLocator);
+    }
+
+    public StoresPage doClickOurStores() {
+        getOurStores().click();
+        return new StoresPage(driver);
     }
 
 }
