@@ -1,5 +1,6 @@
 package com.mystore.qa.testcases;
 
+import com.github.javafaker.Faker;
 import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.*;
 import com.mystore.qa.utils.ConfigReader;
@@ -21,6 +22,7 @@ public class MyWishesPageTest {
 
     private static WebDriver driver;
     private static WebDriverWait wait;
+    Faker faker;
 
     MyStorePage myStorePage;
     LoginPage loginPage;
@@ -84,13 +86,18 @@ public class MyWishesPageTest {
         }
     }
 
+
+
     @Test
-    public void validateExistingWishListTest() {
+    public void createNewWishListTest(){
+        faker = new Faker();
+
         myStorePage = new MyStorePage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myWishesPage = myAccountPage.clickOnMyWishes();
-        String existResult = prop.getProperty("wishList");
-        Assert.assertTrue(myWishesPage.validateExistingWishList(existResult));
+        String newWishListName = faker.app().name();
+        String wishListID = myWishesPage.getId(newWishListName);
+        Assert.assertTrue(myWishesPage.wishListExist(wishListID, newWishListName));
     }
 }

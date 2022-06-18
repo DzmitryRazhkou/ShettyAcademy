@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class MyWishesPage {
 
@@ -93,7 +94,7 @@ public class MyWishesPage {
             if (row.isDisplayed()) {
                 existingWishText.add(row.getText().trim());
                 if (existingWishText.contains(existResult)) {
-                    System.out.println("The existing wish list contains: " +existResult);
+                    System.out.println("The existing wish list contains: " + existResult);
                     return true;
                 }
             }
@@ -104,23 +105,50 @@ public class MyWishesPage {
 
 //    CREATE NEW WISH LIST:
 
-    private WebElement getWishlistField(){
+    private WebElement getWishlistField() {
         By getWishlistFieldLocator = By.id("name");
         wait.until(ExpectedConditions.presenceOfElementLocated(getWishlistFieldLocator));
         return driver.findElement(getWishlistFieldLocator);
     }
 
-    private WebElement getSubmitWishlistBtn(){
+    private WebElement getSubmitWishlistBtn() {
         By getSubmitWishlistLocator = By.id("submitWishlist");
         wait.until(ExpectedConditions.presenceOfElementLocated(getSubmitWishlistLocator));
         return driver.findElement(getSubmitWishlistLocator);
     }
 
 
+    private WebElement createNewWishList(String wishListName) {
+        getWishlistField().sendKeys(wishListName);
+        getSubmitWishlistBtn().click();
 
+        By wishListLocator = By.xpath("//tr");
+        List<WebElement> listOfWishlist = driver.findElements(wishListLocator);
+        for (WebElement wishList : listOfWishlist) {
+            if (wishList.getText().contains(wishListName)) {
+                WebElement selectedWishList = wishList;
+                return selectedWishList;
+            }
+        }
+        return null;
+    }
 
+    public String getId(String wishListName) {
+        String wishListId = createNewWishList(wishListName).getAttribute("id").split("_")[1];
+        System.out.println("The name of wish list is: " + wishListName);
+        System.out.println("The wish list ID is: " + wishListId);
+        return wishListId;
+    }
 
-
+    public boolean wishListExist(String wishListId, String wishListName) {
+        By wishListLocator = By.xpath("(//*[@id='wishlist_" + wishListId + "']/td/a)[1]");
+        try {
+            WebElement wishList = driver.findElement(wishListLocator);
+            return wishList.getText().equalsIgnoreCase(wishListName) && wishList.isDisplayed();
+        } catch (NoSuchElementException error) {
+            return false;
+        }
+    }
 
 
 //    DELETE WISH LIST:
