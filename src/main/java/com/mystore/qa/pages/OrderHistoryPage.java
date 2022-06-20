@@ -21,7 +21,7 @@ public class OrderHistoryPage {
         wait = new WebDriverWait(driver, Duration.ofSeconds(TestUtil.PAGE_LOAD_TIMEOUT_DurationOfSeconds));
     }
 
-    //    VALIDATE BREADCRUMB:
+//    VALIDATE BREADCRUMB:
 
     private WebElement getOrderHistory() {
         By orderHistoryLocator = By.cssSelector("span.navigation_page");
