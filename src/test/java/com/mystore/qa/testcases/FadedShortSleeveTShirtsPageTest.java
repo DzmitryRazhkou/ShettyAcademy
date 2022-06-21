@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 import java.util.Properties;
 
-public class SearchPageTest {
+public class FadedShortSleeveTShirtsPageTest {
 
     ConfigReader cp;
     DriverFactory df;
@@ -24,8 +24,8 @@ public class SearchPageTest {
     MyStorePage myStorePage;
     LoginPage loginPage;
     MyAccountPage myAccountPage;
-    OrderHistoryPage orderHistoryPage;
     SearchPage searchPage;
+    FadedShortSleeveTShirtsPage fadedShortSleeveTShirtsPage;
 
     @BeforeMethod
     public void startUp() {
@@ -43,41 +43,30 @@ public class SearchPageTest {
     }
 
     @Test
-    public void validateSearchBreadcrumbTest() {
+    public void validateFadedShortSleeveTShirtBreadcrumbTest() {
         String productType = prop.getProperty("productType");
 
         myStorePage = new MyStorePage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
-        Assert.assertTrue(searchPage.getSearchBreadCrumb());
+        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
+        Assert.assertTrue(fadedShortSleeveTShirtsPage.getFadedShortSleeveTShirtBreadCrumb());
     }
 
     @Test
-    public void validateSearchTitlePage() {
+    public void validateFadedShortSleeveTShirtTitlePage() {
         String productType = prop.getProperty("productType");
 
         myStorePage = new MyStorePage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
+        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
 
-        String actSearchPageTitle = searchPage.getSearchPageTitle();
-        String expSearchPageTitle = prop.getProperty("searchPageTitle");
-        Assert.assertEquals(expSearchPageTitle, actSearchPageTitle);
-    }
-
-    @Test
-    public void validateSearchProduct() {
-        String productType = prop.getProperty("productType");
-        String product = prop.getProperty("searchedProduct");
-
-        myStorePage = new MyStorePage(driver);
-        loginPage = myStorePage.clickSignIn();
-        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
-        searchPage = myAccountPage.doSearch(productType);
-        Assert.assertTrue(searchPage.getProductCount());
-        Assert.assertTrue(searchPage.getProduct(product));
+        String actFadedShortSleeveTShirtPageTitle = fadedShortSleeveTShirtsPage.getFadedShortSleeveTShirtPageTitle();
+        String expFadedShortSleeveTShirtPageTitle = prop.getProperty("fadedShortSleeveTShirtsTitlePage");
+        Assert.assertEquals(actFadedShortSleeveTShirtPageTitle, expFadedShortSleeveTShirtPageTitle);
     }
 
 }

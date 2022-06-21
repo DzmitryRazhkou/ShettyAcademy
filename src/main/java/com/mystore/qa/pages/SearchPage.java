@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class SearchPage {
 
@@ -41,8 +42,51 @@ public class SearchPage {
 
 //    VALIDATE PAGE TITLE:
 
-    public String getSearchPageTitle(){
-        System.out.println(" =====> Search page title is: " +driver.getTitle()+ " <===== ");
+    public String getSearchPageTitle() {
+        System.out.println(" =====> Search page title is: " + driver.getTitle() + " <===== ");
         return driver.getTitle();
     }
+
+//    PRODUCT COUNT:
+
+    public boolean getProductCount() {
+        By productCountLocator = By.xpath("(//div[@class='product-count'])[1]");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(productCountLocator));
+        try {
+            WebElement productCount = driver.findElement(productCountLocator);
+            System.out.println("Text is: " + productCount.getText());
+            return productCount.isDisplayed();
+        } catch (TimeoutException y) {
+            System.out.println("Provide an another locator");
+        }
+        return false;
+    }
+
+    public boolean getProduct(String productName) {
+        By getProductLocator = By.cssSelector("div.product-container");
+        wait.until(ExpectedConditions.presenceOfElementLocated(getProductLocator));
+        List<WebElement> productList = driver.findElements(getProductLocator);
+        for (WebElement s : productList) {
+            if (s.getText().trim().contains(productName) && s.isDisplayed()) {
+                System.out.println("Product list contains: " +s.getText().trim());
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+//    MORE BUTTON:
+
+    private WebElement getProduct(){
+        By getProductLocator = By.cssSelector("div.product-container");
+        wait.until(ExpectedConditions.presenceOfElementLocated(getProductLocator));
+        return driver.findElement(getProductLocator);
+    }
+
+    public FadedShortSleeveTShirtsPage clickOnMore(){
+        getProduct().click();
+        return new FadedShortSleeveTShirtsPage(driver);
+    }
+
 }
