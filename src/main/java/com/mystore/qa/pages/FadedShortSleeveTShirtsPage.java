@@ -23,7 +23,7 @@ public class FadedShortSleeveTShirtsPage {
 //    VALIDATE BREADCRUMB:
 
     private WebElement getFadedShortSleeveTShirt() {
-        By fadedShortSleeveTShirtLocator = By.cssSelector("breadcrumb clearfix");
+        By fadedShortSleeveTShirtLocator = By.xpath("//div[@class='breadcrumb clearfix']");
         wait.until(ExpectedConditions.visibilityOfElementLocated(fadedShortSleeveTShirtLocator));
         return driver.findElement(fadedShortSleeveTShirtLocator);
     }
