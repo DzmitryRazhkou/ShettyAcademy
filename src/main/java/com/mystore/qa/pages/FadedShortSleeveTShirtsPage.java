@@ -46,4 +46,51 @@ public class FadedShortSleeveTShirtsPage {
         return driver.getTitle();
     }
 
+//    WRITE A REVIEW:
+
+    private WebElement getWriteReview() {
+        By writeReviewLocator = By.cssSelector("a[class='open-comment-form']");
+        wait.until(ExpectedConditions.presenceOfElementLocated(writeReviewLocator));
+        return driver.findElement(writeReviewLocator);
+    }
+
+    private WebElement getStarContent() {
+        By starContentLocator = By.cssSelector("div.star_content>div:last-of-type");
+        wait.until(ExpectedConditions.presenceOfElementLocated(starContentLocator));
+        return driver.findElement(starContentLocator);
+    }
+
+    private WebElement getTitle() {
+        By titleLocator = By.cssSelector("input#comment_title");
+        wait.until(ExpectedConditions.presenceOfElementLocated(titleLocator));
+        return driver.findElement(titleLocator);
+    }
+
+    private WebElement getContent() {
+        By contentLocator = By.cssSelector("#content");
+        wait.until(ExpectedConditions.presenceOfElementLocated(contentLocator));
+        return driver.findElement(contentLocator);
+    }
+
+    private WebElement getSendBtn() {
+        By sendBtnLocator = By.cssSelector("button#submitNewMessage");
+        wait.until(ExpectedConditions.presenceOfElementLocated(sendBtnLocator));
+        return driver.findElement(sendBtnLocator);
+    }
+
+    public boolean newComment() {
+        By newCommentLocator = By.cssSelector("div.fancybox-inner");
+        wait.until(ExpectedConditions.presenceOfElementLocated(newCommentLocator));
+        try {
+            WebElement newComment = driver.findElement(newCommentLocator);
+            newComment.isDisplayed();
+            System.out.println("New comment text is: " + newComment);
+            return true;
+        } catch (TimeoutException y) {
+            System.out.println("Provide another locator");
+            return false;
+        }
+    }
+
+
 }
