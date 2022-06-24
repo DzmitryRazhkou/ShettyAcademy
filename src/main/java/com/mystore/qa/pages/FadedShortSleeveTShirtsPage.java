@@ -5,7 +5,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -172,6 +174,77 @@ public class FadedShortSleeveTShirtsPage {
             return false;
         }
     }
+
+//    ADD TO CART:
+
+    private WebElement getQuantity() {
+        By quantityLocator = By.cssSelector("input#quantity_wanted");
+        wait.until(ExpectedConditions.presenceOfElementLocated(quantityLocator));
+        return driver.findElement(quantityLocator);
+    }
+
+    private WebElement getPlusBtn() {
+        By plusLocator = By.cssSelector("i.icon-plus");
+        wait.until(ExpectedConditions.presenceOfElementLocated(plusLocator));
+        return driver.findElement(plusLocator);
+    }
+
+    private WebElement getMinusBtn() {
+        By minusLocator = By.cssSelector("i.icon-minus");
+        wait.until(ExpectedConditions.presenceOfElementLocated(minusLocator));
+        return driver.findElement(minusLocator);
+    }
+
+    private void getSize(String index) {
+        By sizeLocator = By.cssSelector("select#group_1");
+        wait.until(ExpectedConditions.presenceOfElementLocated(sizeLocator));
+        WebElement size = driver.findElement(sizeLocator);
+
+        Select sel = new Select(size);
+        sel.selectByIndex(Integer.parseInt(index));
+    }
+
+    private WebElement getColor() {
+        By colorLocator = By.cssSelector("ul#color_to_pick_list>li:nth-of-type(1)");
+        wait.until(ExpectedConditions.presenceOfElementLocated(colorLocator));
+        return driver.findElement(colorLocator);
+    }
+
+    private void getAddToCartBtn() {
+        By addToCartBtnLocator = By.cssSelector("p#add_to_cart");
+        WebElement addToCart = driver.findElement(addToCartBtnLocator);
+        Actions act = new Actions(driver);
+        act.moveToElement(addToCart).click().build().perform();
+
+        By cartLayerLocator = By.cssSelector("div#layer_cart");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(cartLayerLocator));
+    }
+
+    public boolean getSuccessMessage(){
+        By successMessageLocator = By.xpath("//div[@class='layer_cart_product col-xs-12 col-md-6']/h2");
+        wait.until(ExpectedConditions.presenceOfElementLocated(successMessageLocator));
+        WebElement successMessage = driver.findElement(successMessageLocator);
+        System.out.println("Success message: " +successMessage.getText());
+        return successMessage.isDisplayed();
+    }
+
+    public void doAddToCart(String quantity, String index) throws InterruptedException {
+        getQuantity().clear();
+        getQuantity().sendKeys(quantity);
+        getPlusBtn().click();
+        getMinusBtn().click();
+        getSize(index);
+        getColor().click();
+        getAddToCartBtn();
+//        Thread.sleep(2000);
+
+    }
+
+
+
+
+
+
 
 
 

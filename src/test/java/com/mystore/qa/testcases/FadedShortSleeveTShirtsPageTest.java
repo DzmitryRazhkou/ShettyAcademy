@@ -73,7 +73,7 @@ public class FadedShortSleeveTShirtsPageTest {
 
     @Test
     public void doWriteReviewTest() {
-        faker  = new Faker();
+        faker = new Faker();
         String productType = prop.getProperty("productType");
         String title = faker.artist().name();
         String comment = faker.medical().symptoms();
@@ -89,7 +89,7 @@ public class FadedShortSleeveTShirtsPageTest {
 
     @Test
     public void doSendEmailFriendTest() {
-        faker  = new Faker();
+        faker = new Faker();
         String productType = prop.getProperty("productType");
         String name = faker.name().fullName();
         String email = faker.internet().emailAddress();
@@ -116,5 +116,18 @@ public class FadedShortSleeveTShirtsPageTest {
         Assert.assertTrue(fadedShortSleeveTShirtsPage.newAddToWish());
     }
 
+    @Test
+    public void doAddToCartTest() throws InterruptedException {
+        String productType = prop.getProperty("productType");
+        String quantity = prop.getProperty("quantity");
+        String size = prop.getProperty("size");
 
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        searchPage = myAccountPage.doSearch(productType);
+        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
+        fadedShortSleeveTShirtsPage.doAddToCart(quantity, size);
+        Assert.assertTrue(fadedShortSleeveTShirtsPage.getSuccessMessage());
+    }
 }
