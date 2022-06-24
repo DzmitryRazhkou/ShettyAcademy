@@ -1,5 +1,6 @@
 package com.mystore.qa.testcases;
 
+import com.github.javafaker.Faker;
 import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.*;
 import com.mystore.qa.utils.ConfigReader;
@@ -21,6 +22,7 @@ public class FadedShortSleeveTShirtsPageTest {
     private static WebDriver driver;
     private static WebDriverWait wait;
 
+    Faker faker;
     MyStorePage myStorePage;
     LoginPage loginPage;
     MyAccountPage myAccountPage;
@@ -68,5 +70,51 @@ public class FadedShortSleeveTShirtsPageTest {
         String expFadedShortSleeveTShirtPageTitle = prop.getProperty("fadedShortSleeveTShirtsTitlePage");
         Assert.assertEquals(actFadedShortSleeveTShirtPageTitle, expFadedShortSleeveTShirtPageTitle);
     }
+
+    @Test
+    public void doWriteReviewTest() {
+        faker  = new Faker();
+        String productType = prop.getProperty("productType");
+        String title = faker.artist().name();
+        String comment = faker.medical().symptoms();
+
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        searchPage = myAccountPage.doSearch(productType);
+        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
+        fadedShortSleeveTShirtsPage.doWriteReview(title, comment);
+        Assert.assertTrue(fadedShortSleeveTShirtsPage.newReviewComment());
+    }
+
+    @Test
+    public void doSendEmailFriendTest() {
+        faker  = new Faker();
+        String productType = prop.getProperty("productType");
+        String name = faker.name().fullName();
+        String email = faker.internet().emailAddress();
+
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        searchPage = myAccountPage.doSearch(productType);
+        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
+        fadedShortSleeveTShirtsPage.doSendEmailFriend(name, email);
+        Assert.assertTrue(fadedShortSleeveTShirtsPage.newEmailComment());
+    }
+
+    @Test
+    public void doAddToWishTest() {
+        String productType = prop.getProperty("productType");
+
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        searchPage = myAccountPage.doSearch(productType);
+        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
+        fadedShortSleeveTShirtsPage.getAddToWishBtn();
+        Assert.assertTrue(fadedShortSleeveTShirtsPage.newAddToWish());
+    }
+
 
 }

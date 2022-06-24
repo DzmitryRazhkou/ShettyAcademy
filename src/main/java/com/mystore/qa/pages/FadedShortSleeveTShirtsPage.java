@@ -72,25 +72,107 @@ public class FadedShortSleeveTShirtsPage {
         return driver.findElement(contentLocator);
     }
 
-    private WebElement getSendBtn() {
-        By sendBtnLocator = By.cssSelector("button#submitNewMessage");
-        wait.until(ExpectedConditions.presenceOfElementLocated(sendBtnLocator));
-        return driver.findElement(sendBtnLocator);
+    private WebElement getSendReviewBtn() {
+        By sendReviewBtnLocator = By.cssSelector("button#submitNewMessage");
+        wait.until(ExpectedConditions.presenceOfElementLocated(sendReviewBtnLocator));
+        return driver.findElement(sendReviewBtnLocator);
     }
 
-    public boolean newComment() {
-        By newCommentLocator = By.cssSelector("div.fancybox-inner");
+    public boolean newReviewComment() {
+        By newCommentLocator = By.cssSelector("div.fancybox-inner > p:nth-of-type(1)");
         wait.until(ExpectedConditions.presenceOfElementLocated(newCommentLocator));
         try {
             WebElement newComment = driver.findElement(newCommentLocator);
             newComment.isDisplayed();
-            System.out.println("New comment text is: " + newComment);
+            System.out.println("New comment text is: " + newComment.getText());
             return true;
         } catch (TimeoutException y) {
             System.out.println("Provide another locator");
             return false;
         }
     }
+
+    public void doWriteReview(String title, String comment){
+        getWriteReview().click();
+        getStarContent().click();
+        getTitle().clear();
+        getTitle().sendKeys(title);
+        getContent().clear();
+        getContent().sendKeys(comment);
+        getSendReviewBtn().click();
+    }
+
+//    SEND TO FRIEND:
+
+    private WebElement getSendToFriendBtn() {
+        By sendToFriendBtnLocator = By.cssSelector("a#send_friend_button");
+        wait.until(ExpectedConditions.presenceOfElementLocated(sendToFriendBtnLocator));
+        return driver.findElement(sendToFriendBtnLocator);
+    }
+
+    private WebElement getFriendNameField() {
+        By friendNameFieldLocator = By.cssSelector("input#friend_name");
+        wait.until(ExpectedConditions.presenceOfElementLocated(friendNameFieldLocator));
+        return driver.findElement(friendNameFieldLocator);
+    }
+
+    private WebElement getFriendEmailField() {
+        By friendEmailFieldLocator = By.cssSelector("input#friend_email");
+        wait.until(ExpectedConditions.presenceOfElementLocated(friendEmailFieldLocator));
+        return driver.findElement(friendEmailFieldLocator);
+    }
+
+    private WebElement getSendEmailBtn() {
+        By sendEmailBtnLocator = By.cssSelector("button#sendEmail");
+        wait.until(ExpectedConditions.presenceOfElementLocated(sendEmailBtnLocator));
+        return driver.findElement(sendEmailBtnLocator);
+    }
+
+    public boolean newEmailComment() {
+        By newCommentLocator = By.cssSelector("div.fancybox-inner > p:nth-of-type(1)");
+        wait.until(ExpectedConditions.presenceOfElementLocated(newCommentLocator));
+        try {
+            WebElement newComment = driver.findElement(newCommentLocator);
+            newComment.isDisplayed();
+            System.out.println("New comment text is: " + newComment.getText());
+            return true;
+        } catch (TimeoutException y) {
+            System.out.println("Provide another locator");
+            return false;
+        }
+    }
+
+    public void doSendEmailFriend(String friendName, String friendEmail){
+        getSendToFriendBtn().click();
+        getFriendNameField().clear();
+        getFriendNameField().sendKeys(friendName);
+        getFriendEmailField().clear();
+        getFriendEmailField().sendKeys(friendEmail);
+        getSendEmailBtn().click();
+    }
+
+//    ADD TO WISH LIST:
+
+    public void getAddToWishBtn() {
+        By addToWishBtnLocator = By.cssSelector("a#wishlist_button");
+        wait.until(ExpectedConditions.presenceOfElementLocated(addToWishBtnLocator));
+        driver.findElement(addToWishBtnLocator).click();
+    }
+
+    public boolean newAddToWish() {
+        By newAddWishLocator = By.cssSelector("p.fancybox-error");
+        wait.until(ExpectedConditions.presenceOfElementLocated(newAddWishLocator));
+        try {
+            WebElement newComment = driver.findElement(newAddWishLocator);
+            newComment.isDisplayed();
+            System.out.println("New comment text is: " + newComment.getText());
+            return true;
+        } catch (TimeoutException y) {
+            System.out.println("Provide another locator");
+            return false;
+        }
+    }
+
 
 
 }
