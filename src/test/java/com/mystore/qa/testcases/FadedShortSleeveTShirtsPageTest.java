@@ -28,6 +28,7 @@ public class FadedShortSleeveTShirtsPageTest {
     MyAccountPage myAccountPage;
     SearchPage searchPage;
     FadedShortSleeveTShirtsPage fadedShortSleeveTShirtsPage;
+    OrderPage orderPage;
 
     @BeforeMethod
     public void startUp() {
@@ -129,5 +130,7 @@ public class FadedShortSleeveTShirtsPageTest {
         fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
         fadedShortSleeveTShirtsPage.doAddToCart(quantity, size);
         Assert.assertTrue(fadedShortSleeveTShirtsPage.getSuccessMessage());
+        orderPage = fadedShortSleeveTShirtsPage.proceedToOrderPage();
+
     }
 }

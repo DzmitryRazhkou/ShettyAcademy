@@ -94,7 +94,7 @@ public class FadedShortSleeveTShirtsPage {
         }
     }
 
-    public void doWriteReview(String title, String comment){
+    public void doWriteReview(String title, String comment) {
         getWriteReview().click();
         getStarContent().click();
         getTitle().clear();
@@ -144,7 +144,7 @@ public class FadedShortSleeveTShirtsPage {
         }
     }
 
-    public void doSendEmailFriend(String friendName, String friendEmail){
+    public void doSendEmailFriend(String friendName, String friendEmail) {
         getSendToFriendBtn().click();
         getFriendNameField().clear();
         getFriendNameField().sendKeys(friendName);
@@ -220,15 +220,43 @@ public class FadedShortSleeveTShirtsPage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(cartLayerLocator));
     }
 
-    public boolean getSuccessMessage(){
+    public boolean getSuccessMessage() {
         By successMessageLocator = By.xpath("//div[@class='layer_cart_product col-xs-12 col-md-6']/h2");
         wait.until(ExpectedConditions.presenceOfElementLocated(successMessageLocator));
         WebElement successMessage = driver.findElement(successMessageLocator);
-        System.out.println("Success message: " +successMessage.getText());
+        System.out.println("Success message: " + successMessage.getText());
         return successMessage.isDisplayed();
     }
 
-    public void doAddToCart(String quantity, String index) throws InterruptedException {
+//    public boolean shoppingCart(String value) {
+//        By shoppingCartLocator = By.cssSelector("div.shopping_cart a>span");
+//        wait.until(ExpectedConditions.presenceOfElementLocated(shoppingCartLocator));
+//
+//        By deleteLocator = By.cssSelector("a[title='Delete']");
+//
+//        List<WebElement> shoppingCartList = driver.findElements(shoppingCartLocator);
+//        for (WebElement s : shoppingCartList) {
+//            if (s.getText().contains("(empty)")){
+//                System.out.println(s.getText());
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+
+    private WebElement getProceedToCheckOutBtn() {
+        By proceedToCheckOutBtnLocator = By.cssSelector("a[title='Proceed to checkout']");
+        wait.until(ExpectedConditions.presenceOfElementLocated(proceedToCheckOutBtnLocator));
+        return driver.findElement(proceedToCheckOutBtnLocator);
+    }
+
+    public OrderPage proceedToOrderPage(){
+        getProceedToCheckOutBtn().click();
+        return new OrderPage(driver);
+    }
+
+
+    public void doAddToCart(String quantity, String index) {
         getQuantity().clear();
         getQuantity().sendKeys(quantity);
         getPlusBtn().click();
@@ -236,16 +264,41 @@ public class FadedShortSleeveTShirtsPage {
         getSize(index);
         getColor().click();
         getAddToCartBtn();
-//        Thread.sleep(2000);
-
     }
 
+//    VALIDATE PRICES:
 
+    private double getTotalPrice() {
+        By totalPriceLocator = By.xpath("(//div[@class='layer_cart_cart col-xs-12 col-md-6']//div)[1]");
+        wait.until(ExpectedConditions.presenceOfElementLocated(totalPriceLocator));
+        String totalPriceTr = driver.findElement(totalPriceLocator).getText().replaceAll("[^a-zA-Z0-9]", "");
+        double totalPrice = Double.parseDouble(totalPriceTr);
+        return totalPrice / 100;
+    }
 
+    private double getTotalShipping() {
+        By totalShippingLocator = By.xpath("(//div[@class='layer_cart_cart col-xs-12 col-md-6']//div)[2]");
+        wait.until(ExpectedConditions.presenceOfElementLocated(totalShippingLocator));
+        String totalShippingText = driver.findElement(totalShippingLocator).getText();
+        String totalShippingTr = totalShippingText.replaceAll("[^a-zA-Z0-9]", "");
+        double totalShipping = Double.parseDouble(totalShippingTr);
+        return totalShipping / 100;
+    }
 
+    public double getTotal() {
+        By totalLocator = By.xpath("(//div[@class='layer_cart_cart col-xs-12 col-md-6']//div)[3]");
+        wait.until(ExpectedConditions.presenceOfElementLocated(totalLocator));
+        String totalText = driver.findElement(totalLocator).getText();
+        String totalTr = totalText.replaceAll("[^a-zA-Z0-9]", "");
+        double total = Double.parseDouble(totalTr);
+        System.out.println(" =====> Expected total price: " + total + " <=====");
+        return total / 100;
+    }
 
-
-
-
-
+    public double price() {
+        double actTotal = getTotalPrice() + getTotalShipping();
+        System.out.println(" =====> Actual total price: " + actTotal + " <=====");
+        return actTotal;
+    }
 }
+
