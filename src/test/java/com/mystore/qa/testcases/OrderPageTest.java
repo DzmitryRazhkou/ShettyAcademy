@@ -12,6 +12,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Properties;
+import java.util.Random;
 
 public class OrderPageTest {
 
@@ -94,5 +95,24 @@ public class OrderPageTest {
         fadedShortSleeveTShirtsPage.doAddToCart(quantity, size);
         orderPage = fadedShortSleeveTShirtsPage.proceedToOrderPage();
         Assert.assertEquals(orderPage.price(), orderPage.getTotal());
+    }
+
+    @Test
+    public void doProceedTest() {
+        faker = new Faker();
+        String productType = prop.getProperty("productType");
+        String quantity = prop.getProperty("quantity");
+        String size = prop.getProperty("size");
+        String deliveryInstruction = faker.currency().name();
+        int index = Math.max(1, 3);
+
+        myStorePage = new MyStorePage(driver);
+        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        searchPage = myAccountPage.doSearch(productType);
+        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
+        fadedShortSleeveTShirtsPage.doAddToCart(quantity, size);
+        orderPage = fadedShortSleeveTShirtsPage.proceedToOrderPage();
+        orderPage.proceedFinally(deliveryInstruction, index);
     }
 }

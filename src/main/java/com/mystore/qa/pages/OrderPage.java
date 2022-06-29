@@ -6,6 +6,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -80,5 +81,61 @@ public class OrderPage {
         System.out.println(" =====> Actual total price: " + actTotal + "$ <=====");
         return actTotal;
     }
+
+//    CLICK PROCEED TO CHECKOUT SUMMARY:
+
+    private WebElement getProceedToCheckOutSummary() {
+        By proceedToCheckOutSummaryLocator = By.xpath("(//a[@title='Proceed to checkout'])[2]");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(proceedToCheckOutSummaryLocator));
+        return driver.findElement(proceedToCheckOutSummaryLocator);
+    }
+
+//    CLICK PROCEED TO CHECKOUT SUMMARY:
+
+    private void selectDeliveryAddress(int index){
+        By deliveryAddressLocator = By.cssSelector("select#id_address_delivery");
+        wait.until(ExpectedConditions.presenceOfElementLocated(deliveryAddressLocator));
+
+        WebElement deliveryAddress = driver.findElement(deliveryAddressLocator);
+        Select select = new Select(deliveryAddress);
+        select.selectByIndex(index);
+    }
+
+    private WebElement getTextArea() {
+        By textAreaLocator = By.cssSelector("textarea[name='message']");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(textAreaLocator));
+        return driver.findElement(textAreaLocator);
+    }
+
+    private WebElement getProceedToCheckOutAddress() {
+        By proceedToCheckOutAddressLocator = By.xpath("(//button[@type='submit'])[2]");
+        wait.until(ExpectedConditions.elementToBeClickable(proceedToCheckOutAddressLocator));
+        return driver.findElement(proceedToCheckOutAddressLocator);
+    }
+
+//    SHIPPING:
+
+    private WebElement getCheckBox() {
+        By checkBoxLocator = By.id("cgv");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(checkBoxLocator));
+        return driver.findElement(checkBoxLocator);
+    }
+
+    private WebElement getProceedToCheckOutShipping() {
+        By proceedToCheckOutShippingLocator = By.xpath("(//button[@type='submit'])[2]");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(proceedToCheckOutShippingLocator));
+        return driver.findElement(proceedToCheckOutShippingLocator);
+    }
+
+    public void proceedFinally(String deliveryInstruction, int index){
+        getProceedToCheckOutSummary().click();
+        selectDeliveryAddress(index);
+        getTextArea().clear();
+        getTextArea().sendKeys(deliveryInstruction);
+        getProceedToCheckOutAddress().click();
+        getCheckBox().click();
+        getProceedToCheckOutShipping().click();
+    }
+
 
 }
