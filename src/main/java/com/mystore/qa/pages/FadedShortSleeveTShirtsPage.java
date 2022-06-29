@@ -265,40 +265,5 @@ public class FadedShortSleeveTShirtsPage {
         getColor().click();
         getAddToCartBtn();
     }
-
-//    VALIDATE PRICES:
-
-    private double getTotalPrice() {
-        By totalPriceLocator = By.xpath("(//div[@class='layer_cart_cart col-xs-12 col-md-6']//div)[1]");
-        wait.until(ExpectedConditions.presenceOfElementLocated(totalPriceLocator));
-        String totalPriceTr = driver.findElement(totalPriceLocator).getText().replaceAll("[^a-zA-Z0-9]", "");
-        double totalPrice = Double.parseDouble(totalPriceTr);
-        return totalPrice / 100;
-    }
-
-    private double getTotalShipping() {
-        By totalShippingLocator = By.xpath("(//div[@class='layer_cart_cart col-xs-12 col-md-6']//div)[2]");
-        wait.until(ExpectedConditions.presenceOfElementLocated(totalShippingLocator));
-        String totalShippingText = driver.findElement(totalShippingLocator).getText();
-        String totalShippingTr = totalShippingText.replaceAll("[^a-zA-Z0-9]", "");
-        double totalShipping = Double.parseDouble(totalShippingTr);
-        return totalShipping / 100;
-    }
-
-    public double getTotal() {
-        By totalLocator = By.xpath("(//div[@class='layer_cart_cart col-xs-12 col-md-6']//div)[3]");
-        wait.until(ExpectedConditions.presenceOfElementLocated(totalLocator));
-        String totalText = driver.findElement(totalLocator).getText();
-        String totalTr = totalText.replaceAll("[^a-zA-Z0-9]", "");
-        double total = Double.parseDouble(totalTr);
-        System.out.println(" =====> Expected total price: " + total + " <=====");
-        return total / 100;
-    }
-
-    public double price() {
-        double actTotal = getTotalPrice() + getTotalShipping();
-        System.out.println(" =====> Actual total price: " + actTotal + " <=====");
-        return actTotal;
-    }
 }
 

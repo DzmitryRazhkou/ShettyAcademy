@@ -118,7 +118,7 @@ public class FadedShortSleeveTShirtsPageTest {
     }
 
     @Test
-    public void doAddToCartTest() throws InterruptedException {
+    public void doAddToCartTest() {
         String productType = prop.getProperty("productType");
         String quantity = prop.getProperty("quantity");
         String size = prop.getProperty("size");
@@ -130,7 +130,6 @@ public class FadedShortSleeveTShirtsPageTest {
         fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
         fadedShortSleeveTShirtsPage.doAddToCart(quantity, size);
         Assert.assertTrue(fadedShortSleeveTShirtsPage.getSuccessMessage());
-        orderPage = fadedShortSleeveTShirtsPage.proceedToOrderPage();
 
     }
 }
