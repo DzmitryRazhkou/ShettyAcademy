@@ -12,12 +12,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class FadedShortSleeveTShirtsPage {
+public class FadedShortSleeveTShirtsPage_Deprecated {
 
     private WebDriver driver;
     private WebDriverWait wait;
 
-    public FadedShortSleeveTShirtsPage(WebDriver driver) {
+    public FadedShortSleeveTShirtsPage_Deprecated(WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(TestUtil.PAGE_LOAD_TIMEOUT_DurationOfSeconds));
     }

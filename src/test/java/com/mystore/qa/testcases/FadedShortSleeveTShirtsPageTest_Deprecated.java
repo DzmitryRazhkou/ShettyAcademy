@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 import java.util.Properties;
 
-public class FadedShortSleeveTShirtsPageTest {
+public class FadedShortSleeveTShirtsPageTest_Deprecated {
 
     ConfigReader cp;
     DriverFactory df;
@@ -27,7 +27,7 @@ public class FadedShortSleeveTShirtsPageTest {
     LoginPage loginPage;
     MyAccountPage myAccountPage;
     SearchPage searchPage;
-    FadedShortSleeveTShirtsPage fadedShortSleeveTShirtsPage;
+    FadedShortSleeveTShirtsPage_Deprecated fadedShortSleeveTShirtsPage;
     OrderPage orderPage;
 
     @BeforeMethod
@@ -58,7 +58,7 @@ public class FadedShortSleeveTShirtsPageTest {
     }
 
     @Test
-    public void validateFadedShortSleeveTShirtTitlePage() {
+    public void validateFadedShortSleeveTShirtTitlePage() throws InterruptedException {
         String productType = prop.getProperty("productType");
 
         myStorePage = new MyStorePage(driver);

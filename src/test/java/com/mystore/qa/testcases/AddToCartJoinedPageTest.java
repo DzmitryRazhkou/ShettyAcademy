@@ -1,6 +1,5 @@
 package com.mystore.qa.testcases;
 
-import com.github.javafaker.Faker;
 import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.*;
 import com.mystore.qa.utils.ConfigReader;
@@ -13,7 +12,7 @@ import org.testng.annotations.Test;
 
 import java.util.Properties;
 
-public class OrderPageTest {
+public class AddToCartJoinedPageTest {
 
     ConfigReader cp;
     DriverFactory df;
@@ -22,13 +21,12 @@ public class OrderPageTest {
     private static WebDriver driver;
     private static WebDriverWait wait;
 
-    Faker faker;
     MyStorePage myStorePage;
     LoginPage loginPage;
     MyAccountPage myAccountPage;
+    OrderHistoryPage orderHistoryPage;
     SearchPage searchPage;
-    FadedShortSleeveTShirtsPage_Deprecated fadedShortSleeveTShirtsPage;
-    OrderPage orderPage;
+    AddToCartJoinedPage addToCartJoinedPage;
 
     @BeforeMethod
     public void startUp() {
@@ -46,73 +44,56 @@ public class OrderPageTest {
     }
 
     @Test
-    public void validateYourShoppingCartBreadcrumbTest() {
+    public void validateSearchBreadcrumbTest() {
         String productType = prop.getProperty("productType");
-        String quantity = prop.getProperty("quantity");
-        String size = prop.getProperty("size");
 
         myStorePage = new MyStorePage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
-        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
-        fadedShortSleeveTShirtsPage.doAddToCart(quantity, size);
-        orderPage = fadedShortSleeveTShirtsPage.proceedToOrderPage();
-        Assert.assertTrue(orderPage.getYourShoppingCartBreadCrumb());
+        Assert.assertTrue(searchPage.getSearchBreadCrumb());
     }
 
     @Test
-    public void validateOrderTitlePage() {
+    public void validateSearchTitlePage() {
         String productType = prop.getProperty("productType");
-        String quantity = prop.getProperty("quantity");
-        String size = prop.getProperty("size");
 
         myStorePage = new MyStorePage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
-        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
-        fadedShortSleeveTShirtsPage.doAddToCart(quantity, size);
-        orderPage = fadedShortSleeveTShirtsPage.proceedToOrderPage();
 
-        String actOrderPageTitle = orderPage.getOrderPageTitle();
-        String expOrderPageTitle = prop.getProperty("orderPageTitle");
-        Assert.assertEquals(expOrderPageTitle, actOrderPageTitle);
+        String actSearchPageTitle = searchPage.getSearchPageTitle();
+        String expSearchPageTitle = prop.getProperty("searchPageTitle");
+        Assert.assertEquals(expSearchPageTitle, actSearchPageTitle);
     }
 
     @Test
-    public void validatePriceTest() {
+    public void validateSearchProduct() {
         String productType = prop.getProperty("productType");
-        String quantity = prop.getProperty("quantity");
-        String size = prop.getProperty("size");
+        String product = prop.getProperty("searchedProduct");
 
         myStorePage = new MyStorePage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
-        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
-        fadedShortSleeveTShirtsPage.doAddToCart(quantity, size);
-        orderPage = fadedShortSleeveTShirtsPage.proceedToOrderPage();
-        Assert.assertEquals(orderPage.price(), orderPage.getTotal());
+        Assert.assertTrue(searchPage.getProductCount());
+        Assert.assertTrue(searchPage.getProduct(product));
     }
 
     @Test
-    public void doProceedTest() {
-        faker = new Faker();
+    public void doAddToCartSearchTest() {
         String productType = prop.getProperty("productType");
         String quantity = prop.getProperty("quantity");
         String size = prop.getProperty("size");
-        String deliveryInstruction = faker.currency().name();
-        int index = Math.max(1, 3);
 
         myStorePage = new MyStorePage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
-        fadedShortSleeveTShirtsPage = searchPage.clickOnMore();
-        fadedShortSleeveTShirtsPage.doAddToCart(quantity, size);
-        orderPage = fadedShortSleeveTShirtsPage.proceedToOrderPage();
-        orderPage.proceedFinally(deliveryInstruction, index);
+        searchPage.clickOnMore();
+        searchPage.doAddToCart(quantity, size);
+        Assert.assertTrue(searchPage.getSuccessMessageSearchPage());
     }
 
 }

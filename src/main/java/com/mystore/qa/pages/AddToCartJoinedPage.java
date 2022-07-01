@@ -13,12 +13,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
-public class SearchPage {
+public class AddToCartJoinedPage {
 
     private WebDriver driver;
     private WebDriverWait wait;
 
-    public SearchPage(WebDriver driver) {
+    public AddToCartJoinedPage (WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(TestUtil.PAGE_LOAD_TIMEOUT_DurationOfSeconds));
     }
@@ -77,6 +77,7 @@ public class SearchPage {
         return false;
     }
 
+
 //    MORE BUTTON:
 
     private WebElement getProduct(){
@@ -90,71 +91,4 @@ public class SearchPage {
         return new FadedShortSleeveTShirtsPage_Deprecated(driver);
     }
 
-    /**
-     * This element should be placed on the faded short sleeve shirts page
-     * @return
-     */
-
-//    ADD TO CART (FROM FADED SHORT SLEEVE SHIRT):
-
-    private WebElement getQuantity() {
-        By quantityLocator = By.cssSelector("input#quantity_wanted");
-        wait.until(ExpectedConditions.presenceOfElementLocated(quantityLocator));
-        return driver.findElement(quantityLocator);
-    }
-
-    private WebElement getPlusBtn() {
-        By plusLocator = By.cssSelector("i.icon-plus");
-        wait.until(ExpectedConditions.presenceOfElementLocated(plusLocator));
-        return driver.findElement(plusLocator);
-    }
-
-    private WebElement getMinusBtn() {
-        By minusLocator = By.cssSelector("i.icon-minus");
-        wait.until(ExpectedConditions.presenceOfElementLocated(minusLocator));
-        return driver.findElement(minusLocator);
-    }
-
-    private void getSize(String index) {
-        By sizeLocator = By.cssSelector("select#group_1");
-        wait.until(ExpectedConditions.presenceOfElementLocated(sizeLocator));
-        WebElement size = driver.findElement(sizeLocator);
-
-        Select sel = new Select(size);
-        sel.selectByIndex(Integer.parseInt(index));
-    }
-
-    private WebElement getColor() {
-        By colorLocator = By.cssSelector("ul#color_to_pick_list>li:nth-of-type(1)");
-        wait.until(ExpectedConditions.presenceOfElementLocated(colorLocator));
-        return driver.findElement(colorLocator);
-    }
-
-    public void getAddToCartBtn() {
-        By addToCartBtnLocator = By.cssSelector("p#add_to_cart");
-        WebElement addToCart = driver.findElement(addToCartBtnLocator);
-        Actions act = new Actions(driver);
-        act.moveToElement(addToCart).click().build().perform();
-
-        By cartLayerLocator = By.cssSelector("div#layer_cart");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(cartLayerLocator));
-    }
-
-    public boolean getSuccessMessageSearchPage() {
-        By successMessageLocator = By.xpath("//div[@class='layer_cart_product col-xs-12 col-md-6']/h2");
-        wait.until(ExpectedConditions.presenceOfElementLocated(successMessageLocator));
-        WebElement successMessage = driver.findElement(successMessageLocator);
-        System.out.println("Success message: " + successMessage.getText());
-        return successMessage.isDisplayed();
-    }
-
-    public void doAddToCart(String quantity, String index) {
-        getQuantity().clear();
-        getQuantity().sendKeys(quantity);
-        getPlusBtn().click();
-        getMinusBtn().click();
-        getSize(index);
-        getColor().click();
-        getAddToCartBtn();
-    }
 }
