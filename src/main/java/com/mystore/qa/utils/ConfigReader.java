@@ -17,8 +17,8 @@ public class ConfigReader {
     public static Properties initProp() {
         properties = new Properties();
         try {
-            FileInputStream ip = new FileInputStream("/Users/dzmitryrazhkou/Documents/Automation/MyStoreGit" +
-                    "/src/main/java/com/mystore/qa/config/Config.properties");
+            FileInputStream ip = new FileInputStream("/Users/dzmitryrazhkou/Documents/Automation/ShettyAcademyGit/" +
+                    "src/main/java/com/mystore/qa/config/Config.properties");
             try {
                 properties.load(ip);
             } catch (IOException e) {
