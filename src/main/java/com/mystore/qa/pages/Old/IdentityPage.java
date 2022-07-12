@@ -1,5 +1,6 @@
-package com.mystore.qa.pages;
+package com.mystore.qa.pages.Old;
 
+import com.mystore.qa.pages.RegisterShettyAcademyPage;
 import com.mystore.qa.utils.TestUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -148,8 +149,8 @@ public class IdentityPage {
         return driver.findElement(getHomeLocator);
     }
 
-    public MyStorePage doClickHome(){
+    public RegisterShettyAcademyPage doClickHome(){
         getHome().click();
-        return new MyStorePage(driver);
+        return new RegisterShettyAcademyPage(driver);
     }
 }

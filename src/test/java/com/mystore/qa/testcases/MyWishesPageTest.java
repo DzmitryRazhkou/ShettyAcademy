@@ -3,6 +3,9 @@ package com.mystore.qa.testcases;
 import com.github.javafaker.Faker;
 import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.*;
+import com.mystore.qa.pages.Old.LoginPage;
+import com.mystore.qa.pages.Old.MyAccountPage;
+import com.mystore.qa.pages.Old.MyWishesPage;
 import com.mystore.qa.utils.ConfigReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,7 +27,7 @@ public class MyWishesPageTest {
     private static WebDriverWait wait;
     Faker faker;
 
-    MyStorePage myStorePage;
+    RegisterShettyAcademyPage myStorePage;
     LoginPage loginPage;
     MyAccountPage myAccountPage;
     MyWishesPage myWishesPage;
@@ -46,7 +49,7 @@ public class MyWishesPageTest {
 
     @Test
     public void validateMyWishesBreadcrumbTest() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myWishesPage = myAccountPage.clickOnMyWishes();
@@ -55,7 +58,7 @@ public class MyWishesPageTest {
 
     @Test
     public void validateIdentityTitlePage() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myWishesPage = myAccountPage.clickOnMyWishes();
@@ -66,7 +69,7 @@ public class MyWishesPageTest {
 
     @Test
     public void validateTopSellersCountTest() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myWishesPage = myAccountPage.clickOnMyWishes();
@@ -90,7 +93,7 @@ public class MyWishesPageTest {
     public void createNewWishListTest(){
         faker = new Faker();
 
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myWishesPage = myAccountPage.clickOnMyWishes();
@@ -101,7 +104,7 @@ public class MyWishesPageTest {
 
     @Test
     public void deleteWishListTest(){
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myWishesPage = myAccountPage.clickOnMyWishes();
@@ -110,7 +113,7 @@ public class MyWishesPageTest {
 
     @Test
     public void doClickOnBackToYourAccountTest() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myWishesPage = myAccountPage.clickOnMyWishes();
@@ -122,7 +125,7 @@ public class MyWishesPageTest {
 
     @Test
     public void doClickOnHomeTest() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myWishesPage = myAccountPage.clickOnMyWishes();

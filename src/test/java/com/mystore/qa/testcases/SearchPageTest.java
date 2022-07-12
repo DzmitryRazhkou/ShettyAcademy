@@ -2,6 +2,10 @@ package com.mystore.qa.testcases;
 
 import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.*;
+import com.mystore.qa.pages.Old.LoginPage;
+import com.mystore.qa.pages.Old.MyAccountPage;
+import com.mystore.qa.pages.Old.OrderHistoryPage;
+import com.mystore.qa.pages.Old.SearchPage;
 import com.mystore.qa.utils.ConfigReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,7 +25,7 @@ public class SearchPageTest {
     private static WebDriver driver;
     private static WebDriverWait wait;
 
-    MyStorePage myStorePage;
+    RegisterShettyAcademyPage myStorePage;
     LoginPage loginPage;
     MyAccountPage myAccountPage;
     OrderHistoryPage orderHistoryPage;
@@ -46,7 +50,7 @@ public class SearchPageTest {
     public void validateSearchBreadcrumbTest() {
         String productType = prop.getProperty("productType");
 
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
@@ -57,7 +61,7 @@ public class SearchPageTest {
     public void validateSearchTitlePage() {
         String productType = prop.getProperty("productType");
 
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
@@ -72,7 +76,7 @@ public class SearchPageTest {
         String productType = prop.getProperty("productType");
         String product = prop.getProperty("searchedProduct");
 
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);

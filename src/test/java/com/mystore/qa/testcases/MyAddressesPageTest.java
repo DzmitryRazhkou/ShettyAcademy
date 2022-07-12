@@ -3,6 +3,9 @@ package com.mystore.qa.testcases;
 import com.github.javafaker.Faker;
 import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.*;
+import com.mystore.qa.pages.Old.LoginPage;
+import com.mystore.qa.pages.Old.MyAccountPage;
+import com.mystore.qa.pages.Old.MyAddressesPage;
 import com.mystore.qa.utils.ConfigReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -11,9 +14,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Properties;
 
 public class MyAddressesPageTest {
@@ -25,7 +25,7 @@ public class MyAddressesPageTest {
     private static WebDriver driver;
     private static WebDriverWait wait;
 
-    MyStorePage myStorePage;
+    RegisterShettyAcademyPage myStorePage;
     LoginPage loginPage;
     MyAccountPage myAccountPage;
     MyAddressesPage myAddressesPage;
@@ -48,7 +48,7 @@ public class MyAddressesPageTest {
 
     @Test
     public void validateMyAddressesMessageTest() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myAddressesPage = myAccountPage.clickOnMyAddresses();
@@ -57,7 +57,7 @@ public class MyAddressesPageTest {
 
     @Test
     public void validateMyAddressesTitlePage() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myAddressesPage = myAccountPage.clickOnMyAddresses();
@@ -69,7 +69,7 @@ public class MyAddressesPageTest {
 
     @Test
     public void doUpdateTest() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myAddressesPage = myAccountPage.clickOnMyAddresses();
@@ -87,7 +87,7 @@ public class MyAddressesPageTest {
 
     @Test(priority = 1)
     public void doAddNewAddressTest() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myAddressesPage = myAccountPage.clickOnMyAddresses();
@@ -108,7 +108,7 @@ public class MyAddressesPageTest {
 
     @Test(priority = 2)
     public void doDelete() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myAddressesPage = myAccountPage.clickOnMyAddresses();
@@ -119,7 +119,7 @@ public class MyAddressesPageTest {
 
     @Test
     public void doClickOnBackToYourAccountTest() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myAddressesPage = myAccountPage.clickOnMyAddresses();
@@ -131,7 +131,7 @@ public class MyAddressesPageTest {
 
     @Test
     public void doClickOnHomeTest() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myAddressesPage = myAccountPage.clickOnMyAddresses();

@@ -2,6 +2,9 @@ package com.mystore.qa.testcases;
 
 import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.*;
+import com.mystore.qa.pages.Old.LoginPage;
+import com.mystore.qa.pages.Old.MyAccountPage;
+import com.mystore.qa.pages.Old.MyCreditSlipsPage;
 import com.mystore.qa.utils.ConfigReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,7 +24,7 @@ public class MyCreditSlipsPageTest {
     private static WebDriver driver;
     private static WebDriverWait wait;
 
-    MyStorePage myStorePage;
+    RegisterShettyAcademyPage myStorePage;
     LoginPage loginPage;
     MyAccountPage myAccountPage;
     MyCreditSlipsPage myCreditSlipsPage;
@@ -43,7 +46,7 @@ public class MyCreditSlipsPageTest {
 
     @Test
     public void validateMyCreditSlipsBreadcrumbTest() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myCreditSlipsPage = myAccountPage.clickOnMyCreditSlips();
@@ -52,7 +55,7 @@ public class MyCreditSlipsPageTest {
 
     @Test
     public void validateMyCreditSlipsTitlePage() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myCreditSlipsPage = myAccountPage.clickOnMyCreditSlips();
@@ -63,7 +66,7 @@ public class MyCreditSlipsPageTest {
 
     @Test
     public void validateMyCreditSlipsMessage() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myCreditSlipsPage = myAccountPage.clickOnMyCreditSlips();
@@ -74,7 +77,7 @@ public class MyCreditSlipsPageTest {
 
     @Test
     public void doClickOnBackToYourAccountTest() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myCreditSlipsPage = myAccountPage.clickOnMyCreditSlips();
@@ -86,7 +89,7 @@ public class MyCreditSlipsPageTest {
 
     @Test
     public void doClickOnHomeTest() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myCreditSlipsPage = myAccountPage.clickOnMyCreditSlips();

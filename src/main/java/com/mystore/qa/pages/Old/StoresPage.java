@@ -1,4 +1,4 @@
-package com.mystore.qa.pages;
+package com.mystore.qa.pages.Old;
 
 import com.mystore.qa.utils.TestUtil;
 import org.openqa.selenium.*;

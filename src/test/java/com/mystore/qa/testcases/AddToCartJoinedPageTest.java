@@ -2,6 +2,7 @@ package com.mystore.qa.testcases;
 
 import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.*;
+import com.mystore.qa.pages.Old.*;
 import com.mystore.qa.utils.ConfigReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,7 +22,7 @@ public class AddToCartJoinedPageTest {
     private static WebDriver driver;
     private static WebDriverWait wait;
 
-    MyStorePage myStorePage;
+    RegisterShettyAcademyPage myStorePage;
     LoginPage loginPage;
     MyAccountPage myAccountPage;
     OrderHistoryPage orderHistoryPage;
@@ -47,7 +48,7 @@ public class AddToCartJoinedPageTest {
     public void validateSearchBreadcrumbTest() {
         String productType = prop.getProperty("productType");
 
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
@@ -58,7 +59,7 @@ public class AddToCartJoinedPageTest {
     public void validateSearchTitlePage() {
         String productType = prop.getProperty("productType");
 
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
@@ -73,7 +74,7 @@ public class AddToCartJoinedPageTest {
         String productType = prop.getProperty("productType");
         String product = prop.getProperty("searchedProduct");
 
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
@@ -87,7 +88,7 @@ public class AddToCartJoinedPageTest {
         String quantity = prop.getProperty("quantity");
         String size = prop.getProperty("size");
 
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);

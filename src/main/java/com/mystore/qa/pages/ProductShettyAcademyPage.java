@@ -1,5 +1,7 @@
 package com.mystore.qa.pages;
 
+import com.mystore.qa.pages.Old.LoginCreateAccountPage;
+import com.mystore.qa.pages.Old.MyAccountPage;
 import com.mystore.qa.utils.TestUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -10,12 +12,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class LoginPage {
+public class ProductShettyAcademyPage {
 
     private WebDriver driver;
     private WebDriverWait wait;
 
-    public LoginPage(WebDriver driver) {
+    public ProductShettyAcademyPage(WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(TestUtil.PAGE_LOAD_TIMEOUT_DurationOfSeconds));
     }
@@ -48,8 +50,8 @@ public class LoginPage {
 
 //    VALIDATE PAGE TITLE:
 
-    public String getMyLoginPageTitle(){
-        System.out.println(" =====> My login page title is: " +driver.getTitle()+ " <===== ");
+    public String getProductPageTitle(){
+        System.out.println(" =====> My product page title is: " +driver.getTitle()+ " <===== ");
         return driver.getTitle();
     }
 

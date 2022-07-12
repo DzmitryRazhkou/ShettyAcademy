@@ -1,10 +1,10 @@
 package com.mystore.qa.testcases;
 
 import com.mystore.qa.driverfactory.DriverFactory;
-import com.mystore.qa.pages.LoginCreateAccountPage;
-import com.mystore.qa.pages.LoginPage;
-import com.mystore.qa.pages.MyAccountPage;
-import com.mystore.qa.pages.MyStorePage;
+import com.mystore.qa.pages.Old.LoginCreateAccountPage;
+import com.mystore.qa.pages.Old.LoginPage;
+import com.mystore.qa.pages.Old.MyAccountPage;
+import com.mystore.qa.pages.RegisterShettyAcademyPage;
 import com.mystore.qa.utils.ConfigReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,7 +24,7 @@ public class MyAccountPageTest {
     private static WebDriver driver;
     private static WebDriverWait wait;
 
-    MyStorePage myStorePage;
+    RegisterShettyAcademyPage myStorePage;
     LoginPage loginPage;
     MyAccountPage myAccountPage;
     LoginCreateAccountPage loginCreateAccountPage;
@@ -46,7 +46,7 @@ public class MyAccountPageTest {
 
     @Test
     public void validateMyAccountBreadcrumbTest() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         Assert.assertTrue(myAccountPage.getMyAccountBreadCrumb());
@@ -54,7 +54,7 @@ public class MyAccountPageTest {
 
     @Test
     public void validateMyAccountTitlePage() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         String actMyAccountPageTitle = myAccountPage.getMyAccountPageTitle();
@@ -64,7 +64,7 @@ public class MyAccountPageTest {
 
     @Test
     public void doClickOnHomeTestPage() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myStorePage = myAccountPage.doClickHome();

@@ -2,6 +2,9 @@ package com.mystore.qa.testcases;
 
 import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.*;
+import com.mystore.qa.pages.Old.LoginPage;
+import com.mystore.qa.pages.Old.MyAccountPage;
+import com.mystore.qa.pages.Old.OrderHistoryPage;
 import com.mystore.qa.utils.ConfigReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,7 +24,7 @@ public class OrderHistoryPageTest {
     private static WebDriver driver;
     private static WebDriverWait wait;
 
-    MyStorePage myStorePage;
+    RegisterShettyAcademyPage myStorePage;
     LoginPage loginPage;
     MyAccountPage myAccountPage;
     OrderHistoryPage orderHistoryPage;
@@ -43,7 +46,7 @@ public class OrderHistoryPageTest {
 
     @Test
     public void validateOrderHistoryBreadcrumbTest() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         orderHistoryPage = myAccountPage.clickOnOrderHistory();
@@ -52,7 +55,7 @@ public class OrderHistoryPageTest {
 
     @Test
     public void validateOrderHistoryTitlePage() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         orderHistoryPage = myAccountPage.clickOnOrderHistory();
@@ -63,7 +66,7 @@ public class OrderHistoryPageTest {
 
     @Test
     public void getOrderReferenceTest() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         orderHistoryPage = myAccountPage.clickOnOrderHistory();
@@ -73,7 +76,7 @@ public class OrderHistoryPageTest {
 
     @Test
     public void getDateTest() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         orderHistoryPage = myAccountPage.clickOnOrderHistory();
@@ -83,7 +86,7 @@ public class OrderHistoryPageTest {
 
     @Test
     public void getTotalPriceTest() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         orderHistoryPage = myAccountPage.clickOnOrderHistory();
@@ -93,7 +96,7 @@ public class OrderHistoryPageTest {
 
     @Test
     public void doClickOnBackToYourAccountTest() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         orderHistoryPage = myAccountPage.clickOnOrderHistory();
@@ -105,7 +108,7 @@ public class OrderHistoryPageTest {
 
     @Test
     public void doClickOnHomeTest() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         orderHistoryPage = myAccountPage.clickOnOrderHistory();

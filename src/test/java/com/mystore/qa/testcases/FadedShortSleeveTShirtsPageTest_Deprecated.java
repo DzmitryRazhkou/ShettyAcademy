@@ -3,6 +3,10 @@ package com.mystore.qa.testcases;
 import com.github.javafaker.Faker;
 import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.*;
+import com.mystore.qa.pages.Old.LoginPage;
+import com.mystore.qa.pages.Old.MyAccountPage;
+import com.mystore.qa.pages.Old.OrderPage;
+import com.mystore.qa.pages.Old.SearchPage;
 import com.mystore.qa.utils.ConfigReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -23,7 +27,7 @@ public class FadedShortSleeveTShirtsPageTest_Deprecated {
     private static WebDriverWait wait;
 
     Faker faker;
-    MyStorePage myStorePage;
+    RegisterShettyAcademyPage myStorePage;
     LoginPage loginPage;
     MyAccountPage myAccountPage;
     SearchPage searchPage;
@@ -49,7 +53,7 @@ public class FadedShortSleeveTShirtsPageTest_Deprecated {
     public void validateFadedShortSleeveTShirtBreadcrumbTest() {
         String productType = prop.getProperty("productType");
 
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
@@ -61,7 +65,7 @@ public class FadedShortSleeveTShirtsPageTest_Deprecated {
     public void validateFadedShortSleeveTShirtTitlePage() throws InterruptedException {
         String productType = prop.getProperty("productType");
 
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
@@ -79,7 +83,7 @@ public class FadedShortSleeveTShirtsPageTest_Deprecated {
         String title = faker.artist().name();
         String comment = faker.medical().symptoms();
 
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
@@ -95,7 +99,7 @@ public class FadedShortSleeveTShirtsPageTest_Deprecated {
         String name = faker.name().fullName();
         String email = faker.internet().emailAddress();
 
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
@@ -108,7 +112,7 @@ public class FadedShortSleeveTShirtsPageTest_Deprecated {
     public void doAddToWishTest() {
         String productType = prop.getProperty("productType");
 
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
@@ -123,7 +127,7 @@ public class FadedShortSleeveTShirtsPageTest_Deprecated {
         String quantity = prop.getProperty("quantity");
         String size = prop.getProperty("size");
 
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);

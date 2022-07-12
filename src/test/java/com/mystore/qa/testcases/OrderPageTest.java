@@ -3,6 +3,10 @@ package com.mystore.qa.testcases;
 import com.github.javafaker.Faker;
 import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.*;
+import com.mystore.qa.pages.Old.LoginPage;
+import com.mystore.qa.pages.Old.MyAccountPage;
+import com.mystore.qa.pages.Old.OrderPage;
+import com.mystore.qa.pages.Old.SearchPage;
 import com.mystore.qa.utils.ConfigReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -23,7 +27,7 @@ public class OrderPageTest {
     private static WebDriverWait wait;
 
     Faker faker;
-    MyStorePage myStorePage;
+    RegisterShettyAcademyPage myStorePage;
     LoginPage loginPage;
     MyAccountPage myAccountPage;
     SearchPage searchPage;
@@ -51,7 +55,7 @@ public class OrderPageTest {
         String quantity = prop.getProperty("quantity");
         String size = prop.getProperty("size");
 
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
@@ -67,7 +71,7 @@ public class OrderPageTest {
         String quantity = prop.getProperty("quantity");
         String size = prop.getProperty("size");
 
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
@@ -86,7 +90,7 @@ public class OrderPageTest {
         String quantity = prop.getProperty("quantity");
         String size = prop.getProperty("size");
 
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
@@ -105,7 +109,7 @@ public class OrderPageTest {
         String deliveryInstruction = faker.currency().name();
         int index = Math.max(1, 3);
 
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);

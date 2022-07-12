@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Properties;
 
-public class LoginCreateAccountPageTest {
+public class ProductShettyAcademyPageTest {
 
     ConfigReader cp;
     DriverFactory df;
@@ -37,7 +37,7 @@ public class LoginCreateAccountPageTest {
     public void startUp() {
         cp = new ConfigReader();
         df = new DriverFactory();
-        prop = ConfigReader.initProp();
+        prop = cp.initProp();
         driver = df.initDriver("chrome", prop);
     }
 
@@ -49,32 +49,39 @@ public class LoginCreateAccountPageTest {
     }
 
     @Test
-    public void validateMyLoginCreateAccountPageTitle(){
-        String emailCreate = prop.getProperty("loginCreateAccountPage");
+    public void validateMyLoginPageTitle(){
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
-        loginCreateAccountPage = loginPage.doCreateAccount(emailCreate);
+//        loginPage = myStorePage.clickSignIn();
         String actMyLoginPageTitle = loginPage.getMyLoginPageTitle();
-        String expMyLoginPageTitle = prop.getProperty("myLoginCreateAccountPageTitle");
+        String expMyLoginPageTitle = prop.getProperty("myLoginPageTitle");
         Assert.assertEquals(expMyLoginPageTitle, actMyLoginPageTitle);
     }
 
-    @DataProvider
-    public Iterator<Object[]> getFillUpPersonalData() {
-        ArrayList<Object[]> testData = TestUtil.fillUpPersonalData();
-        return testData.iterator();
-    }
+//    @Test
+//    public void doClickSignInTest(){
+//        myStorePage = new RegisterShettyAcademyPage(driver);
+//        loginPage = myStorePage.clickSignIn();
+//        Assert.assertTrue(loginPage.getAuthenticationBreadCrumb());
+//    }
+//
+//    @Test
+//    public void validateForgotPasswordLinkTest(){
+//        myStorePage = new RegisterShettyAcademyPage(driver);
+//        loginPage = myStorePage.clickSignIn();
+//        Assert.assertTrue(loginPage.validateForgotPasswordLink());
+//    }
 
-    @Test(dataProvider = "getFillUpPersonalData")
-    public void fillUpPersonalInfoTest(String emailCreateAccount, String firstName, String lastName, String password,
-        String days, String months, String years, String company, String addressFl, String addressSl, String city,
-        String state, long zip, String addInfo, long phone){
 
-        myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
-        loginCreateAccountPage = loginPage.doCreateAccount(emailCreateAccount);
-        myAccountPage = loginCreateAccountPage.fillUpPersonalInfo(firstName, lastName, password, days, months, years,
-                company, addressFl, addressSl, city, state, zip, addInfo, phone);
-        Assert.assertTrue(myAccountPage.getMyAccountBreadCrumb());
-    }
+
+//    @Test
+//    public void doLoginIncorrectCredentialsTest(){
+//        myStorePage = new RegisterShettyAcademyPage(driver);
+//        loginPage = myStorePage.clickSignIn();
+//        loginPage.doLogin(prop.getProperty("wrong_email"), prop.getProperty("wrong_password"));
+//        Assert.assertTrue(loginPage.getErrorForm());
+//    }
+
+
+
+
 }

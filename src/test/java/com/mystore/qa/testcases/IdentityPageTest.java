@@ -2,6 +2,9 @@ package com.mystore.qa.testcases;
 
 import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.*;
+import com.mystore.qa.pages.Old.IdentityPage;
+import com.mystore.qa.pages.Old.LoginPage;
+import com.mystore.qa.pages.Old.MyAccountPage;
 import com.mystore.qa.utils.ConfigReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,7 +27,7 @@ public class IdentityPageTest {
     private static WebDriver driver;
     private static WebDriverWait wait;
 
-    MyStorePage myStorePage;
+    RegisterShettyAcademyPage myStorePage;
     LoginPage loginPage;
     MyAccountPage myAccountPage;
     IdentityPage identityPage;
@@ -46,7 +49,7 @@ public class IdentityPageTest {
 
     @Test
     public void validateIdentityBreadcrumbTest() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         identityPage = myAccountPage.clickOnIdentity();
@@ -55,7 +58,7 @@ public class IdentityPageTest {
 
     @Test
     public void validateIdentityTitlePage() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         identityPage = myAccountPage.clickOnIdentity();
@@ -66,7 +69,7 @@ public class IdentityPageTest {
 
     @Test
     public void getPersonalInfoTest() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         identityPage = myAccountPage.clickOnIdentity();
@@ -80,7 +83,7 @@ public class IdentityPageTest {
 
     @Test
     public void doClickOnBackToYourAccountTest() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         identityPage = myAccountPage.clickOnIdentity();
@@ -92,7 +95,7 @@ public class IdentityPageTest {
 
     @Test
     public void doClickOnHomeTest() {
-        myStorePage = new MyStorePage(driver);
+        myStorePage = new RegisterShettyAcademyPage(driver);
         loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         identityPage = myAccountPage.clickOnIdentity();
