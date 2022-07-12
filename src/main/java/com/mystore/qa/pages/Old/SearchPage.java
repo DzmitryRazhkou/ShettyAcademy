@@ -85,10 +85,10 @@ public class SearchPage {
         return driver.findElement(getProductLocator);
     }
 
-    public FadedShortSleeveTShirtsPage_Deprecated clickOnMore(){
-        getProduct().click();
-        return new FadedShortSleeveTShirtsPage_Deprecated(driver);
-    }
+//    public FadedShortSleeveTShirtsPage_Deprecated clickOnMore(){
+//        getProduct().click();
+//        return new FadedShortSleeveTShirtsPage_Deprecated(driver);
+//    }
 
     /**
      * This element should be placed on the faded short sleeve shirts page

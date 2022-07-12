@@ -2,13 +2,10 @@ package com.mystore.qa.testcases;
 
 
 import com.mystore.qa.driverfactory.DriverFactory;
-import com.mystore.qa.pages.Old.ContactUsPage;
-import com.mystore.qa.pages.Old.LoginPage;
-import com.mystore.qa.pages.Old.MyAccountPage;
+import com.mystore.qa.pages.ProductShettyAcademyPage;
 import com.mystore.qa.pages.RegisterShettyAcademyPage;
 import com.mystore.qa.utils.ConfigReader;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -16,19 +13,16 @@ import org.testng.annotations.Test;
 
 import java.util.*;
 
-
 public class RegisterShettyAcademyPageTest {
-
 
     ConfigReader cp;
     DriverFactory df;
     Properties prop;
 
     private static WebDriver driver;
-    private static WebDriverWait wait;
 
     RegisterShettyAcademyPage registerPage;
-
+    ProductShettyAcademyPage productShettyAcademyPage;
 
 
     @BeforeMethod
@@ -54,7 +48,7 @@ public class RegisterShettyAcademyPageTest {
     }
 
     @Test
-    public void validateMyStorePageTitle() {
+    public void validateRegisterPageTitle() {
         registerPage = new RegisterShettyAcademyPage(driver);
         String actRegisterPageTitle = registerPage.getMyStorePageTitle();
         String expRegisterPageTitle = prop.getProperty("expRegisterPageTitle");
@@ -82,36 +76,18 @@ public class RegisterShettyAcademyPageTest {
         String email = prop.getProperty("email");
         String password = prop.getProperty("password");
         registerPage = new RegisterShettyAcademyPage(driver);
-        registerPage.doLogin(email, password);
+        productShettyAcademyPage = registerPage.doLogin(email, password);
+        String actProductPageTitle = productShettyAcademyPage.getProductPageTitle();
+        String expProductPageTitle = prop.getProperty("expProductPageTitle");
+        Assert.assertEquals(expProductPageTitle, actProductPageTitle);
     }
 
 
-//    @Test(dataProvider = "getDataSectionWomen")
-//    public void validateSectionWomen(String women, String dresses, String t_shirts) {
-//        myStorePage = new RegisterPage(driver);
-//        List<String> expList = new ArrayList<>(Arrays.asList(women, dresses, t_shirts));
-//        List<String> actList = myStorePage.getNamesOfSection();
-//        Assert.assertEquals(expList, actList);
-//    }
-//
-//
 
-//
-//    @Test
-//    public void validateAmountOfFooterPicsTest() {
-//        myStorePage = new RegisterPage(driver);
-//        int expAmountOfFooter = Integer.parseInt(ConfigReader.initProp().getProperty("amountOfFooter"));
-//        int actAmountOfFooter = myStorePage.footerPictures();
-//        Assert.assertEquals(expAmountOfFooter, actAmountOfFooter);
-//    }
-//
-//    @Test
-//    public void leftBoxTextTest() {
-//        myStorePage = new RegisterPage(driver);
-//        String actFacebookLinkText = myStorePage.faceBookFieldText();
-//        String expFacebookLinkText = ConfigReader.initProp().getProperty("facebookLinkText");
-//        Assert.assertEquals(expFacebookLinkText, actFacebookLinkText);
-//    }
+
+
+
+
 //
 //    @DataProvider
 //    public Iterator<Object[]> getDataMiddleBoxTest() {

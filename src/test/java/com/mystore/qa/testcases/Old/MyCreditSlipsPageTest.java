@@ -1,4 +1,4 @@
-package com.mystore.qa.testcases;
+package com.mystore.qa.testcases.Old;
 
 import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.*;
@@ -47,7 +47,7 @@ public class MyCreditSlipsPageTest {
     @Test
     public void validateMyCreditSlipsBreadcrumbTest() {
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myCreditSlipsPage = myAccountPage.clickOnMyCreditSlips();
         Assert.assertTrue(myCreditSlipsPage.getMyCreditSlipsBreadCrumb());
@@ -56,7 +56,7 @@ public class MyCreditSlipsPageTest {
     @Test
     public void validateMyCreditSlipsTitlePage() {
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myCreditSlipsPage = myAccountPage.clickOnMyCreditSlips();
         String actMyCreditSlipsPageTitle = myCreditSlipsPage.getMyCreditSlipsPageTitle();
@@ -67,7 +67,7 @@ public class MyCreditSlipsPageTest {
     @Test
     public void validateMyCreditSlipsMessage() {
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myCreditSlipsPage = myAccountPage.clickOnMyCreditSlips();
         String actMyCreditSlipsMessage = myCreditSlipsPage.getMessage();
@@ -78,7 +78,7 @@ public class MyCreditSlipsPageTest {
     @Test
     public void doClickOnBackToYourAccountTest() {
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myCreditSlipsPage = myAccountPage.clickOnMyCreditSlips();
         myAccountPage = myCreditSlipsPage.doClickBackToToYourAccount();
@@ -90,7 +90,7 @@ public class MyCreditSlipsPageTest {
     @Test
     public void doClickOnHomeTest() {
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myCreditSlipsPage = myAccountPage.clickOnMyCreditSlips();
         myStorePage = myCreditSlipsPage.doClickHome();

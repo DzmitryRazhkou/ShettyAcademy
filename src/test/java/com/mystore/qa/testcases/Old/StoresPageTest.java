@@ -1,4 +1,4 @@
-package com.mystore.qa.testcases;
+package com.mystore.qa.testcases.Old;
 
 import com.github.javafaker.Faker;
 import com.mystore.qa.driverfactory.DriverFactory;
@@ -51,7 +51,7 @@ public class StoresPageTest {
     @Test
     public void validateMyWishesBreadcrumbTest() {
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myWishesPage = myAccountPage.clickOnMyWishes();
         storesPage = myWishesPage.doClickOurStores();
@@ -61,7 +61,7 @@ public class StoresPageTest {
     @Test
     public void validateIdentityTitlePage() {
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myWishesPage = myAccountPage.clickOnMyWishes();
         storesPage = myWishesPage.doClickOurStores();
@@ -73,7 +73,7 @@ public class StoresPageTest {
     @Test
     public void doGoogleClicksTest() throws InterruptedException {
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myWishesPage = myAccountPage.clickOnMyWishes();
         storesPage = myWishesPage.doClickOurStores();
@@ -83,7 +83,7 @@ public class StoresPageTest {
     @Test
     public void doZoomInZoomOutTest() throws InterruptedException {
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myWishesPage = myAccountPage.clickOnMyWishes();
         storesPage = myWishesPage.doClickOurStores();
@@ -94,7 +94,7 @@ public class StoresPageTest {
     public void selectLocationStoreTest() throws InterruptedException {
         faker = new Faker();
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         myWishesPage = myAccountPage.clickOnMyWishes();
         storesPage = myWishesPage.doClickOurStores();

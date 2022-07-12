@@ -1,4 +1,4 @@
-package com.mystore.qa.testcases;
+package com.mystore.qa.testcases.Old;
 
 import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.*;
@@ -49,7 +49,7 @@ public class AddToCartJoinedPageTest {
         String productType = prop.getProperty("productType");
 
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
         Assert.assertTrue(searchPage.getSearchBreadCrumb());
@@ -60,7 +60,7 @@ public class AddToCartJoinedPageTest {
         String productType = prop.getProperty("productType");
 
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
 
@@ -75,7 +75,7 @@ public class AddToCartJoinedPageTest {
         String product = prop.getProperty("searchedProduct");
 
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
         Assert.assertTrue(searchPage.getProductCount());
@@ -89,10 +89,10 @@ public class AddToCartJoinedPageTest {
         String size = prop.getProperty("size");
 
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
         searchPage = myAccountPage.doSearch(productType);
-        searchPage.clickOnMore();
+//        searchPage.clickOnMore();
         searchPage.doAddToCart(quantity, size);
         Assert.assertTrue(searchPage.getSuccessMessageSearchPage());
     }

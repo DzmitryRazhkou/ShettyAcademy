@@ -1,11 +1,11 @@
-package com.mystore.qa.testcases;
+package com.mystore.qa.testcases.Old;
 
 import com.github.javafaker.Faker;
 import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.*;
 import com.mystore.qa.pages.Old.LoginPage;
 import com.mystore.qa.pages.Old.MyAccountPage;
-import com.mystore.qa.pages.Old.MyWishesPage;
+import com.mystore.qa.pages.Old.MyAddressesPage;
 import com.mystore.qa.utils.ConfigReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -14,10 +14,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
 import java.util.Properties;
 
-public class MyWishesPageTest {
+public class MyAddressesPageTest {
 
     ConfigReader cp;
     DriverFactory df;
@@ -25,12 +24,12 @@ public class MyWishesPageTest {
 
     private static WebDriver driver;
     private static WebDriverWait wait;
-    Faker faker;
 
     RegisterShettyAcademyPage myStorePage;
     LoginPage loginPage;
     MyAccountPage myAccountPage;
-    MyWishesPage myWishesPage;
+    MyAddressesPage myAddressesPage;
+    Faker faker;
 
     @BeforeMethod
     public void startUp() {
@@ -48,76 +47,83 @@ public class MyWishesPageTest {
     }
 
     @Test
-    public void validateMyWishesBreadcrumbTest() {
+    public void validateMyAddressesMessageTest() {
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
-        myWishesPage = myAccountPage.clickOnMyWishes();
-        Assert.assertTrue(myWishesPage.getMyWishesBreadCrumb());
+        myAddressesPage = myAccountPage.clickOnMyAddresses();
+        Assert.assertTrue(myAddressesPage.getMyAddressesParagraphMessage());
     }
 
     @Test
-    public void validateIdentityTitlePage() {
+    public void validateMyAddressesTitlePage() {
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
-        myWishesPage = myAccountPage.clickOnMyWishes();
-        String actMyWishesPageTitle = myWishesPage.getMyWishesPageTitle();
-        String expMyWishesPageTitle = prop.getProperty("myWishesPageTitle");
-        Assert.assertEquals(expMyWishesPageTitle, actMyWishesPageTitle);
+        myAddressesPage = myAccountPage.clickOnMyAddresses();
+        String actMyAddressesPageTitle = myAddressesPage.getMyAddressesPageTitle();
+        String expMyAddressesPageTitle = prop.getProperty("myAddressesPageTitle");
+        Assert.assertEquals(expMyAddressesPageTitle, actMyAddressesPageTitle);
     }
 
+
     @Test
-    public void validateTopSellersCountTest() {
+    public void doUpdateTest() {
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
-        myWishesPage = myAccountPage.clickOnMyWishes();
+        myAddressesPage = myAccountPage.clickOnMyAddresses();
 
-        List<String> actTopSellersList = myWishesPage.getTopSellers();
-
-        int actAmountOfTopSellers = actTopSellersList.size();
-        System.out.println(" =====> The amount of top sellers: " + actAmountOfTopSellers + " products <=====. ");
-        int expAmountOfTopSellers = Integer.parseInt(prop.getProperty("countOfTopSellers"));
-        Assert.assertEquals(expAmountOfTopSellers, actAmountOfTopSellers);
-
-        for (String s : actTopSellersList) {
-            System.out.println(s);
-
-            String result = prop.getProperty("product");
-            Assert.assertTrue(myWishesPage.validateTopSellers(result));
-        }
-    }
-
-    @Test
-    public void createNewWishListTest(){
         faker = new Faker();
+        String addressFl = faker.address().fullAddress();
+        String addressSl = faker.address().secondaryAddress();
+        String phone = faker.phoneNumber().cellPhone();
+        String data = faker.beer().name();
+        String alias = faker.name().title();
 
-        myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
-        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
-        myWishesPage = myAccountPage.clickOnMyWishes();
-        String newWishListName = faker.app().name();
-        String wishListID = myWishesPage.getId(newWishListName);
-        Assert.assertTrue(myWishesPage.wishListExist(wishListID, newWishListName));
+        myAddressesPage.doUpdate(addressFl, addressSl, phone, data, alias);
+        Assert.assertTrue(myAddressesPage.getMyAddressesParagraphMessage());
     }
 
-    @Test
-    public void deleteWishListTest(){
+    @Test(priority = 1)
+    public void doAddNewAddressTest() {
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
-        myWishesPage = myAccountPage.clickOnMyWishes();
-        myWishesPage.getAlert();
+        myAddressesPage = myAccountPage.clickOnMyAddresses();
+
+        faker = new Faker();
+        String addressFl = faker.address().fullAddress();
+        String addressSl = faker.address().secondaryAddress();
+        String city = faker.address().city();
+        String state = faker.address().state();
+        String zip = faker.address().zipCode();
+        String phone = faker.phoneNumber().cellPhone();
+        String data = faker.beer().name();
+        String alias = faker.name().title();
+
+        myAddressesPage.doAddNewAddress(addressFl, addressSl, city, state, zip, phone, data, alias);
+        Assert.assertTrue(myAddressesPage.getMyAddressesParagraphMessage());
+    }
+
+    @Test(priority = 2)
+    public void doDelete() {
+        myStorePage = new RegisterShettyAcademyPage(driver);
+//        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        myAddressesPage = myAccountPage.clickOnMyAddresses();
+        myAddressesPage.getAlert();
+
+        Assert.assertTrue(myAddressesPage.getMyAddressesParagraphMessage());
     }
 
     @Test
     public void doClickOnBackToYourAccountTest() {
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
-        myWishesPage = myAccountPage.clickOnMyWishes();
-        myAccountPage = myWishesPage.doClickBackToToYourAccount();
+        myAddressesPage = myAccountPage.clickOnMyAddresses();
+        myAccountPage = myAddressesPage.doClickBackToToYourAccount();
         String actMyAccountPageTitle = myAccountPage.getMyAccountPageTitle();
         String expMyAccountPageTitle = prop.getProperty("myAccountPageTitle");
         Assert.assertEquals(expMyAccountPageTitle, actMyAccountPageTitle);
@@ -126,12 +132,13 @@ public class MyWishesPageTest {
     @Test
     public void doClickOnHomeTest() {
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
-        myWishesPage = myAccountPage.clickOnMyWishes();
-        myStorePage = myWishesPage.doClickHome();
+        myAddressesPage = myAccountPage.clickOnMyAddresses();
+        myStorePage = myAddressesPage.doClickHome();
         String actMyStorePageTitle = myStorePage.getMyStorePageTitle();
         String expMyStorePageTitle = prop.getProperty("myStorePageTitle");
         Assert.assertEquals(expMyStorePageTitle, actMyStorePageTitle);
     }
 }
+

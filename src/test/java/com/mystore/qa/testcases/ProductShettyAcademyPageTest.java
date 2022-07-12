@@ -1,22 +1,15 @@
 package com.mystore.qa.testcases;
 
 import com.mystore.qa.driverfactory.DriverFactory;
-import com.mystore.qa.pages.Old.LoginCreateAccountPage;
-import com.mystore.qa.pages.Old.LoginPage;
-import com.mystore.qa.pages.Old.MyAccountPage;
+import com.mystore.qa.pages.ProductShettyAcademyPage;
 import com.mystore.qa.pages.RegisterShettyAcademyPage;
 import com.mystore.qa.utils.ConfigReader;
-import com.mystore.qa.utils.TestUtil;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Properties;
 
 public class ProductShettyAcademyPageTest {
@@ -26,12 +19,9 @@ public class ProductShettyAcademyPageTest {
     Properties prop;
 
     private static WebDriver driver;
-    private static WebDriverWait wait;
 
-    RegisterShettyAcademyPage myStorePage;
-    LoginPage loginPage;
-    MyAccountPage myAccountPage;
-    LoginCreateAccountPage loginCreateAccountPage;
+    RegisterShettyAcademyPage registerShettyAcademyPage;
+    ProductShettyAcademyPage productShettyAcademyPage;
 
     @BeforeMethod
     public void startUp() {
@@ -48,40 +38,36 @@ public class ProductShettyAcademyPageTest {
         }
     }
 
+
     @Test
-    public void validateMyLoginPageTitle(){
-        myStorePage = new RegisterShettyAcademyPage(driver);
-//        loginPage = myStorePage.clickSignIn();
-        String actMyLoginPageTitle = loginPage.getMyLoginPageTitle();
-        String expMyLoginPageTitle = prop.getProperty("myLoginPageTitle");
-        Assert.assertEquals(expMyLoginPageTitle, actMyLoginPageTitle);
+    public void validateProductPageTitle() {
+        String email = prop.getProperty("email");
+        String password = prop.getProperty("password");
+        registerShettyAcademyPage = new RegisterShettyAcademyPage(driver);
+        productShettyAcademyPage = registerShettyAcademyPage.doLogin(email, password);
+        String actProductPageTitle = productShettyAcademyPage.getProductPageTitle();
+        String expProductPageTitle = prop.getProperty("expProductPageTitle");
+        Assert.assertEquals(expProductPageTitle, actProductPageTitle);
     }
 
-//    @Test
-//    public void doClickSignInTest(){
-//        myStorePage = new RegisterShettyAcademyPage(driver);
-//        loginPage = myStorePage.clickSignIn();
-//        Assert.assertTrue(loginPage.getAuthenticationBreadCrumb());
-//    }
-//
-//    @Test
-//    public void validateForgotPasswordLinkTest(){
-//        myStorePage = new RegisterShettyAcademyPage(driver);
-//        loginPage = myStorePage.clickSignIn();
-//        Assert.assertTrue(loginPage.validateForgotPasswordLink());
-//    }
+    @Test
+    public void validateHomeButton() {
+        String email = prop.getProperty("email");
+        String password = prop.getProperty("password");
+        registerShettyAcademyPage = new RegisterShettyAcademyPage(driver);
+        productShettyAcademyPage = registerShettyAcademyPage.doLogin(email, password);
+        Assert.assertTrue(productShettyAcademyPage.homeButtonValidate());
+    }
 
-
-
-//    @Test
-//    public void doLoginIncorrectCredentialsTest(){
-//        myStorePage = new RegisterShettyAcademyPage(driver);
-//        loginPage = myStorePage.clickSignIn();
-//        loginPage.doLogin(prop.getProperty("wrong_email"), prop.getProperty("wrong_password"));
-//        Assert.assertTrue(loginPage.getErrorForm());
-//    }
-
-
-
+    @Test
+    public void AmountOfProductTest() {
+        String email = prop.getProperty("email");
+        String password = prop.getProperty("password");
+        registerShettyAcademyPage = new RegisterShettyAcademyPage(driver);
+        productShettyAcademyPage = registerShettyAcademyPage.doLogin(email, password);
+        int expAmountOfProduct = Integer.parseInt(ConfigReader.initProp().getProperty("amountOfProduct"));
+        int actAmountOfProduct = productShettyAcademyPage.productAmount();
+        Assert.assertEquals(expAmountOfProduct, actAmountOfProduct);
+    }
 
 }

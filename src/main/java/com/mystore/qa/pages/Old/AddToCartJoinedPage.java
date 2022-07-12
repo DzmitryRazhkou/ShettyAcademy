@@ -86,9 +86,6 @@ public class AddToCartJoinedPage {
         return driver.findElement(getProductLocator);
     }
 
-    public FadedShortSleeveTShirtsPage_Deprecated clickOnMore(){
-        getProduct().click();
-        return new FadedShortSleeveTShirtsPage_Deprecated(driver);
-    }
+
 
 }

@@ -1,10 +1,11 @@
-package com.mystore.qa.testcases;
+package com.mystore.qa.testcases.Old;
 
 import com.mystore.qa.driverfactory.DriverFactory;
-import com.mystore.qa.pages.Old.LoginCreateAccountPage;
+import com.mystore.qa.pages.*;
 import com.mystore.qa.pages.Old.LoginPage;
 import com.mystore.qa.pages.Old.MyAccountPage;
-import com.mystore.qa.pages.RegisterShettyAcademyPage;
+import com.mystore.qa.pages.Old.OrderHistoryPage;
+import com.mystore.qa.pages.Old.SearchPage;
 import com.mystore.qa.utils.ConfigReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,7 +16,7 @@ import org.testng.annotations.Test;
 
 import java.util.Properties;
 
-public class MyAccountPageTest {
+public class SearchPageTest {
 
     ConfigReader cp;
     DriverFactory df;
@@ -27,7 +28,8 @@ public class MyAccountPageTest {
     RegisterShettyAcademyPage myStorePage;
     LoginPage loginPage;
     MyAccountPage myAccountPage;
-    LoginCreateAccountPage loginCreateAccountPage;
+    OrderHistoryPage orderHistoryPage;
+    SearchPage searchPage;
 
     @BeforeMethod
     public void startUp() {
@@ -45,32 +47,41 @@ public class MyAccountPageTest {
     }
 
     @Test
-    public void validateMyAccountBreadcrumbTest() {
+    public void validateSearchBreadcrumbTest() {
+        String productType = prop.getProperty("productType");
+
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
-        Assert.assertTrue(myAccountPage.getMyAccountBreadCrumb());
+        searchPage = myAccountPage.doSearch(productType);
+        Assert.assertTrue(searchPage.getSearchBreadCrumb());
     }
 
     @Test
-    public void validateMyAccountTitlePage() {
+    public void validateSearchTitlePage() {
+        String productType = prop.getProperty("productType");
+
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
-        String actMyAccountPageTitle = myAccountPage.getMyAccountPageTitle();
-        String expMyAccountPageTitle = prop.getProperty("myAccountPageTitle");
-        Assert.assertEquals(expMyAccountPageTitle, actMyAccountPageTitle);
+        searchPage = myAccountPage.doSearch(productType);
+
+        String actSearchPageTitle = searchPage.getSearchPageTitle();
+        String expSearchPageTitle = prop.getProperty("searchPageTitle");
+        Assert.assertEquals(expSearchPageTitle, actSearchPageTitle);
     }
 
     @Test
-    public void doClickOnHomeTestPage() {
-        myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
-        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
-        myStorePage = myAccountPage.doClickHome();
-        String actMyStorePageTitle = myStorePage.getMyStorePageTitle();
-        String expMyStorePageTitle = prop.getProperty("myStorePageTitle");
-        Assert.assertEquals(expMyStorePageTitle, actMyStorePageTitle);
+    public void validateSearchProduct() {
+        String productType = prop.getProperty("productType");
+        String product = prop.getProperty("searchedProduct");
 
+        myStorePage = new RegisterShettyAcademyPage(driver);
+//        loginPage = myStorePage.clickSignIn();
+        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
+        searchPage = myAccountPage.doSearch(productType);
+        Assert.assertTrue(searchPage.getProductCount());
+        Assert.assertTrue(searchPage.getProduct(product));
     }
+
 }

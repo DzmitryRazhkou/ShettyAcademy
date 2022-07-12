@@ -1,10 +1,10 @@
-package com.mystore.qa.testcases;
+package com.mystore.qa.testcases.Old;
 
 import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.*;
+import com.mystore.qa.pages.Old.IdentityPage;
 import com.mystore.qa.pages.Old.LoginPage;
 import com.mystore.qa.pages.Old.MyAccountPage;
-import com.mystore.qa.pages.Old.OrderHistoryPage;
 import com.mystore.qa.utils.ConfigReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,9 +13,12 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
-public class OrderHistoryPageTest {
+public class IdentityPageTest {
 
     ConfigReader cp;
     DriverFactory df;
@@ -27,7 +30,7 @@ public class OrderHistoryPageTest {
     RegisterShettyAcademyPage myStorePage;
     LoginPage loginPage;
     MyAccountPage myAccountPage;
-    OrderHistoryPage orderHistoryPage;
+    IdentityPage identityPage;
 
     @BeforeMethod
     public void startUp() {
@@ -45,62 +48,46 @@ public class OrderHistoryPageTest {
     }
 
     @Test
-    public void validateOrderHistoryBreadcrumbTest() {
+    public void validateIdentityBreadcrumbTest() {
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
-        orderHistoryPage = myAccountPage.clickOnOrderHistory();
-        Assert.assertTrue(orderHistoryPage.getOrderHistoryBreadCrumb());
+        identityPage = myAccountPage.clickOnIdentity();
+        Assert.assertTrue(identityPage.getIdentityBreadCrumb());
     }
 
     @Test
-    public void validateOrderHistoryTitlePage() {
+    public void validateIdentityTitlePage() {
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
-        orderHistoryPage = myAccountPage.clickOnOrderHistory();
-        String actOrderHistoryPageTitle = orderHistoryPage.getOrderHistoryPageTitle();
-        String expOrderHistoryPageTitle = prop.getProperty("orderHistoryPageTitle");
-        Assert.assertEquals(expOrderHistoryPageTitle, actOrderHistoryPageTitle);
+        identityPage = myAccountPage.clickOnIdentity();
+        String actIdentityPageTitle = identityPage.getIdentityPageTitle();
+        String expIdentityPageTitle = prop.getProperty("myIdentityPageTitle");
+        Assert.assertEquals(expIdentityPageTitle, actIdentityPageTitle);
     }
 
     @Test
-    public void getOrderReferenceTest() {
+    public void getPersonalInfoTest() {
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
-        orderHistoryPage = myAccountPage.clickOnOrderHistory();
-        String orderReference = prop.getProperty("orderReference");
-        Assert.assertTrue(orderHistoryPage.getOrderReference(orderReference));
-    }
+        identityPage = myAccountPage.clickOnIdentity();
+        List<String> actPersonalInfoList = identityPage.getPersonalInfo();
 
-    @Test
-    public void getDateTest() {
-        myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
-        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
-        orderHistoryPage = myAccountPage.clickOnOrderHistory();
-        String date = prop.getProperty("date");
-        Assert.assertTrue(orderHistoryPage.getDate(date));
-    }
+        List<String> expPersonalInfoList = new ArrayList<>(Arrays.asList(prop.getProperty("firstname"),
+                prop.getProperty("lastname"), prop.getProperty("email"), prop.getProperty("dob")));
 
-    @Test
-    public void getTotalPriceTest() {
-        myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
-        myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
-        orderHistoryPage = myAccountPage.clickOnOrderHistory();
-        String totalPrice = prop.getProperty("totalPrice");
-        Assert.assertTrue(orderHistoryPage.getTotalPrice(totalPrice));
+        Assert.assertEquals(expPersonalInfoList, actPersonalInfoList);
     }
 
     @Test
     public void doClickOnBackToYourAccountTest() {
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
-        orderHistoryPage = myAccountPage.clickOnOrderHistory();
-        myAccountPage = orderHistoryPage.doClickBackToToYourAccount();
+        identityPage = myAccountPage.clickOnIdentity();
+        myAccountPage = identityPage.doClickBackToToYourAccount();
         String actMyAccountPageTitle = myAccountPage.getMyAccountPageTitle();
         String expMyAccountPageTitle = prop.getProperty("myAccountPageTitle");
         Assert.assertEquals(expMyAccountPageTitle, actMyAccountPageTitle);
@@ -109,12 +96,13 @@ public class OrderHistoryPageTest {
     @Test
     public void doClickOnHomeTest() {
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         myAccountPage = loginPage.doLogin(prop.getProperty("email"), prop.getProperty("password"));
-        orderHistoryPage = myAccountPage.clickOnOrderHistory();
-        myStorePage = orderHistoryPage.doClickHome();
+        identityPage = myAccountPage.clickOnIdentity();
+        myStorePage = identityPage.doClickHome();
         String actMyStorePageTitle = myStorePage.getMyStorePageTitle();
         String expMyStorePageTitle = prop.getProperty("myStorePageTitle");
         Assert.assertEquals(expMyStorePageTitle, actMyStorePageTitle);
     }
+
 }

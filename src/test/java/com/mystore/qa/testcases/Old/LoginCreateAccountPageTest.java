@@ -1,4 +1,4 @@
-package com.mystore.qa.testcases;
+package com.mystore.qa.testcases.Old;
 
 import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.Old.LoginCreateAccountPage;
@@ -52,7 +52,7 @@ public class LoginCreateAccountPageTest {
     public void validateMyLoginCreateAccountPageTitle(){
         String emailCreate = prop.getProperty("loginCreateAccountPage");
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         loginCreateAccountPage = loginPage.doCreateAccount(emailCreate);
         String actMyLoginPageTitle = loginPage.getMyLoginPageTitle();
         String expMyLoginPageTitle = prop.getProperty("myLoginCreateAccountPageTitle");
@@ -71,7 +71,7 @@ public class LoginCreateAccountPageTest {
         String state, long zip, String addInfo, long phone){
 
         myStorePage = new RegisterShettyAcademyPage(driver);
-        loginPage = myStorePage.clickSignIn();
+//        loginPage = myStorePage.clickSignIn();
         loginCreateAccountPage = loginPage.doCreateAccount(emailCreateAccount);
         myAccountPage = loginCreateAccountPage.fillUpPersonalInfo(firstName, lastName, password, days, months, years,
                 company, addressFl, addressSl, city, state, zip, addInfo, phone);
