@@ -1,0 +1,12 @@
+2022-07-13 15:40:33,779  INFO [main] RegisterShettyAcademyPage:214 - User clicks on the register button
+2022-07-13 15:40:35,690  INFO [main] RegisterShettyAcademyPage:217 - User enters an first name
+2022-07-13 15:40:36,315  INFO [main] RegisterShettyAcademyPage:221 - User enters an last name
+2022-07-13 15:40:36,531  INFO [main] RegisterShettyAcademyPage:225 - User enters an email address
+2022-07-13 15:40:36,748  WARN [main] RegisterShettyAcademyPage:229 - User enters a phone number
+2022-07-13 15:40:36,885  WARN [main] RegisterShettyAcademyPage:233 - User selects an occupation from drop down menu
+2022-07-13 15:40:37,136  INFO [main] RegisterShettyAcademyPage:236 - User selects a gender
+2022-07-13 15:40:37,545  INFO [main] RegisterShettyAcademyPage:239 - User enters a password
+2022-07-13 15:40:38,376  INFO [main] RegisterShettyAcademyPage:243 - User confirms a password
+2022-07-13 15:40:38,514  INFO [main] RegisterShettyAcademyPage:247 - User confirms that under 18+
+2022-07-13 15:40:38,658  INFO [main] RegisterShettyAcademyPage:250 - User confirms at log in button
+2022-07-13 15:40:38,932  INFO [main] RegisterShettyAcademyPage:264 - Success registration message should be dislplayed
