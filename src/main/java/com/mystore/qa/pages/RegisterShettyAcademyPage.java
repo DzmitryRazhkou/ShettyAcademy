@@ -4,6 +4,7 @@ package com.mystore.qa.pages;
 import com.mystore.qa.utils.TestUtil;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -90,6 +91,134 @@ public class RegisterShettyAcademyPage {
         loginField().click();
         return new ProductShettyAcademyPage(driver);
     }
+
+//    REGISTER:
+
+    private WebElement getRegisterBtn() {
+        By registerBtnLocator = By.cssSelector("a.btn1");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(registerBtnLocator));
+        return driver.findElement(registerBtnLocator);
+    }
+
+    private WebElement firstNameField() {
+        By firstnameFieldLocator = By.id("firstName");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(firstnameFieldLocator));
+        return driver.findElement(firstnameFieldLocator);
+    }
+
+    private WebElement lastNameField() {
+        By lastNameFieldLocator = By.id("lastName");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(lastNameFieldLocator));
+        return driver.findElement(lastNameFieldLocator);
+    }
+
+    private WebElement emailUserField() {
+        By emailUserLocator = By.id("userEmail");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(emailUserLocator));
+        return driver.findElement(emailUserLocator);
+    }
+
+    private WebElement getUserMobileField() {
+        By userMobileLocator = By.id("userMobile");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(userMobileLocator));
+        return driver.findElement(userMobileLocator);
+    }
+
+    private void getOccupation(String occupation) {
+        By occupationLocator = By.cssSelector("select[formcontrolname='occupation'] option");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(occupationLocator));
+
+        List<WebElement> list = driver.findElements(occupationLocator);
+
+        for (WebElement webElement : list) {
+            if (webElement.getText().equals(occupation)) {
+                webElement.click();
+                break;
+            }
+        }
+    }
+
+    private WebElement getGender(){
+        By getGenderLocator = By.cssSelector("input[value='Male']");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(getGenderLocator));
+        return driver.findElement(getGenderLocator);
+    }
+
+    private WebElement getUserPassword() {
+        By userPasswordLocator = By.id("userPassword");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(userPasswordLocator));
+        return driver.findElement(userPasswordLocator);
+    }
+
+    private WebElement getConfirmUserPassword() {
+        By confirmedUserPasswordLocator = By.id("confirmPassword");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(confirmedUserPasswordLocator));
+        return driver.findElement(confirmedUserPasswordLocator);
+    }
+
+    private WebElement getCheckBox() {
+        By getCheckBoxLocator = By.cssSelector("input[type='checkbox']");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(getCheckBoxLocator));
+        return driver.findElement(getCheckBoxLocator);
+    }
+
+    private WebElement getLoginBtn() {
+        By loginBtnLocator = By.id("login");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(loginBtnLocator));
+        return driver.findElement(loginBtnLocator);
+    }
+
+
+
+
+    public void doRegistration(String firstName, String lastName, String email, String phoneNumber, String occupation, String password) throws InterruptedException {
+        getRegisterBtn().click();
+
+        firstNameField().clear();
+        firstNameField().sendKeys(firstName);
+
+        lastNameField().clear();
+        lastNameField().sendKeys(lastName);
+
+        emailUserField().clear();
+        emailUserField().sendKeys(email);
+
+        getUserMobileField().clear();
+        getUserMobileField().sendKeys(phoneNumber);
+
+        getOccupation(occupation);
+
+        getGender().click();
+
+        getUserPassword().clear();
+        getUserPassword().sendKeys(password);
+
+        getConfirmUserPassword().clear();
+        getConfirmUserPassword().sendKeys(password);
+
+        getCheckBox().click();
+
+        getLoginBtn().click();
+    }
+
+//    PROVE OF THE SUCCESSFUL REGISTRATION:
+
+    private WebElement successMessage() {
+        By successMessageLocator = By.cssSelector("h1.headcolor");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(successMessageLocator));
+        return driver.findElement(successMessageLocator);
+    }
+
+    public boolean validateSuccessRegistration() {
+        try {
+            System.out.println(" ====> "+ successMessage().getText()+ " <==== ");
+            return successMessage().isDisplayed();
+        } catch (TimeoutException y) {
+            System.out.println(" =====> Please provide the correct locator. <=====");
+            return false;
+        }
+    }
+
 }
 
 

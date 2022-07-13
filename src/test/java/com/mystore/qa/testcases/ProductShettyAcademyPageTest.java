@@ -70,4 +70,14 @@ public class ProductShettyAcademyPageTest {
         Assert.assertEquals(expAmountOfProduct, actAmountOfProduct);
     }
 
+    @Test
+    public void doSearchTest() throws InterruptedException {
+        String email = prop.getProperty("email");
+        String password = prop.getProperty("password");
+        registerShettyAcademyPage = new RegisterShettyAcademyPage(driver);
+        productShettyAcademyPage = registerShettyAcademyPage.doLogin(email, password);
+        productShettyAcademyPage.doSearch(prop.getProperty("product"));
+        Assert.assertTrue(productShettyAcademyPage.validateProduct(prop.getProperty("productName")));
+    }
+
 }
