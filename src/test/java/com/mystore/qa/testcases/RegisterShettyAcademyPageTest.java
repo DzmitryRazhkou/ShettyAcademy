@@ -1,6 +1,7 @@
 package com.mystore.qa.testcases;
 
 
+import com.github.javafaker.Faker;
 import com.mystore.qa.driverfactory.DriverFactory;
 import com.mystore.qa.pages.ProductShettyAcademyPage;
 import com.mystore.qa.pages.RegisterShettyAcademyPage;
@@ -20,6 +21,7 @@ public class RegisterShettyAcademyPageTest {
     Properties prop;
 
     private static WebDriver driver;
+    Faker faker;
 
     RegisterShettyAcademyPage registerPage;
     ProductShettyAcademyPage productShettyAcademyPage;
@@ -82,103 +84,21 @@ public class RegisterShettyAcademyPageTest {
         Assert.assertEquals(expProductPageTitle, actProductPageTitle);
     }
 
+    @Test
+    public void doRegistration() throws InterruptedException {
+        faker = new Faker();
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String email = faker.internet().emailAddress();
+        String phone = faker.numerify("##########");
+        String occupation = prop.getProperty("occupation");
+        String password = prop.getProperty("pwd");
 
+        registerPage = new RegisterShettyAcademyPage(driver);
+        registerPage.doRegistration(firstName, lastName, email, phone, occupation, password);
+        Assert.assertTrue(registerPage.validateSuccessRegistration());
+    }
 
-
-
-
-
-//
-//    @DataProvider
-//    public Iterator<Object[]> getDataMiddleBoxTest() {
-//        ArrayList<Object[]> testData = TestUtil.getDataMiddleBoxText();
-//        return testData.iterator();
-//    }
-//
-//    @Test(dataProvider = "getDataMiddleBoxTest")
-//    public void middleBoxTextTest(String comeVisitUs, String callUs, String howToPayDues) {
-//        myStorePage = new RegisterPage(driver);
-//        List<String> expList = new ArrayList<>(Arrays.asList(comeVisitUs, callUs, howToPayDues));
-//        List<String> actList = myStorePage.middleBox();
-//        Assert.assertNotEquals(expList, actList);
-//    }
-//
-//    @Test
-//    public void rightBoxTextTest() {
-//        myStorePage = new RegisterPage(driver);
-//        String actRightBox = myStorePage.rightBox();
-//        String expRightBox = ConfigReader.initProp().getProperty("rightBox");
-//        Assert.assertEquals(actRightBox, expRightBox);
-//    }
-//
-//    @Test
-//    public void middleDescriptionSeleniumTest() {
-//        myStorePage = new RegisterPage(driver);
-//        String actMiddleDescription = myStorePage.getMiddleDescription();
-//        String expMiddleDescription = ConfigReader.initProp().getProperty("middleDescription");
-//        Assert.assertEquals(actMiddleDescription, expMiddleDescription);
-//    }
-//
-//    @Test
-//    public void validateDescriptionOfWebsiteTest() {
-//        myStorePage = new RegisterPage(driver);
-//        String actSeleniumArticleText = myStorePage.getSeleniumArticleDescription();
-//        String expSeleniumArticleText = ConfigReader.initProp().getProperty("seleniumArticleText");
-//        Assert.assertEquals(actSeleniumArticleText, expSeleniumArticleText);
-//    }
-//
-//    @Test
-//    public void validateFollowUsSeleniumLinksTest() {
-//        myStorePage = new RegisterPage(driver);
-//        List<String> actLinksList = myStorePage.getFollowUsSeleniumLinks();
-//        List<String> expLinksList = new ArrayList<>(Arrays.asList("https://www.facebook.com/groups/525066904174158/", null, null, null));
-//        Assert.assertEquals(actLinksList, expLinksList);
-//    }
-//
-//    @DataProvider
-//    public Iterator<Object[]> getFooterMyAccount() {
-//        ArrayList<Object[]> testData = TestUtil.getFooterMyAccount();
-//        return testData.iterator();
-//    }
-//
-//    @Test(dataProvider = "getFooterMyAccount")
-//    public void validateFooterMyAccount(String myOrders, String myCreditSlips, String myAddresses, String myPersonalInfo){
-//
-//        myStorePage = new RegisterPage(driver);
-//        List<String> actFooterMyAccountList = myStorePage.getFooterMyAccount();
-//        List<String> expFooterMyAccountList = new ArrayList<>(Arrays.asList(myOrders, myCreditSlips, myAddresses, myPersonalInfo));
-//        Assert.assertEquals(actFooterMyAccountList, expFooterMyAccountList);
-//    }
-//
-//    @DataProvider
-//    public Iterator<Object[]> getFooterInformation() {
-//        ArrayList<Object[]> testData = TestUtil.getFooterInformation();
-//        return testData.iterator();
-//    }
-//
-//    @Test(dataProvider = "getFooterInformation")
-//    public void validateFooterInformation(String specials, String newProducts, String bestSellers,
-//                                          String ourStores, String contactUs, String terms, String aboutUs, String siteMap){
-//
-//        myStorePage = new RegisterPage(driver);
-//        List<String> actFooterInformationList = myStorePage.getFooterInformation();
-//        List<String> expFooterInformationList = new ArrayList<>(Arrays.asList(specials, newProducts, bestSellers, ourStores, contactUs, terms, aboutUs, siteMap));
-//        Assert.assertEquals(actFooterInformationList, expFooterInformationList);
-//    }
-//
-//    @DataProvider
-//    public Iterator<Object[]> getFooterStoreInfo() {
-//        ArrayList<Object[]> testData = TestUtil.getFooterStoreInfo();
-//        return testData.iterator();
-//    }
-//
-//    @Test(dataProvider = "getFooterStoreInfo")
-//    public void validateFooterStoreInfo(String geoLocation, String phone, String email){
-//        myStorePage = new RegisterPage(driver);
-//        List<String> actFooterStoreInformationList = myStorePage.getStoreInfo();
-//        List<String> expFooterStoreInformationList = new ArrayList<>(Arrays.asList(geoLocation, phone, email));
-//        Assert.assertEquals(actFooterStoreInformationList, expFooterStoreInformationList);
-//    }
 }
 
 
