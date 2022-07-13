@@ -69,12 +69,32 @@ public class PaymentShettyAcademyPage {
     }
 
     public void doPlaceOrder(String firstLetter, String country){
-        scrollPage();
+
         getSelectCountry().clear();
         getSelectCountry().sendKeys(firstLetter);
+        scrollPage();
         getCountryList(country);
         getPlaceOrderBtn().click();
     }
+
+//    CONFIRMATION ORDER MESSAGE:
+
+    private WebElement getConfirmationOrder() {
+        By getConfirmationOrderLocator = By.cssSelector("h1.hero-primary");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(getConfirmationOrderLocator));
+        return driver.findElement(getConfirmationOrderLocator);
+    }
+
+    public boolean validateConfirmationOrder() {
+        try {
+            System.out.println("=====> Confirmation order text is: " + getConfirmationOrder().getText() + " <=====");
+            return getConfirmationOrder().isDisplayed();
+        } catch (TimeoutException y) {
+            System.out.println(" ===> Please provide the correct locator. <===");
+            return false;
+        }
+    }
+
 
 
 

@@ -61,6 +61,7 @@ public class PaymentShettyAcademyPageTest {
         myCartShettyAcademyPage = productShettyAcademyPage.doClickOnCart();
         paymentShettyAcademyPage = myCartShettyAcademyPage.proceedToCheckOut(prop.getProperty("productName"));
         paymentShettyAcademyPage.doPlaceOrder(firstLetter, country);
+        Assert.assertTrue(paymentShettyAcademyPage.validateConfirmationOrder());
     }
 
 }
