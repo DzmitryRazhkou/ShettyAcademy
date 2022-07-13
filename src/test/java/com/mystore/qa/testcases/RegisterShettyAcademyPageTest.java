@@ -53,15 +53,15 @@ public class RegisterShettyAcademyPageTest extends BaseTest {
 
     @Test
     public void doRegistration() {
+        registerPage = new RegisterShettyAcademyPage(driver);
         faker = new Faker();
         String firstName = faker.name().firstName();
         String lastName = faker.name().lastName();
         String email = faker.internet().emailAddress();
         String phone = faker.numerify("1#########");
         String occupation = prop.getProperty("occupation");
-        String password = prop.getProperty("pwd");
+        String password = registerPage.generatePassword();
 
-        registerPage = new RegisterShettyAcademyPage(driver);
         registerPage.doRegistration(firstName, lastName, email, phone, occupation, password);
         Assert.assertTrue(registerPage.validateSuccessRegistration());
     }
