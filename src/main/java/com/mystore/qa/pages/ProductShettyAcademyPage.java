@@ -19,7 +19,13 @@ public class ProductShettyAcademyPage {
         wait = new WebDriverWait(driver, Duration.ofSeconds(TestUtil.PAGE_LOAD_TIMEOUT_DurationOfSeconds));
     }
 
-//    VALIDATE HOME BUTTON:
+    private WebElement getLogOutBtn() {
+        By getLogOutBtnLocator = By.xpath("(//button[@class='btn btn-custom'])[4]");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(getLogOutBtnLocator));
+        return driver.findElement(getLogOutBtnLocator);
+    }
+
+//    VALIDATE LOGIN IN CONFIRMATION MESSAGE:
 
     private WebElement getLoginGreenConfirmationMessage() {
         By getLoginGreenConfirmationMessageLocator = By.cssSelector("div[aria-label='Login Successfully']");
@@ -27,7 +33,7 @@ public class ProductShettyAcademyPage {
         return driver.findElement(getLoginGreenConfirmationMessageLocator);
     }
 
-    public boolean validateGetLoginGreenConfirmationMessage() {
+    public boolean validateGetLogInGreenConfirmationMessage() {
         try {
             System.out.println("=====> Confirmation message is: " + getLoginGreenConfirmationMessage().getText() + " <=====");
             return getLoginGreenConfirmationMessage().isDisplayed();
@@ -35,6 +41,11 @@ public class ProductShettyAcademyPage {
             System.out.println(" ===> Please provide the correct locator. <===");
             return false;
         }
+    }
+
+    public RegisterShettyAcademyPage doLogOut(){
+        getLogOutBtn().click();
+        return new RegisterShettyAcademyPage(driver);
     }
 
 //    VALIDATE PAGE TITLE:

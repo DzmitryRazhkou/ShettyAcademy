@@ -4,7 +4,6 @@ package com.mystore.qa.pages;
 import com.mystore.qa.utils.TestUtil;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -67,6 +66,8 @@ public class RegisterShettyAcademyPage {
         return academyEmailText;
     }
 
+//    LOG IN:
+
     private WebElement emailField() {
         By emailFieldLocator = By.id("userEmail");
         wait.until(ExpectedConditions.visibilityOfElementLocated(emailFieldLocator));
@@ -90,6 +91,24 @@ public class RegisterShettyAcademyPage {
         passwordField().sendKeys(password);
         loginField().click();
         return new ProductShettyAcademyPage(driver);
+    }
+
+//    VALIDATE LOGIN OUT CONFIRMATION MESSAGE:
+
+    private WebElement getLogOutGreenConfirmationMessage() {
+        By getLogOutGreenConfirmationMessageLocator = By.cssSelector("div[role='alertdialog']");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(getLogOutGreenConfirmationMessageLocator));
+        return driver.findElement(getLogOutGreenConfirmationMessageLocator);
+    }
+
+    public boolean validateGetLogOutGreenConfirmationMessage() {
+        try {
+            System.out.println("=====> Confirmation message is: " + getLogOutGreenConfirmationMessage().getText() + " <=====");
+            return getLogOutGreenConfirmationMessage().isDisplayed();
+        } catch (TimeoutException y) {
+            System.out.println(" ===> Please provide the correct locator. <===");
+            return false;
+        }
     }
 
 //    REGISTER:
@@ -171,7 +190,7 @@ public class RegisterShettyAcademyPage {
 
 
 
-    public void doRegistration(String firstName, String lastName, String email, String phoneNumber, String occupation, String password) throws InterruptedException {
+    public void doRegistration(String firstName, String lastName, String email, String phoneNumber, String occupation, String password) {
         getRegisterBtn().click();
 
         firstNameField().clear();

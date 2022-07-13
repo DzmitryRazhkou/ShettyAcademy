@@ -38,6 +38,16 @@ public class ProductShettyAcademyPageTest {
         }
     }
 
+    @Test
+    public void doLogOutTest() {
+        String email = prop.getProperty("email");
+        String password = prop.getProperty("password");
+        registerShettyAcademyPage = new RegisterShettyAcademyPage(driver);
+        productShettyAcademyPage = registerShettyAcademyPage.doLogin(email, password);
+        registerShettyAcademyPage = productShettyAcademyPage.doLogOut();
+        Assert.assertTrue(registerShettyAcademyPage.validateGetLogOutGreenConfirmationMessage());
+    }
+
 
     @Test
     public void validateProductPageTitle() {

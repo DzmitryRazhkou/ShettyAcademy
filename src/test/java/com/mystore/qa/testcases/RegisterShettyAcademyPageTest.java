@@ -79,16 +79,16 @@ public class RegisterShettyAcademyPageTest {
         String password = prop.getProperty("password");
         registerPage = new RegisterShettyAcademyPage(driver);
         productShettyAcademyPage = registerPage.doLogin(email, password);
-        Assert.assertTrue(productShettyAcademyPage.validateGetLoginGreenConfirmationMessage());
+        Assert.assertTrue(productShettyAcademyPage.validateGetLogInGreenConfirmationMessage());
     }
 
     @Test
-    public void doRegistration() throws InterruptedException {
+    public void doRegistration() {
         faker = new Faker();
         String firstName = faker.name().firstName();
         String lastName = faker.name().lastName();
         String email = faker.internet().emailAddress();
-        String phone = faker.numerify("##########");
+        String phone = faker.numerify("1#########");
         String occupation = prop.getProperty("occupation");
         String password = prop.getProperty("pwd");
 
