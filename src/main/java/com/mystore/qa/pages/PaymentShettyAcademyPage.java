@@ -1,21 +1,14 @@
 package com.mystore.qa.pages;
 
-import com.mystore.qa.utils.TestUtil;
+import com.mystore.qa.basepage.BasePage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 import java.util.List;
 
-public class PaymentShettyAcademyPage {
-
-    private final WebDriver driver;
-    private final WebDriverWait wait;
+public class PaymentShettyAcademyPage extends BasePage {
 
     public PaymentShettyAcademyPage(WebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(TestUtil.PAGE_LOAD_TIMEOUT_DurationOfSeconds));
+        super(driver);
     }
 
 //    VALIDATE PAYMENT PAGE:
@@ -94,11 +87,4 @@ public class PaymentShettyAcademyPage {
             return false;
         }
     }
-
-
-
-
-
-
-
 }

@@ -1,23 +1,16 @@
 package com.mystore.qa.pages;
 
-import com.mystore.qa.utils.TestUtil;
+import com.mystore.qa.basepage.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
-public class MyCartShettyAcademyPage {
-
-    private final WebDriver driver;
-    private final WebDriverWait wait;
+public class MyCartShettyAcademyPage extends BasePage {
 
     public MyCartShettyAcademyPage(WebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(TestUtil.PAGE_LOAD_TIMEOUT_DurationOfSeconds));
+        super(driver);
     }
 
 //    VALIDATE CART PAGE:
@@ -46,12 +39,6 @@ public class MyCartShettyAcademyPage {
         return driver.findElement(getProductMyCartLocator);
     }
 
-//    private WebElement getContinueShopping() {
-//        By getContinueShoppingLocator = By.cssSelector("button[routerlink='/dashboard']");
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(getContinueShoppingLocator));
-//        return driver.findElement(getContinueShoppingLocator);
-//    }
-
     private WebElement getCheckOut() {
         By getCheckOutLocator = By.xpath("//*[contains(text(),'Checkout')]");
         wait.until(ExpectedConditions.visibilityOfElementLocated(getCheckOutLocator));
@@ -64,9 +51,4 @@ public class MyCartShettyAcademyPage {
             getCheckOut().click();
             return new PaymentShettyAcademyPage(driver);
     }
-
-
-
-
-
 }
