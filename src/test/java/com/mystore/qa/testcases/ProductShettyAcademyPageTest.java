@@ -1,6 +1,8 @@
 package com.mystore.qa.testcases;
 
 import com.mystore.qa.driverfactory.DriverFactory;
+import com.mystore.qa.pages.MyCartShettyAcademyPage;
+import com.mystore.qa.pages.PaymentShettyAcademyPage;
 import com.mystore.qa.pages.ProductShettyAcademyPage;
 import com.mystore.qa.pages.RegisterShettyAcademyPage;
 import com.mystore.qa.utils.ConfigReader;
@@ -22,6 +24,8 @@ public class ProductShettyAcademyPageTest {
 
     RegisterShettyAcademyPage registerShettyAcademyPage;
     ProductShettyAcademyPage productShettyAcademyPage;
+    MyCartShettyAcademyPage myCartShettyAcademyPage;
+    PaymentShettyAcademyPage paymentShettyAcademyPage;
 
     @BeforeMethod
     public void startUp() {
@@ -93,4 +97,32 @@ public class ProductShettyAcademyPageTest {
         productShettyAcademyPage.doAddToCart();
         Assert.assertTrue(productShettyAcademyPage.validateAddToCartGreenConfirmationMessage());
     }
+
+    @Test
+    public void doClickOnCartBtnTest() throws InterruptedException {
+        String email = prop.getProperty("email");
+        String password = prop.getProperty("password");
+        registerShettyAcademyPage = new RegisterShettyAcademyPage(driver);
+        productShettyAcademyPage = registerShettyAcademyPage.doLogin(email, password);
+        productShettyAcademyPage.doSearch(prop.getProperty("product"));
+        Thread.sleep(1500);
+        productShettyAcademyPage.doAddToCart();
+        myCartShettyAcademyPage = productShettyAcademyPage.doClickOnCart();
+        Assert.assertTrue(myCartShettyAcademyPage.validateMyCartHeader());
+    }
+
+    @Test
+    public void doProceedToCheckOutTest() throws InterruptedException {
+        String email = prop.getProperty("email");
+        String password = prop.getProperty("password");
+        registerShettyAcademyPage = new RegisterShettyAcademyPage(driver);
+        productShettyAcademyPage = registerShettyAcademyPage.doLogin(email, password);
+        productShettyAcademyPage.doSearch(prop.getProperty("product"));
+        Thread.sleep(1500);
+        productShettyAcademyPage.doAddToCart();
+        myCartShettyAcademyPage = productShettyAcademyPage.doClickOnCart();
+        paymentShettyAcademyPage = myCartShettyAcademyPage.proceedToCheckOut(prop.getProperty("productName"));
+        Assert.assertTrue(paymentShettyAcademyPage.validatePaymentHeader());
+    }
+
 }

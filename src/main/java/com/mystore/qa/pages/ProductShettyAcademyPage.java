@@ -19,12 +19,6 @@ public class ProductShettyAcademyPage {
         wait = new WebDriverWait(driver, Duration.ofSeconds(TestUtil.PAGE_LOAD_TIMEOUT_DurationOfSeconds));
     }
 
-    private WebElement getLogOutBtn() {
-        By getLogOutBtnLocator = By.xpath("(//button[@class='btn btn-custom'])[4]");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(getLogOutBtnLocator));
-        return driver.findElement(getLogOutBtnLocator);
-    }
-
 //    VALIDATE LOGIN IN CONFIRMATION MESSAGE:
 
     private WebElement getLoginGreenConfirmationMessage() {
@@ -41,11 +35,6 @@ public class ProductShettyAcademyPage {
             System.out.println(" ===> Please provide the correct locator. <===");
             return false;
         }
-    }
-
-    public RegisterShettyAcademyPage doLogOut(){
-        getLogOutBtn().click();
-        return new RegisterShettyAcademyPage(driver);
     }
 
 //    VALIDATE PAGE TITLE:
@@ -139,6 +128,33 @@ public class ProductShettyAcademyPage {
         getViewButton().click();
         getAddToCart().click();
     }
+
+//    LOG OUT BUTTON
+
+    private WebElement getLogOutBtn() {
+        By getLogOutBtnLocator = By.xpath("(//button[@class='btn btn-custom'])[4]");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(getLogOutBtnLocator));
+        return driver.findElement(getLogOutBtnLocator);
+    }
+
+    public RegisterShettyAcademyPage doLogOut(){
+        getLogOutBtn().click();
+        return new RegisterShettyAcademyPage(driver);
+    }
+
+//    CART BUTTON
+
+    private WebElement getCartBtn() {
+        By getCartBtnLocator = By.xpath("(//button[@class='btn btn-custom'])[3]");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(getCartBtnLocator));
+        return driver.findElement(getCartBtnLocator);
+    }
+
+    public MyCartShettyAcademyPage doClickOnCart(){
+        getCartBtn().click();
+        return new MyCartShettyAcademyPage(driver);
+    }
+
 }
 
 
