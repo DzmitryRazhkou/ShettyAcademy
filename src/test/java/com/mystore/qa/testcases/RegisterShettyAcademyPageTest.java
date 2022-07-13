@@ -79,9 +79,7 @@ public class RegisterShettyAcademyPageTest {
         String password = prop.getProperty("password");
         registerPage = new RegisterShettyAcademyPage(driver);
         productShettyAcademyPage = registerPage.doLogin(email, password);
-        String actProductPageTitle = productShettyAcademyPage.getProductPageTitle();
-        String expProductPageTitle = prop.getProperty("expProductPageTitle");
-        Assert.assertEquals(expProductPageTitle, actProductPageTitle);
+        Assert.assertTrue(productShettyAcademyPage.validateGetLoginGreenConfirmationMessage());
     }
 
     @Test

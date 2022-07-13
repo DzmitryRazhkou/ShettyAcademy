@@ -10,7 +10,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
 import java.util.Properties;
 
 public class ProductShettyAcademyPageTest {
@@ -52,15 +51,6 @@ public class ProductShettyAcademyPageTest {
     }
 
     @Test
-    public void validateHomeButton() {
-        String email = prop.getProperty("email");
-        String password = prop.getProperty("password");
-        registerShettyAcademyPage = new RegisterShettyAcademyPage(driver);
-        productShettyAcademyPage = registerShettyAcademyPage.doLogin(email, password);
-        Assert.assertTrue(productShettyAcademyPage.homeButtonValidate());
-    }
-
-    @Test
     public void AmountOfProductTest() {
         String email = prop.getProperty("email");
         String password = prop.getProperty("password");
@@ -72,12 +62,25 @@ public class ProductShettyAcademyPageTest {
     }
 
     @Test
-    public void doSearchTest() {
+    public void doSearchTest() throws InterruptedException {
         String email = prop.getProperty("email");
         String password = prop.getProperty("password");
         registerShettyAcademyPage = new RegisterShettyAcademyPage(driver);
         productShettyAcademyPage = registerShettyAcademyPage.doLogin(email, password);
         productShettyAcademyPage.doSearch(prop.getProperty("product"));
+        Thread.sleep(1500);
         Assert.assertTrue(productShettyAcademyPage.validateProduct(prop.getProperty("productName")));
+    }
+
+    @Test
+    public void doAddToCartTest() throws InterruptedException {
+        String email = prop.getProperty("email");
+        String password = prop.getProperty("password");
+        registerShettyAcademyPage = new RegisterShettyAcademyPage(driver);
+        productShettyAcademyPage = registerShettyAcademyPage.doLogin(email, password);
+        productShettyAcademyPage.doSearch(prop.getProperty("product"));
+        Thread.sleep(1500);
+        productShettyAcademyPage.doAddToCart();
+        Assert.assertTrue(productShettyAcademyPage.validateAddToCartGreenConfirmationMessage());
     }
 }

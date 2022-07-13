@@ -21,17 +21,16 @@ public class ProductShettyAcademyPage {
 
 //    VALIDATE HOME BUTTON:
 
-    private WebElement getHomeButton() {
-        By getHomeButtonLocator = By.cssSelector("button[routerlink='/dashboard/']");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(getHomeButtonLocator));
-        return driver.findElement(getHomeButtonLocator);
+    private WebElement getLoginGreenConfirmationMessage() {
+        By getLoginGreenConfirmationMessageLocator = By.cssSelector("div[aria-label='Login Successfully']");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(getLoginGreenConfirmationMessageLocator));
+        return driver.findElement(getLoginGreenConfirmationMessageLocator);
     }
 
-    public boolean homeButtonValidate() {
+    public boolean validateGetLoginGreenConfirmationMessage() {
         try {
-            System.out.println("=====> Home button is displayed. <=====");
-            System.out.println("=====> Home button text is: " + getHomeButton().getText() + " <=====");
-            return getHomeButton().isDisplayed();
+            System.out.println("=====> Confirmation message is: " + getLoginGreenConfirmationMessage().getText() + " <=====");
+            return getLoginGreenConfirmationMessage().isDisplayed();
         } catch (TimeoutException y) {
             System.out.println(" ===> Please provide the correct locator. <===");
             return false;
@@ -69,7 +68,7 @@ public class ProductShettyAcademyPage {
         searchField().sendKeys(Keys.RETURN);
     }
 
-    public List<String> getListOfProduct(String productName) {
+    public List<String> getListOfProduct() {
         By productLocator = By.cssSelector("div.card");
         wait.until(ExpectedConditions.visibilityOfElementLocated(productLocator));
 
@@ -79,14 +78,12 @@ public class ProductShettyAcademyPage {
         for (WebElement s : listProducts) {
             System.out.println(s.getText());
             listOfProductsText.add(s.getText());
-            if (listOfProductsText.contains(productName)) {
-            }
         }
         return listOfProductsText;
     }
 
     public boolean validateProduct(String productName) {
-        List<String> list = getListOfProduct(productName);
+        List<String> list = getListOfProduct();
         for (String set : list) {
             if (set.contains(productName)) {
                 System.out.println(" =====> " + productName + " <===== ");
@@ -95,6 +92,41 @@ public class ProductShettyAcademyPage {
         }
         System.out.println("Provide another product");
         return false;
+    }
+
+//    CLICK AT THE VIEW PRODUCT:
+
+    private WebElement getViewButton() {
+        By getViewButtonLocator = By.cssSelector("div.card-body button:last-of-type");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(getViewButtonLocator));
+        return driver.findElement(getViewButtonLocator);
+    }
+
+    private WebElement getAddToCart() {
+        By getViewButtonLocator = By.cssSelector("button[routerlink='/dashboard/cart']");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(getViewButtonLocator));
+        return driver.findElement(getViewButtonLocator);
+    }
+
+    private WebElement getAddToCartGreenConfirmationMessage() {
+        By addToCartGreenConfirmationMessageLocator = By.cssSelector("div[role='alertdialog']");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(addToCartGreenConfirmationMessageLocator));
+        return driver.findElement(addToCartGreenConfirmationMessageLocator);
+    }
+
+    public boolean validateAddToCartGreenConfirmationMessage() {
+        try {
+            System.out.println("=====> Confirmation message is: " + getAddToCartGreenConfirmationMessage().getText() + " <=====");
+            return getAddToCartGreenConfirmationMessage().isDisplayed();
+        } catch (TimeoutException y) {
+            System.out.println(" ===> Please provide the correct locator. <===");
+            return false;
+        }
+    }
+
+    public void doAddToCart() {
+        getViewButton().click();
+        getAddToCart().click();
     }
 }
 
