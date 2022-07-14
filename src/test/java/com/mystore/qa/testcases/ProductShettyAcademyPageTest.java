@@ -8,6 +8,7 @@ import com.mystore.qa.utils.ConfigReader;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+
 public class ProductShettyAcademyPageTest extends BaseTest{
     RegisterShettyAcademyPage registerShettyAcademyPage;
     ProductShettyAcademyPage productShettyAcademyPage;

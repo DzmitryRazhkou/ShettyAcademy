@@ -1,6 +1,7 @@
 package com.mystore.qa.testcases;
 
 import com.mystore.qa.basetest.BaseTest;
+import com.mystore.qa.listeners.RetryAnalyzer;
 import com.mystore.qa.pages.MyCartShettyAcademyPage;
 import com.mystore.qa.pages.PaymentShettyAcademyPage;
 import com.mystore.qa.pages.ProductShettyAcademyPage;
@@ -16,7 +17,7 @@ public class PaymentShettyAcademyPageTest extends BaseTest {
     MyCartShettyAcademyPage myCartShettyAcademyPage;
     PaymentShettyAcademyPage paymentShettyAcademyPage;
 
-    @Test
+//    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void doProceedToCheckOutTest() throws InterruptedException {
         String email = prop.getProperty("email");
         String password = prop.getProperty("password");
