@@ -5,7 +5,6 @@ import com.mystore.qa.pages.ProductShettyAcademyPage;
 import com.mystore.qa.pages.RegisterShettyAcademyPage;
 import com.mystore.qa.utils.ConfigReader;
 import org.testng.Assert;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 public class RegisterShettyAcademyPageTest extends BaseTest {
@@ -44,12 +43,21 @@ public class RegisterShettyAcademyPageTest extends BaseTest {
     }
 
     @Test
-    public void doLoginTest() {
+    public void doLoginTestCorrectCredentials() {
         String email = prop.getProperty("email");
         String password = prop.getProperty("password");
         registerPage = new RegisterShettyAcademyPage(driver);
         productShettyAcademyPage = registerPage.doLogin(email, password);
         Assert.assertTrue(productShettyAcademyPage.validateGetLogInGreenConfirmationMessage());
+    }
+
+    @Test
+    public void doLoginTestIncorrectCredentials() {
+        String email = prop.getProperty("wrong_email");
+        String password = prop.getProperty("wrong_password");
+        registerPage = new RegisterShettyAcademyPage(driver);
+        productShettyAcademyPage = registerPage.doLogin(email, password);
+        Assert.assertTrue(registerPage.validateIncorrectCredentialsRedConfirmation());
     }
 
     @Test

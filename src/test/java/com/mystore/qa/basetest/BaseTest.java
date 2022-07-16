@@ -1,9 +1,6 @@
 package com.mystore.qa.basetest;
 
-
-import com.mystore.qa.basepage.BasePage;
 import com.mystore.qa.driverfactory.DriverFactory;
-import com.mystore.qa.testcases.RegisterShettyAcademyPageTest;
 import com.mystore.qa.utils.ConfigReader;
 import com.mystore.qa.utils.Screenshot;
 import org.openqa.selenium.WebDriver;
@@ -16,11 +13,9 @@ import java.util.Properties;
 
 @Listeners(com.mystore.qa.listeners.Listeners.class)
 public class BaseTest {
-
     protected ConfigReader cp;
     protected DriverFactory df;
     protected Properties prop;
-
     protected static WebDriver driver;
 
     @BeforeMethod

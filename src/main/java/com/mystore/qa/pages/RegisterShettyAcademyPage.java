@@ -9,7 +9,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegisterShettyAcademyPage extends BasePage{
-    private final Logger log = Logger.getLogger(RegisterShettyAcademyPage.class);
     public RegisterShettyAcademyPage(WebDriver driver) {
         super(driver);
     }
@@ -107,7 +106,7 @@ public class RegisterShettyAcademyPage extends BasePage{
 
     public boolean validateGetLogOutGreenConfirmationMessage() {
         try {
-            log.warn("Confirmation log out pop up message should be dislplayed");
+            log.warn("Confirmation log out pop up message should be displayed");
             System.out.println("=====> Confirmation message is: " + getLogOutGreenConfirmationMessage().getText() + " <=====");
             return getLogOutGreenConfirmationMessage().isDisplayed();
         } catch (TimeoutException y) {
@@ -271,6 +270,25 @@ public class RegisterShettyAcademyPage extends BasePage{
         }
     }
 
+//    INCORRECT CREDENTIALS
+
+    private WebElement getIncorrectCredentialsRedConfirmationMessage() {
+        By getIncorrectCredentialsRedConfirmationMessageLocator = By.cssSelector("div[role='alertdialog']");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(getIncorrectCredentialsRedConfirmationMessageLocator));
+        return driver.findElement(getIncorrectCredentialsRedConfirmationMessageLocator);
+    }
+
+    public boolean validateIncorrectCredentialsRedConfirmation() {
+        try {
+            log.warn("Incorrect credentials confirmation log out pop up message should be displayed");
+            System.out.println("=====> Incorrect credentials confirmation message is: " + getIncorrectCredentialsRedConfirmationMessage().getText() + " <=====");
+            return getIncorrectCredentialsRedConfirmationMessage().isDisplayed();
+        } catch (TimeoutException y) {
+            log.error("Wait");
+            System.out.println(" ===> Please provide the correct locator. <===");
+            return false;
+        }
+    }
 }
 
 

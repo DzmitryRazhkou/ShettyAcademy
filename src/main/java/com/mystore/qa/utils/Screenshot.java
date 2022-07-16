@@ -11,7 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Screenshot {
-
     public static void takeScreenshot(WebDriver driver, String fileName){
         String dateName = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss").format(new Date());
         TakesScreenshot screenshot = (TakesScreenshot) driver;
@@ -23,5 +22,4 @@ public class Screenshot {
             throw new RuntimeException(e);
         }
     }
-
 }
