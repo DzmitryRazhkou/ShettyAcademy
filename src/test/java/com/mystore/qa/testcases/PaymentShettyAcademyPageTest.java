@@ -6,6 +6,10 @@ import com.mystore.qa.pages.MyCartShettyAcademyPage;
 import com.mystore.qa.pages.PaymentShettyAcademyPage;
 import com.mystore.qa.pages.ProductShettyAcademyPage;
 import com.mystore.qa.pages.RegisterShettyAcademyPage;
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -17,7 +21,10 @@ public class PaymentShettyAcademyPageTest extends BaseTest {
     MyCartShettyAcademyPage myCartShettyAcademyPage;
     PaymentShettyAcademyPage paymentShettyAcademyPage;
 
-//    @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(priority = 3, retryAnalyzer = RetryAnalyzer.class)
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Test Case Description: Verify Proceed To Check Out")
+    @Story("Story Name: To Check Proceed To Check Out")
     public void doProceedToCheckOutTest() throws InterruptedException {
         String email = prop.getProperty("email");
         String password = prop.getProperty("password");

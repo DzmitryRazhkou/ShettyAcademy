@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Test Automation Single Suite" verbose="1"
+       thread-count="3" parallel="tests">
+    
+    <listeners>
+        <listener class-name="com.mystore.qa.listeners.Listeners"></listener>
+    </listeners>
+
+    <test name="Chrome Test">
+        <parameter name="browser" value="firefox-headless"></parameter>
+        <classes>
+            <class name="com.mystore.qa.testcases.RegisterShettyAcademyPageTest">
+                <methods>
+                    <include name="doLoginTestCorrectCredentials"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

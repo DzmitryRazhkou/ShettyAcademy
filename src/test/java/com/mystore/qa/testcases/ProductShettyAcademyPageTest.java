@@ -5,6 +5,10 @@ import com.mystore.qa.pages.PaymentShettyAcademyPage;
 import com.mystore.qa.pages.ProductShettyAcademyPage;
 import com.mystore.qa.pages.RegisterShettyAcademyPage;
 import com.mystore.qa.utils.ConfigReader;
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -15,7 +19,10 @@ public class ProductShettyAcademyPageTest extends BaseTest{
     MyCartShettyAcademyPage myCartShettyAcademyPage;
     PaymentShettyAcademyPage paymentShettyAcademyPage;
 
-    @Test
+    @Test(priority = 7)
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Test Case Description: Verify Log Out")
+    @Story("Story Name: To Check Log Out")
     public void doLogOutTest() {
         String email = prop.getProperty("email");
         String password = prop.getProperty("password");
@@ -25,7 +32,10 @@ public class ProductShettyAcademyPageTest extends BaseTest{
         Assert.assertTrue(registerShettyAcademyPage.validateGetLogOutGreenConfirmationMessage());
     }
 
-    @Test
+    @Test(priority = 5)
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Test Case Description: Verify Product Page Title")
+    @Story("Story Name: To Check Product Page Title")
     public void validateProductPageTitle() {
         String email = prop.getProperty("email");
         String password = prop.getProperty("password");
@@ -36,7 +46,10 @@ public class ProductShettyAcademyPageTest extends BaseTest{
         Assert.assertEquals(expProductPageTitle, actProductPageTitle);
     }
 
-    @Test
+    @Test(priority = 6)
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Test Case Description: Verify Amount Of Products")
+    @Story("Story Name: To Check Amount Of Products")
     public void AmountOfProductTest() {
         String email = prop.getProperty("email");
         String password = prop.getProperty("password");
@@ -47,7 +60,10 @@ public class ProductShettyAcademyPageTest extends BaseTest{
         Assert.assertEquals(expAmountOfProduct, actAmountOfProduct);
     }
 
-    @Test
+    @Test(priority = 1)
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Test Case Description: Verify Do Search Product")
+    @Story("Story Name: To Check Do Search Product")
     public void doSearchTest() throws InterruptedException {
         String email = prop.getProperty("email");
         String password = prop.getProperty("password");
@@ -58,7 +74,10 @@ public class ProductShettyAcademyPageTest extends BaseTest{
         Assert.assertTrue(productShettyAcademyPage.validateProduct(prop.getProperty("productName")));
     }
 
-    @Test
+    @Test(priority = 2)
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Test Case Description: Verify Do Add To Cart Product")
+    @Story("Story Name: To Check Do Add To Cart Product")
     public void doAddToCartTest() throws InterruptedException {
         String email = prop.getProperty("email");
         String password = prop.getProperty("password");
@@ -70,7 +89,10 @@ public class ProductShettyAcademyPageTest extends BaseTest{
         Assert.assertTrue(productShettyAcademyPage.validateAddToCartGreenConfirmationMessage());
     }
 
-    @Test
+    @Test(priority = 3)
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Test Case Description: Verify Click On Cart Button")
+    @Story("Story Name: To Check Click On Cart Button")
     public void doClickOnCartBtnTest() throws InterruptedException {
         String email = prop.getProperty("email");
         String password = prop.getProperty("password");
@@ -83,7 +105,10 @@ public class ProductShettyAcademyPageTest extends BaseTest{
         Assert.assertTrue(myCartShettyAcademyPage.validateMyCartHeader());
     }
 
-    @Test
+    @Test(priority = 4)
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Test Case Description: Verify Proceed To Check Out")
+    @Story("Story Name: To Check Proceed To Check Out")
     public void doProceedToCheckOutTest() throws InterruptedException {
         String email = prop.getProperty("email");
         String password = prop.getProperty("password");

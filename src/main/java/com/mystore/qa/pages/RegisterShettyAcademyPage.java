@@ -1,7 +1,6 @@
 package com.mystore.qa.pages;
 import com.mystore.qa.basepage.BasePage;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
@@ -196,7 +195,7 @@ public class RegisterShettyAcademyPage extends BasePage{
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@!#$%&";
         String password = RandomStringUtils.random( 8, characters );
 
-        String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@!#$%&])(?=\\S+$).{8,}$";
+        String regex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@!#$%&])(?=\\S+$).{8,}$";
         Pattern pattern = Pattern.compile( regex );
         Matcher matcher = pattern.matcher( password );
 

@@ -8,6 +8,7 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
+import org.testng.annotations.Parameters;
 
 import java.util.Properties;
 
@@ -19,11 +20,12 @@ public class BaseTest {
     protected static WebDriver driver;
 
     @BeforeMethod
-    public void startUp() {
+    @Parameters("browser")
+    public void startUp(String browser) {
         cp = new ConfigReader();
         df = new DriverFactory();
-        prop = cp.initProp();
-        driver = df.initDriver("chrome", prop);
+        prop = ConfigReader.initProp();
+        driver = df.initDriver(browser, prop);
     }
 
     @AfterMethod
