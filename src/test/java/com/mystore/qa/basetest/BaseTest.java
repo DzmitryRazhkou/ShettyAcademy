@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 
+import java.net.MalformedURLException;
 import java.util.Properties;
 
 @Listeners(com.mystore.qa.listeners.Listeners.class)
@@ -21,7 +22,7 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters("browser")
-    public void startUp(String browser) {
+    public void startUp(String browser) throws MalformedURLException {
         cp = new ConfigReader();
         df = new DriverFactory();
         prop = ConfigReader.initProp();
