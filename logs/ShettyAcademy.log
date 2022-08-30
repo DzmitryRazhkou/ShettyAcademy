@@ -1,3 +1,0 @@
-2022-08-23 19:03:18,459  INFO [TestNG-tests-1] BasePage:88 - User enters an email into email field
-2022-08-23 19:03:18,607  INFO [TestNG-tests-1] BasePage:90 - User enters an password into password field
-2022-08-23 19:03:18,678  INFO [TestNG-tests-1] BasePage:92 - User clicks on the login button

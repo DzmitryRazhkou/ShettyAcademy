@@ -9,12 +9,9 @@
     </listeners>
 
     <test name="Chrome Test">
-        <parameter name="browser" value="firefox-headless"></parameter>
+        <parameter name="browser" value="chrome"></parameter>
         <classes>
-            <class name="com.mystore.qa.testcases.RegisterShettyAcademyPageTest">
-                <methods>
-                    <include name="doLoginTestCorrectCredentials"/>
-                </methods>
+            <class name="com.mystore.qa.testcases.HybridTest">
             </class>
         </classes>
     </test>

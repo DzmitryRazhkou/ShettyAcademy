@@ -57,8 +57,8 @@ public class RegisterShettyAcademyPageTest extends BaseTest {
 
     @Test(priority = 1)
     @Severity(SeverityLevel.CRITICAL)
-    @Description("Test Case Description: Verify Login With Correct Credentials")
-    @Story("Story Name: To Check Login With Correct Credentials")
+    @Description("Test Case Description: Verify Login With Correct Product")
+    @Story("Story Name: To Check Login With Correct Product")
     public void doLoginTestCorrectCredentials() {
         registerPage = new RegisterShettyAcademyPage(driver);
         String email = prop.getProperty("email");
@@ -69,8 +69,8 @@ public class RegisterShettyAcademyPageTest extends BaseTest {
 
     @Test(priority = 2)
     @Severity(SeverityLevel.CRITICAL)
-    @Description("Test Case Description: Verify Login With Incorrect Credentials")
-    @Story("Story Name: To Check Login With Incorrect Credentials")
+    @Description("Test Case Description: Verify Login With Incorrect Product")
+    @Story("Story Name: To Check Login With Incorrect Product")
     public void doLoginTestIncorrectCredentials() {
         registerPage = new RegisterShettyAcademyPage(driver);
         String email = prop.getProperty("wrong_email");
